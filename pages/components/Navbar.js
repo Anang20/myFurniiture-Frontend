@@ -27,7 +27,7 @@ export default function Navbar() {
                         <Link href="./../login">
                             <a className={styles["nav-link"]} style={{ fontWeight: 600 }}>Login</a>
                         </Link>
-                        <Link href="#">
+                        <Link href="./../register">
                             <button className={styles["button-register"]}>Register</button>
                         </Link>
                     </div>
