@@ -25,10 +25,10 @@ export default function Navbar() {
                             <a className={styles["nav-link"]}>Produk</a>
                         </Link>
                         <Link href="./../login">
-                            <a className={styles["nav-link"]} style={{ fontWeight: 600 }}>Login</a>
+                            <a className={styles["nav-link"]} style={{ fontWeight: 600 }}>Masuk</a>
                         </Link>
                         <Link href="./../register">
-                            <button className={styles["button-register"]}>Register</button>
+                            <button className={styles["button-register"]}>Daftar</button>
                         </Link>
                     </div>
                 </div>

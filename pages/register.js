@@ -36,11 +36,11 @@ export default function Register() {
                                                     <input type="password" style={{ borderRadius: 15 }} name="password" className="form-control" placeholder="Masukkan Password..." required/>
                                                 </div>
                                                 <div className="d-grid gap-2">
-                                                    <button type="submit" style={{ borderRadius: 15, backgroundColor: '#00B8B0', border: 'none' }} className="btn btn-success btn-user btn-block mt-4">Masuk</button>
+                                                    <button type="submit" style={{ borderRadius: 15, backgroundColor: '#00B8B0', border: 'none' }} className="btn btn-success btn-user btn-block mt-4">Daftar</button>
                                                     <center>
                                                         <p>Sudah Punya Akun?
                                                             <Link href="./login">
-                                                                <a style={{ color: '#00B8B0' }}> Daftar</a>
+                                                                <a style={{ color: '#00B8B0' }}> Masuk</a>
                                                             </Link>
                                                         </p>
                                                     </center>
