@@ -40,7 +40,7 @@ export default function Register() {
                                                     <center>
                                                         <p>Sudah Punya Akun?
                                                             <Link href="./login">
-                                                                <a style={{ color: '#00B8B0' }}> Masuk</a>
+                                                                <a style={{ color: '#00B8B0' }}> Daftar</a>
                                                             </Link>
                                                         </p>
                                                     </center>
