@@ -32,7 +32,7 @@ export default function Login() {
                                                 <div className="d-grid gap-2">
                                                     <button type="submit" style={{ borderRadius: 15, backgroundColor: '#00B8B0', border: 'none' }} className="btn btn-success btn-user btn-block mt-4">Masuk</button>
                                                     <center>
-                                                        <p>Belum Punya Akunn?
+                                                        <p>Belum Punya Akuun?
                                                             <Link href="./register">
                                                                 <a style={{ color: '#00B8B0' }}> Daftar</a>
                                                             </Link>
