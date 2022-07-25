@@ -1,8 +1,8 @@
-import Head from "next/head"
-import Script from "next/script";
 import { useEffect } from "react";
-import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/globals.css';
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }) {
   useEffect(()=>{
