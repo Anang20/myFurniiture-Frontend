@@ -1,33 +1,33 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import logo from '../../public/images/logo.png'
+import logo from '../../public/images/logo-black.png'
 import styles from '../../styles/Home.module.css'
 
-export default function Navbar() {
+const Navbar = () => {
     return (
-        <nav class="navbar navbar-expand-lg navbar-light" background-color='#ffff'>
-            <div class="container">
-                <a class="navbar-brand">
-                    <Image src={logo} width={227} height={54}/>
+        <nav className="navbar navbar-expand-lg navbar-light" background-color='#ffff'>
+            <div className="container">
+                <a className="navbar-brand">
+                    <Image src={logo} width={227} height={54} alt={"logo"}/>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
+                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div className="navbar-nav ms-auto">
                         <Link href="/">
                             <a className={styles["nav-link"]}>Beranda</a>
                         </Link>
-                        <Link href="/testing">
+                        <Link href="#">
                             <a className={styles["nav-link"]}>Tentang Kami</a>
                         </Link>
-                        <Link href="">
+                        <Link href="#">
                             <a className={styles["nav-link"]}>Produk</a>
                         </Link>
-                        <Link href="./../login">
+                        <Link href="/../login">
                             <a className={styles["nav-link"]} style={{ fontWeight: 600 }}>Masuk</a>
                         </Link>
-                        <Link href="./../register">
+                        <Link href="/../register">
                             <button className={styles["button-register"]}>Daftar</button>
                         </Link>
                     </div>
@@ -36,3 +36,5 @@ export default function Navbar() {
         </nav>
     )
 }
+
+export default Navbar;
