@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import styles from '../styles/Home.module.css'
 import Link from "next/link";
 
-export default function Login() {
+const Login = () => {
     return (
         <>
         <div className="container">
@@ -15,7 +15,7 @@ export default function Login() {
                             <div className="card-body p-0">
                                 <div className="row">
                                     <div className="col-lg-5 d-none d-lg-block p-5">
-                                        <Image src={imageLogin} style={{ marginLeft: 35 }} width={500} height={450}/>
+                                        <Image src={imageLogin} style={{ marginLeft: 35 }} width={500} height={450} alt={"login"}/>
                                     </div>
                                     <div className="col-lg-7">
                                         <div className="p-5">
@@ -30,11 +30,13 @@ export default function Login() {
                                                     <input type="password" style={{ borderRadius: 15 }} name="password" className="form-control form-control-password" placeholder="Masukkan Password..." required/>
                                                 </div>
                                                 <div className="d-grid gap-2">
-                                                    <button type="submit" style={{ borderRadius: 15, backgroundColor: '#00B8B0', border: 'none' }} className="btn btn-success btn-user btn-block mt-4">Masuk</button>
+                                                    <Link href="./dashboard/">
+                                                        <button type="submit" style={{ borderRadius: 15, backgroundColor: '#00B8B0', border: 'none' }} className="btn btn-success btn-user btn-block mt-4">Masuk</button>
+                                                    </Link>
                                                     <center>
                                                         <p>Belum Punya Akun?
                                                             <Link href="./register">
-                                                                <a style={{ color: '#00B8B0' }}> Daftar</a>
+                                                                <a style={{ color: '#00B8B0', textDecoration: 'none' }}> Daftar</a>
                                                             </Link>
                                                         </p>
                                                     </center>
@@ -53,3 +55,4 @@ export default function Login() {
     </>
     )
 }
+export default Login;
