@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import styles from '../styles/Home.module.css'
 import Link from "next/link";
 
-export default function Register() {
+const Register = () => {
     return (
         <>
         <div className="container">
@@ -15,7 +15,7 @@ export default function Register() {
                             <div className="card-body p-0">
                                 <div className="row">
                                     <div className="col-lg-5 d-none d-lg-block p-5">
-                                        <Image src={imageRegister} style={{ marginLeft: 35 }} width={500} height={450}/>
+                                        <Image src={imageRegister} style={{ marginLeft: 35 }} width={650} height={700} alt={"register"}/>
                                     </div>
                                     <div className="col-lg-7">
                                         <div className="p-5">
@@ -40,7 +40,7 @@ export default function Register() {
                                                     <center>
                                                         <p>Sudah Punya Akun?
                                                             <Link href="./login">
-                                                                <a style={{ color: '#00B8B0' }}> Masuk</a>
+                                                                <a style={{ color: '#00B8B0', textDecoration: 'none' }}> Masuk</a>
                                                             </Link>
                                                         </p>
                                                     </center>
@@ -58,3 +58,4 @@ export default function Register() {
         </>
     )
 }
+export default Register;
