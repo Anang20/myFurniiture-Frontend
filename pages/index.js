@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import Navbar from './components/navbar'
 
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
     <Navbar/>
@@ -19,10 +19,12 @@ export default function Home() {
           </div>
         </div>
         <div className='col-md-6 d-none d-lg-block'>
-            <Image className={styles["image-beranda"]} src={beranda}></Image>
+            <Image className={styles["image-beranda"]} src={beranda}alt={"beranda"}></Image>
         </div>
       </div>
     </div>
     </div>
   )
 }
+
+export default Home;
