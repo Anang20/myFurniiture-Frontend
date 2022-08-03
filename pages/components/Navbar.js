@@ -5,7 +5,7 @@ import styles from '../../styles/Home.module.css'
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light" background-color='#ffff'>
+        <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'white' }}>
             <div className="container">
                 <a className="navbar-brand">
                     <Image src={logo} width={227} height={54} alt={"logo"}/>
@@ -15,19 +15,19 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <Link href="/">
+                        <Link href="#beranda">
                             <a className={styles["nav-link"]}>Beranda</a>
                         </Link>
-                        <Link href="#">
+                        <Link href="#tentang-kami">
                             <a className={styles["nav-link"]}>Tentang Kami</a>
                         </Link>
-                        <Link href="#">
+                        <Link href="#produk">
                             <a className={styles["nav-link"]}>Produk</a>
                         </Link>
-                        <Link href="/../login">
+                        <Link href="/../auth/login">
                             <a className={styles["nav-link"]} style={{ fontWeight: 600 }}>Masuk</a>
                         </Link>
-                        <Link href="/../register">
+                        <Link href="/../auth/register">
                             <button className={styles["button-register"]}>Daftar</button>
                         </Link>
                     </div>
