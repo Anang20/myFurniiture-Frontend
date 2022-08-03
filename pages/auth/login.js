@@ -7,6 +7,7 @@ import { useState, Fragment } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
+import { useAuthenticatedPage } from "../../helper/Authenticated";
 
 const Login = () => {
 
@@ -40,18 +41,18 @@ const Login = () => {
         axios.post("http://localhost:3222/auth/login", formData, {
             headers: { 'content-type': 'application/json' }
         }).then(result => {
-            
 
             const decode = jwtDecode(result.data.accessToken)
             const role = decode.query.role["role_name"];
+            const id = decode.query["id_user"];
             window.alert(result.data.message)
             if (role === "admin") {
                 window.alert("berhasil")
                 localStorage.setItem('accesToken', result.data.accessToken)
-                router.push("../dashboard")
+                router.push(`../dashboard/${id}`); 
             } else if (role === "customer") {
                 localStorage.setItem('accessToken', result.data.accessToken)
-                router.push("/")
+                router.push(`../home`);
             }
         })
     } catch (error) {
