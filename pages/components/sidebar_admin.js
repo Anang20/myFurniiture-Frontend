@@ -58,7 +58,7 @@ const SidebarAdmin = () => {
           </li>
 
           <li className="nav-item">
-            <Link href="#">
+            <Link href="/dashboard/terima_pembayaran">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faHandshake} style={{ width: 28, height: 28 }}/>
                 <span className="pl-2">Terima Pembayaran</span>
