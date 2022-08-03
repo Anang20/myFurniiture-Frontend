@@ -1,7 +1,11 @@
 import avatar from '../../public/images/profile.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { id } from "./../[id]"
+import { useRouter } from 'next/router';
 const NavbarAdmin = () => {
+    const router = useRouter()
+    const { id } = router.query
     return (
       <>
       <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -14,7 +18,7 @@ const NavbarAdmin = () => {
                     </div>
                     <ul className="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                         <li>
-                            <Link href="/dashboard/profile/edit_profile">
+                            <Link href={`/dashboard/profile/edit_profile/${id}`}>
                                 <a className="dropdown-item">Edit Profil</a>
                             </Link>
                         </li>
