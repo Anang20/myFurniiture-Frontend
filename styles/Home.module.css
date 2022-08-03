@@ -21,6 +21,33 @@
   color: #00B8B0;
 }
 
+.search{
+  background: rgba(0, 0, 0, 0.09);
+  border-radius: 11px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 74px;
+  width: 320px;
+  height: 43px;
+  margin-left: 50px;
+}
+
+.search-input {
+  margin-left: -70px;
+  width: 320px;
+  height: 43px;
+  background: transparent;
+  border-radius: 11px;
+  outline: none;
+  border: none;
+}
+
+.wrapper {
+  height: 535px;
+}
+
 .button-register{
   display: flex;
   flex-direction: row;
@@ -41,8 +68,13 @@
 }
 
 .title {
+  margin-top: 50px;
   font-weight: 600px;
+  font-size: 50px;
   font-family: 'Poppins';
+  font-style: normal;
+  line-height: 75px;
+  color: #000000;
 }
 
 .furniture {
@@ -56,7 +88,7 @@
   height: 56px;
   left: 120px;
   top: 459px;
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: #00B8B0;
   color: #ffff;
   border: none;
@@ -68,6 +100,485 @@
   height: 352px;
   left: 815px;
   top: 175px;
+}
+
+.title-tentang {
+  text-transform: uppercase;
+  font-style: normal;
+  color: #00B8B0;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 45px;
+  letter-spacing: 0.24em;
+}
+
+.title2-tentang {
+  margin-top: -10px;
+  width: 570px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 48px;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  color: #292D32;
+}
+
+.deskripsi-tentang {
+  margin-top: -10px;
+  width: 589px; 
+  height: 64px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.01em;
+  color: #9DA2AA;
+}
+
+.summary-tentang {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 63px;
+  margin-bottom: 11px;
+  color: #181818;
+  opacity: 0.9;
+  transform: rotate(-0.11deg);
+}
+
+.summary-deskripsi {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #010101;
+  opacity: 0.9;
+}
+
+.title-content h4{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  height: 45px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  color: #00B8B0;
+}
+
+.title-produk {
+  height: 33px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: #000000;
+}
+
+.harga-produk {
+  height: 30px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #00B8B0;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  background-color: #474747;
+  margin-top: 80px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.brand {
+  margin-top: 80px;
+  width: 40%;
+}
+
+.brand p {
+  margin-top: 20px;
+  color: #9DA2AA;
+  font-size: 16px;
+}
+
+.page {
+  padding-left: 10px;
+  margin-top: 100px;
+  width: 30%;
+}
+
+.page h5 {
+  color: #fff;
+}
+
+.page ul > li > a:hover {
+  color: #00B8B0;
+}
+
+.page ul > li > a {
+  color: #9DA2AA;
+}
+
+.page ul {
+  list-style: none;
+  margin-left: -30px;
+  margin-top: 35px;
+}
+
+.page li {
+  margin-top: 10px;
+}
+
+.contact {
+  padding-left: 10px;
+  margin-top: 100px;
+  width: 30%;
+}
+
+.contact h5{
+  color: #fff;
+}
+
+.contact p {
+  margin-top: 35px;
+  color: #9DA2AA;
+}
+
+.copy-right {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.icon-footer {
+  color: #9DA2AA;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.icon-footer span:nth-child(2) {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* Card */
+
+.card {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: row;
+}
+
+.card-content {
+  border: 1px solid rgba(0, 0, 0, 0.068);
+  border-radius: 7px;
+  width: 30%;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.desc-card {
+  padding-left: 25px;
+  padding-top: 20px;
+}
+
+.desc-card h5 {
+  font-weight: 500;
+}
+
+.desc-card p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #00B8B0;
+  margin-bottom: 50px;
+}
+
+/* carousel */
+.title-carousel {
+  float: left;
+  margin-top: -400px;
+  margin-left: -50px;
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.deskripsi-carousel {
+  float: left;
+  margin-top: -350px;
+  margin-left: -50px;
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  font-style: normal;
+  line-height: 30px;
+  width: 390px;
+  text-align: left;
+}
+
+.harga-carousel {
+  float: left;
+  margin-top: -250px;
+  margin-left: -50px;
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.button-group {
+  float: left;
+  margin-top: -170px;
+  margin-left: -50px;
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.beli-produk {
+  width: 153px;
+  height: 50px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  padding: 10px 20px;
+  margin-right: 23px;
+  background: #00B8B0;
+  border: none;
+}
+
+.button-selengkapnya {
+  box-sizing: border-box;
+  border: 1px solid #00B8B0;
+  padding: 10px 20px;
+  width: 187px;
+  height: 50px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #00B8B0;
+  border: 1px solid #00B8B0;
+  background-color: transparent;
+}
+
+/* Card Home */
+.button-detail-produk {
+  width: 214.64px;
+  height: 26.37px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+  color: #FFFFFF;
+  border-radius: 15px;
+  border: none;
+  background-color: #00B8B0;
+}
+
+
+/* Page Detail Produk */
+.quantity-button{
+  margin-top: -110px;
+  margin-left: 170px;
+  z-index: 100;
+}
+
+.decrement-count {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  width: 32px;
+  height: 50px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.count-result {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 14px 60px;
+  gap: 10px;
+  width: 10px;
+  height: 50px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.increment-count {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  width: 32px;
+  height: 50px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.button-tambah-keranjang {
+  margin-top: 300px;
+  padding: 10px 20px;
+  gap: 10px;
+  width: 400px;
+  height: 50px;
+  left: 854px;
+  top: 588px;
+  color: #FFFEFE;
+  background: #00B8B0;
+  border: none;
+}
+
+.deskripsi-title {
+  margin-top: 40px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.deskripsi {
+  width: 80%;
+  height: 48px;
+  z-index: 100;
+  margin-bottom: 400px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* Page Cart */
+.delete-cart {
+  margin-left: 400px;
+  border: none;
+  background-color: transparent !important;
+}
+
+.delete-cart:hover {
+  color: #00B8B0;
+}
+
+.button-lanjut-pembayaran {
+  border: none;
+  background-color: #00B8B0;
+  color: #fff;
+  width: 299px;
+  height: 48px;
+  margin-top: 59px;
+  margin-bottom: 24px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.quantity-button-cart {
+  margin-top: 90px;
+  margin-left: 60px;
+  display: flex;  
+}
+
+.decrement-count-cart {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  width: 32px;
+  height: 35px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.count-result-cart {
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  padding-right: 30px;
+  padding-left: 23px;
+  height: 35px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.increment-count-cart {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  width: 32px;
+  height: 35px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Halaman checkout */
+.button-bayar {
+  padding: 10px 20px;
+  border: none;
+  gap: 10px;
+  margin-left: 100px;
+  width: 453.94px;
+  height: 50px;
+  background: #00B8B0;
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #FFFFFF;
+}
+
+.langkah-bayar {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 /* Page Login */
@@ -85,6 +596,97 @@
   padding: 90px 0 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
   z-index: 99;
+}
+
+@media (max-width: 480px) { 
+  .wrapper {
+    background-color: #ECEEEE;
+    height: 575px;
+  }
+
+  .title {
+    margin-top: 100px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: 200px;
+    font-size: 30px;
+    font-style: normal;
+    line-height: 45px;
+    font-family: 'Poppins';
+  }
+
+  .button-belanja-sekarang {
+    margin-left: 50px;
+    font-family: 'Poppins';
+    width: 230px;
+    border-radius: 15px;
+    background-color: #00B8B0;
+    color: #ffff;
+    border: none;
+  }
+
+  .title2-tentang {
+    width: 300px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    text-transform: capitalize;
+    color: #292D32;
+  }
+
+  .deskripsi-tentang {
+    width: 300px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .brand {
+    width: 100%;
+  }
+  
+  .page {
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 0px;
+  }
+
+  .page ul {
+    margin-top: 10px;
+  }
+  
+  .contact {
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 0px;
+  }
+
+  .contact p {
+    margin-top: 10px;
+    padding-right: 10px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-content {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  
 }
 
 @media (max-width: 767.98px) {
