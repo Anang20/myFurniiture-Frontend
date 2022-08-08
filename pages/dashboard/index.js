@@ -1,11 +1,20 @@
 import { faChair, faHandHoldingUsd, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Head from "next/head";
+import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
 import NavbarAdmin from "../components/navbar_admin";
 import SidebarAdmin from "../components/sidebar_admin";
 
 const Dashboard = () => {
+
+    useAuthenticatedPage();
+
     return (
         <>
+        <Head>
+            <title>MyFuniture | Dashboard</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
          <div id="wrapper">
             <SidebarAdmin/>
                 <div id="content-wrapper" className="d-flex flex-column">

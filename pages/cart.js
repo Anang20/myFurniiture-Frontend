@@ -5,6 +5,7 @@ import Image from "next/image";
 import almari from "../public/images/almari.png"
 import { useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 const Cart = () => {
     const [count, setCount] = useState(0)
@@ -21,6 +22,10 @@ const Cart = () => {
 
     return (
         <>
+        <Head>
+            <title>MyFuniture | Keranjang</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <NavbarCustomer/>
         <div className="container-fluid" style={{ backgroundColor: '#ECEEEE' }}>
             <div className="container" style={{ backgroundColor: '#ECEEEE' }}>

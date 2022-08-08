@@ -7,10 +7,16 @@ import tentangKami from '../public/images/tentang-kami.png';
 import Link from 'next/link';
 import Footer from './components/footer';
 import CardProduk from './components/card-produk';
+import useAuthenticatedPage from '../helper/useAuthenticatedPage';
 
-const Home = () => {
+const Index = () => {
+
   return (
     <>
+    <Head>
+      <title>MyFuniture</title>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head> 
     <div>
     <Navbar/>
     <div className={styles.wrapper}>
@@ -65,11 +71,10 @@ const Home = () => {
       </div>
     </div>
 
-    {/* Produk */}
     <CardProduk/>
     <Footer/>
   </>
   )
 }
 
-export default Home;
+export default Index;

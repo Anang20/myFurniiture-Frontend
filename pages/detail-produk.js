@@ -7,6 +7,7 @@ import Footer from "./components/footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBox, faHand, faHandHolding } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Head from "next/head";
 
 const DetailProduk = () => {
 
@@ -25,6 +26,10 @@ const DetailProduk = () => {
 
     return (
         <>
+        <Head>
+            <title>MyFuniture | Detail Produk</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <NavbarCustomer/>
         <div className="container" style={{ position: 'relative', marginTop: 120, minHeight: '100%' }}>
             <div className="row">

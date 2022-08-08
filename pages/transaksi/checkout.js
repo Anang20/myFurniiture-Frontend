@@ -1,10 +1,15 @@
 import NavbarCustomer from "../components/navbar_customer";
 import styles from "../../styles/Home.module.css";
 import Footer from "../components/footer";
+import Head from "next/head";
 
 const CheckOut = () => {
     return (
         <>
+        <Head>
+            <title>MyFuniture | Checkout</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <NavbarCustomer/>
         <div className="container-fluid" style={{ backgroundColor: '#ECEEEE' }}>
             <div className="container" style={{ backgroundColor: '#ECEEEE' }}>
