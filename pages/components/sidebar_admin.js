@@ -17,7 +17,7 @@ const SidebarAdmin = () => {
         <div id="wrapper" style={{ backgroundColor: '#00B8B0' }}>
         <ul className="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
-          <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+          <a className="sidebar-brand d-flex align-items-center justify-content-center">
               <div className="sidebar-brand-text mx-3"><Image src={logo} alt={"logo"} priority/></div>
           </a>
 
@@ -31,7 +31,7 @@ const SidebarAdmin = () => {
           </li>
 
           <li className="nav-item">
-            <Link href="#">
+            <Link href="/dashboard/produk">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faCouch} style={{ width: 28, height: 28 }}/>
                 <span className="pl-2">Produk</span>
@@ -40,7 +40,7 @@ const SidebarAdmin = () => {
           </li>
 
           <li className="nav-item">
-            <Link href="#">
+            <Link href="/dashboard/order">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faShoppingCart} style={{ width: 28, height: 28 }}/>
                 <span className="pl-2">Order</span>
@@ -49,7 +49,7 @@ const SidebarAdmin = () => {
           </li>
 
           <li className="nav-item">
-            <Link href="#">
+            <Link href="/dashboard/permintaan">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faHandHolding} style={{ width: 28, height: 28 }}/>
                 <span className="pl-2">Permintaan</span>
@@ -67,7 +67,7 @@ const SidebarAdmin = () => {
           </li>
 
           <li className="nav-item">
-            <Link href="#">
+            <Link href="/dashboard/laporan_transaksi">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faFile} style={{ width: 28, height: 28 }}/>
                 <span className="pl-2">Laporan Transaksi</span>
