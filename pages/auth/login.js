@@ -7,7 +7,8 @@ import { useState, Fragment } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
-import { useAuthenticatedPage } from "../../helper/Authenticated";
+import { useAuthenticatedPage } from "../../helper/useAuthenticatedPage";
+import Head from 'next/head'
 
 const Login = () => {
 
@@ -40,19 +41,17 @@ const Login = () => {
         console.log(formData)
         axios.post("http://localhost:3222/auth/login", formData, {
             headers: { 'content-type': 'application/json' }
-        }).then(result => {
+        }).then(result => { 
 
+            localStorage.setItem('accessToken', result.data.accessToken)
             const decode = jwtDecode(result.data.accessToken)
             const role = decode.query.role["role_name"];
             const id = decode.query["id_user"];
-            window.alert(result.data.message)
             if (role === "admin") {
-                window.alert("berhasil")
-                localStorage.setItem('accesToken', result.data.accessToken)
-                router.push(`../dashboard/${id}`); 
+                window.alert("Login berhasil")
+                router.push(`/dashboard/${id}`); 
             } else if (role === "customer") {
-                localStorage.setItem('accessToken', result.data.accessToken)
-                router.push(`../home`);
+                router.push(`/home`);
             }
         })
     } catch (error) {
@@ -62,6 +61,10 @@ const Login = () => {
 
     return (
         <>
+        <Head>
+            <title>MyFuniture | Login</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <div className="container">
             <div className={styles.container}>
                 <div className="row justify-content-center mt-5">

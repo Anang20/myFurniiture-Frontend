@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router"
 import axios from "axios";
+import Head from "next/head";
 
 const Register = () => {
 
@@ -55,7 +56,6 @@ const Register = () => {
             setPassword(password)
             const res = await axios.post("http://localhost:3222/auth/register", {nama_lengkap, email, no_telp, password})
             .then(result => {
-                console.log(result.data.statusCode)
                 if (result.data.statusCode == 201 || result.data.statusCode == 200) {
                     window.alert(result.data.message)
                     router.push('/auth/login')
@@ -71,6 +71,10 @@ const Register = () => {
 
     return (
         <>
+        <Head>
+            <title>MyFuniture | Register</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <div className="container">
             <div className={styles.container}>
                 <div className="row justify-content-center mt-3">
