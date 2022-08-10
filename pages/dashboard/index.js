@@ -1,13 +1,27 @@
 import { faChair, faHandHoldingUsd, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+import appConfig from "../../config/app";
 import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
 import NavbarAdmin from "../components/navbar_admin";
 import SidebarAdmin from "../components/sidebar_admin";
 
 const Dashboard = () => {
-
+    
     useAuthenticatedPage();
+    const [dataDashboard, setDataDashboard] = useState([])
+
+    const getData = async () => {
+        const res = await axios.get(`${appConfig.apiUrl}/dashboard`);
+        const result = res.data.data
+        setDataDashboard(result)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
 
     return (
         <>
@@ -31,7 +45,7 @@ const Dashboard = () => {
                                                 <div className="text-xs font-weight-bold text-gray-800 text-uppercase mb-1 pl-3">
                                                     Total Produk
                                                 </div>
-                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">20 Produk</div>
+                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">{dataDashboard.produk} Produk</div>
                                             </div>
                                             <div className="col-auto pr-3">
                                                <FontAwesomeIcon
@@ -51,9 +65,9 @@ const Dashboard = () => {
                                         <div className="row no-gutters align-items-center mt-2">
                                             <div className="col mr-2">
                                                 <div className="text-xs font-weight-bold text-gray-800 text-uppercase mb-1 pl-3">
-                                                    Total Anggota
+                                                    Total Customer
                                                 </div>
-                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">20 Anggota</div>
+                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">{dataDashboard.user} Customer</div>
                                             </div>
                                             <div className="col-auto pr-3">
                                                <FontAwesomeIcon
@@ -75,7 +89,7 @@ const Dashboard = () => {
                                                 <div className="text-xs font-weight-bold text-gray-800 text-uppercase mb-1 pl-3">
                                                     Total Transaksi
                                                 </div>
-                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">20 Transaksi</div>
+                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">{dataDashboard.payment} Transaksi</div>
                                             </div>
                                             <div className="col-auto pr-3">
                                                <FontAwesomeIcon
