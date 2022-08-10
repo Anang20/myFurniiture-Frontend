@@ -31,7 +31,6 @@ const TambahProduk = () => {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            console.log(res, "apa itu res nya")
             setGambar(res.data.data.filename)
         } catch(err){
 
@@ -74,6 +73,7 @@ const TambahProduk = () => {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
+            router.push('/dashboard/produk')
 
     }catch(e){
 
@@ -96,15 +96,15 @@ const TambahProduk = () => {
 
                             <form onSubmit={onFormSubmit} method="POST">
                                 <div className="row mb-3">
-                                    <label htmlFor="nama_produk" className="col-sm-2 col-form-label">Nama Produk</label>
-                                    <div className="col-sm-9">
-                                        <input type="text" className="form-control" onChange={onChangeNamaProduk} placeholder="Masukkan Nama Produk" required/>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
                                     <label htmlFor="gambar" className="col-sm-2 col-form-label">Gambar</label>
                                     <div className="col-sm-9">
                                         <input type="file" className="form-control" onChange={onChangeGambar}  />
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <label htmlFor="nama_produk" className="col-sm-2 col-form-label">Nama Produk</label>
+                                    <div className="col-sm-9">
+                                        <input type="text" className="form-control" onChange={onChangeNamaProduk} placeholder="Masukkan Nama Produk" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
