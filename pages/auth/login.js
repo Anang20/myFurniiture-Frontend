@@ -3,11 +3,10 @@ import imageLogin from '../../public/images/login.png'
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from '../../styles/Home.module.css'
 import Link from "next/link";
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
-import { useAuthenticatedPage } from "../../helper/useAuthenticatedPage";
 import Head from 'next/head'
 
 const Login = () => {
