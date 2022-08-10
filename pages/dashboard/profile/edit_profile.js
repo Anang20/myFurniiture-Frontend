@@ -1,9 +1,15 @@
+import Head from "next/head";
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
+import Link from "next/link";
 
 const EditProfileAdmin = () => {
     return (
         <>
+        <Head>
+            <title>MyFuniture | Edit Profil</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
         <div id="wrapper">
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
@@ -52,7 +58,9 @@ const EditProfileAdmin = () => {
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-5">
-                                        <a href="#" className="btn btn-warning mr-3">Cancel</a>
+                                        <Link href="/dashboard">
+                                            <a className="btn btn-warning mr-3">Cancel</a>
+                                        </Link>
                                         <button type="submit" className="btn btn-success">Update</button>
                                     </div>
                                 </div>
