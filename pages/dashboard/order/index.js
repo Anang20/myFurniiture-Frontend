@@ -225,7 +225,7 @@ import Head from "next/head";
         <title>MyFuniture | Order</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ maxWidth: 1120 }}>
+       <div id="wrapper" style={{ maxWidth: 1140 }}>
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
