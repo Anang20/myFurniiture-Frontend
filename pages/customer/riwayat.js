@@ -1,9 +1,13 @@
 import Image from "next/image";
-import NavbarCustomer from "./components/navbar_customer";
-import almari from "../public/images/almari.png";
-import Footer from "./components/footer";
+import NavbarCustomer from "../components/navbar_customer";
+import almari from "../../public/images/almari.png";
+import Footer from "../components/footer";
+import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
 
 const Riwayat = () => {
+
+    useAuthenticatedPage()
+
     return (
         <>
         <NavbarCustomer/>

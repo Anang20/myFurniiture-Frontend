@@ -24,6 +24,8 @@ const Dashboard = () => {
         getData()
     }, [])
 
+    useAuthenticatedPage()
+
     return (
         <>
         <Head>

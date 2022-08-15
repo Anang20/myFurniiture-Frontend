@@ -10,6 +10,7 @@ import appConfig from "../../../config/app";
 import jwtDecode from "jwt-decode";
 import { message } from "antd";
 import { useRouter } from "next/router";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 
 const ListAlamat = () => {
@@ -55,7 +56,7 @@ const ListAlamat = () => {
                 <div>
                     <h5 style={{ display: 'block', float: 'left' }}>Alamat Saya</h5>
                     <Link href="/dashboard/profile/tambah_alamat">
-                        <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
+                        <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', fontSize: 13, display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
                     </Link>
                 </div>
                 <div className="col-sm-12">
@@ -102,6 +103,9 @@ const ListAlamat = () => {
 }
 
 const Alamat = () => {
+
+    useAuthenticatedPage()
+
     return (
         <>
         <Head>

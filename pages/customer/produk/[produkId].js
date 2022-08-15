@@ -26,6 +26,7 @@ const DetailProduk = () => {
         harga: '0',
         deskripsi: '',
         stok: '',
+
     }])
     const stok = produk?.stok
     // const [changeCount, setChange] = useState(0)
@@ -52,6 +53,7 @@ const DetailProduk = () => {
         const getData = async () => {
             const ress = await axios.get(`${appConfig.apiUrl}/produk/${produkId}`)
             const result = ress.data.data
+            console.log(produkId);
             setProduk(result)
         };
         getData();
@@ -66,6 +68,7 @@ const DetailProduk = () => {
                 const id_user = decode.query["id_user"];
                 const endpoint = await axios.get(`${appConfig.apiUrl}/cart/cari_cart/${id_user}`)
                 const result = endpoint.data.data.id_cart
+                // console.log(id_user);
                 console.log('ini id cart', result);
                 setIdCart(result)
             } catch (e) {
@@ -78,9 +81,10 @@ const DetailProduk = () => {
         const createDetail = async ()=> {
             try{
                 const response = await axios.post(`${appConfig.apiUrl}/cart/${produkId}/${idCart}`, {kuantiti: count})
+                console.log(response);
                 if (response.status == 201 || response.status == 200) {
-                    router.push("/customer/produk/cart")
                     message.success("Berhasil menambahkan produk ke keranjang")
+                    router.push("/customer/produk/cart")
                 } else {
                     message.error("Upss ada kesalahan saat menambahkan ke cart")
                 }
@@ -88,7 +92,6 @@ const DetailProduk = () => {
                 console.log(e);
             }
         }
-
     useAuthenticatedPage();
 
     return (
