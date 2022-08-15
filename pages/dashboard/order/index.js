@@ -132,8 +132,8 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         value: 'no',
         width: 10,
         fixed: 'left',
-        sorter: (a, b) => a.no.length - b.no.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.no.length - b.no.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Tanggal',
@@ -141,59 +141,59 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         value: 'created_at',
         width: 20,
         fixed: 'left',
-        ...getColumnSearchProps('tanggal'),
+        // ...getColumnSearchProps('tanggal'),
       },
       {
         title: 'Nama',
         dataIndex: 'nama',
         value: 'nama_lengkap',
         width: 20,
-        ...getColumnSearchProps('nama'),
+        // ...getColumnSearchProps('nama'),
       },
       {
         title: 'Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
         width: 20,
-        sorter: (a, b) => a.nama_produk.length - b.nama_produk.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.nama_produk.length - b.nama_produk.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Kuantiti',
         dataIndex: 'quantity',
         value: 'quantity',
-        width: 10,
-        ...getColumnSearchProps('quantity'),
+        width: 15 ,
+        // ...getColumnSearchProps('quantity'),
       },
       {
         title: 'Harga Barang',
         dataIndex: 'harga_barang',
         value: 'harga_barang',
         width: 20,
-        ...getColumnSearchProps('harga_barang'),
+        // ...getColumnSearchProps('harga_barang'),
       },
       {
         title: 'Harga Kirim',
         dataIndex: 'harga_kirim',
         value: 'harga_kirim',
         width: 20,
-        ...getColumnSearchProps('harga_kirim'),
+        // ...getColumnSearchProps('harga_kirim'),
       },
       {
         title: 'Total Order',
         dataIndex: 'total_order',
         value: 'total_order',
         width: 20,
-        sorter: (a, b) => a.total_order.length - b.total_order.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.total_order.length - b.total_order.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Alamat',
         dataIndex: 'alamat',
         value: 'alamat',
         width: 20,
-        sorter: (a, b) => a.alamat.length - b.alamat.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.alamat.length - b.alamat.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Status',
@@ -228,7 +228,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Order</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ maxWidth: 1140 }}>
+       <div id="wrapper" >
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">

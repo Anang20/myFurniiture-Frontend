@@ -187,7 +187,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Laporan Transaksi</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ maxWidth: 1140 }}>
+       <div id="wrapper" >
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">

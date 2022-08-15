@@ -11,14 +11,21 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import appConfig from "../../../config/app";
 
   const Permintaan = () => {
 
-    const [permintaan, setPermintaan] = useState([]);
+    const [permintaan, setPermintaan] = useState([{
+      tanggal : '',
+      nama_lengkap : '',
+      nama_produk: '',
+      kuantiti: 0,
+    }]);
 
     const getPermintaan = async () => {
-        const res = await axios.get("localhost:3222/request");
+        const res = await axios.get(`${appConfig.apiUrl}/request`);
         const result = res.data.data;
+        console.log(result);
         setPermintaan(result);
     }
     useEffect(() => {
@@ -127,43 +134,42 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
   
     const columns = [
       {
-        title: 'no',
-        dataIndex: 'no',
-        value: 'no',
-        width: 20,
-        sorter: (a, b) => a.no.length - b.no.length,
-        sortDirections: ['descend', 'ascend'],
+        title: 'No',
+        dataIndex: 'No',
+        value: 'No',
+        width: 5,
+        ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'Tanggal',
         dataIndex: 'tanggal',
-        value: 'created_at',
+        value: 'tanggal',
         width: 30,
-        ...getColumnSearchProps('tanggal'),
-        sorter: (a, b) => a.tanggal.length - b.tanggal.length,
-        sortDirections: ['descend', 'ascend'],
+        // ...getColumnSearchProps('tanggal'),
+        // sorter: (a, b) => a.tanggal.length - b.tanggal.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Nama',
         dataIndex: 'nama_lengkap',
         value: 'nama_lengkap',
         width: 50,
-        ...getColumnSearchProps('nama_lengkap'),
+        // ...getColumnSearchProps('nama_lengkap'),
       },
       {
         title: 'Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
         width: 50,
-        ...getColumnSearchProps('nama_produk'),
+        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'kuantiti',
         dataIndex: 'kuantiti',
-        value: 'quantity',
+        value: 'kuantiti',
         width: 20,
-        sorter: (a, b) => a.kuantiti.length - b.kuantiti.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.kuantiti.length - b.kuantiti.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Action',
@@ -185,7 +191,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Permintaan</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ maxWidth: 1125 }}>
+       <div id="wrapper">
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
@@ -202,7 +208,6 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
                           dataSource={permintaan}
                           scroll={{
                             x: 1500,
-                            y: 300,
                           }}
                           />
                           </div>

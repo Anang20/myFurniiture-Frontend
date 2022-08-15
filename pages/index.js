@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image';
 import beranda from '../public/images/beranda.png';
 import styles from '../styles/Home.module.css';
-import Navbar from './components/navbar';
+import Navbar from './components/Navbar';
 import tentangKami from '../public/images/tentang-kami.png';
 import Link from 'next/link';
 import Footer from './components/footer';
