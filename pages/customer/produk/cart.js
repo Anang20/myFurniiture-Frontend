@@ -38,6 +38,24 @@ const Cart = () => {
     const incrementCount = () => {
         setCount(prevCount => prevCount + 1)
     }
+    // useEffect(() => {
+    //     const updateData = async () => {
+    //         try {
+    //             const token = localStorage.getItem('accessToken')
+    //             const decode = jwtDecode(token)
+    //             const userId = decode.query["id_user"]
+    //             const endpoint = `${appConfig.apiUrl}/cart/cari/${userId}`;
+    //             const items = await axios.get(endpoint)
+    //             const result = items.data.data
+    //             // console.log(result);
+    //             setCart(result);
+    //         } catch (e) {
+
+    //         }
+    //         const response = await axios.get(`${appConfig.apiUrl}/`)
+    //     }
+    //     getDataCart()
+    // }, [])
 
     useEffect(() => {
         const getDataCart = async () => {
@@ -81,7 +99,7 @@ const Cart = () => {
             <div className="container" style={{ backgroundColor: '#ECEEEE' }}>
                 <div className="row">
                     <div className="col-lg-7">
-                        <div className="card" style={{ marginTop: 120, borderRadius: 0}}>
+                        <div className="card" style={{ marginTop: 120, borderRadius: 0, marginBottom: 30}}>
                             <div className="card-body d-flex align-items-center justify flex-row" style={{ borderBottom: '3px solid rgba(0, 0, 0, 0.09)' }}>
                                 <input type="checkbox" checked={isChecked} onChange={handleOnChange}/><span className="ml-2 ">Pilih Semua</span>
                                 <button className={styles["delete-cart"]}>Hapus</button>
@@ -101,11 +119,10 @@ const Cart = () => {
                                                 <span>Rp {value.harga_total}</span><br/>
                                             </div>
                                         </div>
-                                            <a style={{ zIndex: 1000, marginLeft: 80 }}>Hapus</a>
                                         <div className="col-2">
                                             <div className={styles["quantity-button-cart"]} style={{ marginLeft: -6 }}>
                                                 <button className={styles["decrement-count-cart"]} onClick={decrementCount}>-</button>
-                                                <span className={styles["count-result-cart"]}>{value.kuantiti}</span>
+                                                <span className={styles["count-result-cart"]} >{value.kuantiti}</span>
                                                 <button className={styles["increment-count-cart"]} onClick={incrementCount}>+</button>
                                             </div>
                                         </div>

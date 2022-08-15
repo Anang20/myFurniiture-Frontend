@@ -30,10 +30,10 @@ const TambahAlamatCustomer = () => {
 
     const getDataUser = () => {
         try {
-            const token = localStorage.getItem('accessToken');
-            const decode = jwtDecode(token)
+                const token = localStorage.getItem('accessToken');
+                const decode = jwtDecode(token)
 
-            const id = decode.query["id_user"];
+                const id = decode.query["id_user"];
             const endpoint = `${appConfig.apiUrl}/users/cari_user/${id}`;
 
             axios.get(endpoint).then((value) => {

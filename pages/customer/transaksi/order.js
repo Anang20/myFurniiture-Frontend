@@ -4,8 +4,119 @@ import almari from "/public/images/almari.png";
 import Footer from "../../components/footer";
 import Head from "next/head";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import jwtDecode from "jwt-decode";
+import appConfig from "../../../config/app";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { useRouter } from "next/router";
 
 const Order = () => {
+    const [produk, setProduk] = useState([{
+        produk: {
+            gambar: '',
+            nama_produk:'',
+            harga: 0,
+        }
+    }])
+    const [alamat, setAlamat] = useState([{}])
+    const [alamatId, setAlamatId] = useState('')
+    const [ongkir, setOngkir] = useState()
+    const [hargaProduk,setHargaProduk] = useState(0)
+    const [cartId,setIdCart] = useState('')
+    const [order,setOrder] = useState('')
+    const router = useRouter()
+
+    useEffect(() => {
+        const getProduk = async () => {
+            try {
+                const token = localStorage.getItem('accessToken');
+                const decode = jwtDecode(token)
+                const id = decode.query["id_user"];
+                // produk
+                const res = await axios.get(`${appConfig.apiUrl}/order/cart/${id}`)
+                console.log(res,'res');
+                const produk = res.data.data.detail
+                console.log(produk, 'ini produk');
+                const cartId = res.data.data.id_cart
+                setIdCart(cartId)
+                console.log(cartId, 'ini id card');
+                const hasil = []    
+                setProduk(produk)
+                // Alamat
+                const respon = await axios.get(`${appConfig.apiUrl}/users/cari_alamat/${id}`)
+                const alamat = respon.data.data.alamat
+                setAlamat(alamat)
+                
+            } catch (err) {
+                console.log('errornya', err);
+            }
+        }
+        getProduk()
+    }, [])
+
+    useEffect(() => {
+        const getOngkir = async () => {
+            try {
+                const res = await axios.post(`${appConfig.apiUrl}/order/ongkir/${alamatId}`)
+                console.log(res, 'ini');
+                const ongkir = res.data.data
+                console.log(ongkir, 'ini ongkir');
+                setOngkir(ongkir)
+            } catch (err) {
+                console.log('errornya', err);
+            }
+        }
+        getOngkir()
+    }, [alamatId    ])
+
+    const createOrder = async () => {
+        try {
+            const response = await axios.post(`${appConfig.apiUrl}/order/buat/Order`, {id_cart: cartId, id_alamat: alamatId, total_hrg_brg: hargaProduk , total_hrg_krm:ongkir, total_order: order})
+            console.log(response, 'ini response')
+           
+                if (response.status == 201 || response.status == 200) {
+                    router.push("/customer/transaksi/checkout")
+                    message.success("Berhasil Order")
+                } else {
+                    message.error("Upss ada kesalahan saat menambahkan order")
+                }
+        
+        } catch (err) {
+            console.log('error nya adalah', err);
+        }
+    }
+
+    const handleAlamat = async (event) => {
+        const getAlamatId = await event.target.value;
+        console.log(getAlamatId);
+        setAlamatId(getAlamatId);
+    }
+    const curency = (value)=>{
+        const formatter = new Intl.NumberFormat('en-ID', {
+            style: 'currency',
+            currency: 'IDR'
+          }).format(value)
+          .replace(/[IDR]/gi, '')
+          .replace(/(\.+\d{2})/, '')
+          .trimLeft()
+          return formatter
+    }
+    const totalHargaProduk = async () => {
+       const hasil = await produk.reduce((value, i)=> {
+            return value + i.produk.harga
+        }, 0)
+        console.log(hasil);
+        setHargaProduk(hasil)
+    }
+    totalHargaProduk()
+
+    const totalOrder = async () => {
+        const hasil = await ongkir +hargaProduk
+        console.log(hasil, 'hasil');
+        setOrder(hasil)
+    }
+    totalOrder()
 
     useAuthenticatedPage()
     return (
@@ -23,43 +134,45 @@ const Order = () => {
                         pastikan Anda telah melengkapi <b className="text-danger">profil alamat</b> yang ada di user profile, jika belum, masuk ke user profile lalu pilih menu alamat
                     </div>
 
-                    <form method="POST">
+                    <form>
                         <div className="row mb-3">
                             <label htmlFor="alamat" className="col-sm-2 col-form-label">Pilih Alamat:</label>
                             <div className="col-sm-10">
-                                <select name="id_alamat_user" className="form-select" aria-label="Default select example">
+                                <select name="id_alamat_user" className="form-select" aria-label="Default select example" onChange={(e) => handleAlamat (e)}>
                                     <option defaultValue={'Pilih Alamat'}>-- Pilih Alamat --</option>
-                                    <option value={1}>Jepara</option>
-                                    <option value={2}>Kendal</option>
-                                    <option value={3}>Bekasi</option>
+                                    {
+                                        alamat?.map((value, index) => (
+                                             <option key={index} value={value.id_alamat_user}>{value.alamat}</option>
+                                    ))
+                                }
                                 </select>
                             </div>
                         </div>
 
                         <div className="row mb-3">
                             <div className="col-sm-9">
-                                <input type="hidden" className="form-control" name="id_cart" required/>
+                                <input type="text" value={cartId} className="form-control" name="id_cart" required/>
                             </div>
 
                             <div className="col-sm-9">
-                                <input type="hidden" className="form-control" name="id_harga_kirim" required/>
+                                <input type="text" value={alamatId} className="form-control" name="id_alamat" required/>
                             </div>
                 
                             <div className="col-sm-9">
-                                <input type="hidden" className="form-control" name="total_hrg_brg" required/>
+                                <input type="text" value={hargaProduk} className="form-control" name="total_hrg_brg" required/>
                             </div>
 
                             <div className="col-sm-9">
-                                <input type="hidden" className="form-control" name="total_hrg_kirim" required/>
+                                <input type="text" value={ongkir} className="form-control" name="total_hrg_kirim" required/>
                             </div>
 
                             <div className="col-sm-9">
-                                <input type="hidden" className="form-control" name="total_order" required/>
+                                <input type="text" value={order} className="form-control" name="total_order" required/>
                             </div>
 
-                            <div className="col-sm-9">
-                                <input type="hidden" className="form-control" name="status" required/>
-                            </div>
+                            {/* <div className="col-sm-9">
+                                <input type="text" className="form-control" name="status" required/>
+                            </div> */}
 
                             <table style={{ textAlign: 'center', width: '100%', marginTop: 59 }}>
                                 <thead>
@@ -72,27 +185,21 @@ const Order = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><Image src={almari} width={59} height={62} alt={almari} style={{ borderRadius: 4, filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))' }}/></td>
-                                        <td>Almari Minimalis</td>
-                                        <td>Rp 7000000</td>
-                                        <td>1</td>
-                                        <td>Rp 7000000</td>
-                                    </tr>
-                                    <tr>
-                                        <td><Image src={almari} width={59} height={62} alt={almari} style={{ borderRadius: 4, filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))' }}/></td>
-                                        <td>Almari Minimalis</td>
-                                        <td>Rp 7000000</td>
-                                        <td>1</td>
-                                        <td>Rp 7000000</td>
-                                    </tr>
-                                    <tr>
-                                        <td><Image src={almari} width={59} height={62} alt={almari} style={{ borderRadius: 4, filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))' }}/></td>
-                                        <td>Almari Minimalis</td>
-                                        <td>Rp 7000000</td>
-                                        <td>1</td>
-                                        <td>Rp 7000000</td>
-                                    </tr>
+                                {
+                                    produk?.map((value)=>{
+                                     return (
+                                     <tr>
+                                            <td><Image src={`${appConfig.apiUrl}/file/${value?.produk?.gambar}`} width={59} height={62} alt={almari} style={{ borderRadius: 4, filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))' }}/></td>
+                                            <td>{value.produk.nama_produk}</td>
+                                            <td>Rp. {curency(value.produk.harga)}</td>
+                                            <td>{value.kuantiti}</td>
+                                            <td>Rp. {curency(value.harga_total)}</td>
+                                        </tr> 
+                                     )  
+                                    })
+                                    
+                                }
+                                    
                                 </tbody>
                             </table>
                             
@@ -101,20 +208,20 @@ const Order = () => {
                                     <tbody>
                                         <tr>
                                             <td style={{ paddingRight: 27 }}>Total harga produk</td>
-                                            <td>Rp 21000000</td>
+                                            <td>Rp. {curency(hargaProduk||0)}</td>
                                         </tr>
                                         <tr>
                                             <td>Biaya Ongkir</td>
-                                            <td>Rp 100000</td>
+                                            <td>Rp. {curency(ongkir||0)}</td>
                                         </tr>
                                         <tr>
                                             <td>Total Pembayaran</td>
-                                            <td>Rp 21100000</td>
+                                            <td>Rp. {curency(hargaProduk+ ongkir||0)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <button style={{  marginLeft: 720, marginTop: 28, width: 296, height: 50, background: '#00B8B0', color: '#FFFFFF', fontWeight: 400, fonstSize: 20, borderRadius: 15, border: 'none' }}>Buat Pesanan</button>
+                            <button onClick={createOrder} style={{  marginLeft: 720, marginTop: 28, width: 296, height: 50, background: '#00B8B0', color: '#FFFFFF', fontWeight: 400, fonstSize: 20, borderRadius: 15, border: 'none' }}>Buat Pesanan</button>
                         </div>
                     </form>
                     
