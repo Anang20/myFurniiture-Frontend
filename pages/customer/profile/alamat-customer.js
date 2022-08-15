@@ -59,7 +59,7 @@ const ListAlamat = () => {
                         <div>
                             <h5 style={{ display: 'block', float: 'left' }}>Alamat Saya</h5>
                             <Link href="/customer/profile/tambah-alamat-customer">
-                                <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
+                                <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', fontSize: 13 ,display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
                             </Link>
                         </div>
                         <div className="col-sm-12">

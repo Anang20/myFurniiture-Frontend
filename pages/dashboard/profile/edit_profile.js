@@ -2,8 +2,12 @@ import Head from "next/head";
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import Link from "next/link";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const EditProfileAdmin = () => {
+
+    useAuthenticatedPage()
+
     return (
         <>
         <Head>

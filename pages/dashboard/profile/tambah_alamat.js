@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
 import { message } from "antd";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const TambahAlamat = () => {
 
@@ -162,6 +163,8 @@ const TambahAlamat = () => {
         }
     }
 
+    useAuthenticatedPage()
+
     return (
         <>
         <Head>
@@ -262,7 +265,7 @@ const TambahAlamat = () => {
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-5">
-                                        <Link href="/customer/profile/alamat-customer">
+                                        <Link href="/dashboard/profile/alamat">
                                             <a className="btn btn-warning mr-3">Cancel</a>
                                         </Link>
                                         <button type="button" onClick={tambahAlamatSubmit} className="btn btn-success">Simpan</button>

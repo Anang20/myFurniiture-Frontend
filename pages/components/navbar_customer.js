@@ -52,7 +52,7 @@ const NavbarCustomer = (props) => {
                         <Link href="https://wa.me/089524783056?text=Saya%20ingin%20request%20produk%20furniture%20yang%20belum%20ada%20di%20aplikasi%20Anda">
                             <a target="_blank" className={styles["nav-link"]}>Request</a>
                         </Link>
-                        <Link href="/riwayat">
+                        <Link href="/customer/riwayat">
                             <a className={styles["nav-link"]}>History</a>
                         </Link>
                         <Link href="/customer/profile/edit-profile-customer">

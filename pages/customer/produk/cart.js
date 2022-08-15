@@ -58,6 +58,16 @@ const Cart = () => {
         getDataCart()
     }, [])
 
+    const totalBarang = cart?.reduce((value, produk) => {
+        return value + produk.kuantiti 
+    }, 0)
+    console.log(totalBarang);
+
+    const totalBelanja = cart?.reduce((value, produk) => {
+        return value + produk.harga_total
+    }, 0)
+    console.log(totalBelanja);
+
     useAuthenticatedPage()
 
     return (
@@ -76,8 +86,8 @@ const Cart = () => {
                                 <input type="checkbox" checked={isChecked} onChange={handleOnChange}/><span className="ml-2 ">Pilih Semua</span>
                                 <button className={styles["delete-cart"]}>Hapus</button>
                             </div>
-                            {cart?.map((value) => 
-                                <div key={value.id_cart_detail} className="card-body d-flex align-items-center">
+                            {cart?.map((value, key) => 
+                                <div key={key} className="card-body d-flex align-items-center">
                                     <div className="row">
                                         <div className="col-1 pt-5">
                                             <input type="checkbox" id="produk" name="produk" checked={isChecked} onChange={handleOnChange}/>
@@ -91,8 +101,9 @@ const Cart = () => {
                                                 <span>Rp {value.harga_total}</span><br/>
                                             </div>
                                         </div>
+                                            <a style={{ zIndex: 1000, marginLeft: 80 }}>Hapus</a>
                                         <div className="col-2">
-                                            <div className={styles["quantity-button-cart"]}>
+                                            <div className={styles["quantity-button-cart"]} style={{ marginLeft: -6 }}>
                                                 <button className={styles["decrement-count-cart"]} onClick={decrementCount}>-</button>
                                                 <span className={styles["count-result-cart"]}>{value.kuantiti}</span>
                                                 <button className={styles["increment-count-cart"]} onClick={incrementCount}>+</button>
@@ -108,9 +119,8 @@ const Cart = () => {
                         <div className="card">
                             <div className="card-body">
                                 <form>
-                                    <label>Total Belanja</label><label className="ml-5">Rp</label><br/>
-                                    Above checkbox is {isChecked ? "checked" : "un-checked"}<br/>
-                                    <label>Total Pesanan</label><label className="ml-5">2</label><br/>
+                                    <label>Total Belanja</label><label className="ml-5">{totalBelanja}</label><br/>
+                                    <label>Total Pesanan</label><label className="ml-5">{totalBarang}</label>
                                     <Link href="/customer/transaksi/order">
                                     <button className={styles["button-lanjut-pembayaran"]}>Lanjutkan Ke Pembayaran</button>
                                     </Link>
