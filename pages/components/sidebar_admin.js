@@ -25,7 +25,7 @@ const SidebarAdmin = () => {
             <Link href="/dashboard">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faHome} style={{ width: 28, height: 28 }}/>
-                <span className="text-card pl-2" style={{ top: 100 }}>Dashboard</span>
+                <span className="text-card pl-2" style={{ top: 100, fontSize: 15 }}>Dashboard</span>
               </a>
             </Link>
           </li>
@@ -34,7 +34,7 @@ const SidebarAdmin = () => {
             <Link href="/dashboard/produk">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faCouch} style={{ width: 28, height: 28 }}/>
-                <span className="pl-2">Produk</span>
+                <span className="pl-2" style={{ fontSize: 15 }}>Produk</span>
               </a>
             </Link>
           </li>
@@ -43,7 +43,7 @@ const SidebarAdmin = () => {
             <Link href="/dashboard/order">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faShoppingCart} style={{ width: 28, height: 28 }}/>
-                <span className="pl-2">Order</span>
+                <span className="pl-2" style={{ fontSize: 15 }}>Order</span>
               </a>
             </Link>
           </li>
@@ -52,7 +52,7 @@ const SidebarAdmin = () => {
             <Link href="/dashboard/permintaan">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faHandHolding} style={{ width: 28, height: 28 }}/>
-                <span className="pl-2">Permintaan</span>
+                <span className="pl-1" style={{ fontSize: 15 }}>Permintaan</span>
               </a>
             </Link>
           </li>
@@ -61,7 +61,7 @@ const SidebarAdmin = () => {
             <Link href="/dashboard/terima_pembayaran">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faHandshake} style={{ width: 28, height: 28 }}/>
-                <span className="pl-2">Terima Pembayaran</span>
+                <span className="pl-2" style={{ fontSize: 15 }}>Terima Pembayaran</span>
               </a>
             </Link>
           </li>
@@ -70,7 +70,7 @@ const SidebarAdmin = () => {
             <Link href="/dashboard/laporan_transaksi">
               <a className="nav-link">
                 <FontAwesomeIcon icon={faFile} style={{ width: 28, height: 28 }}/>
-                <span className="pl-2">Laporan Transaksi</span>
+                <span className="pl-2" style={{ fontSize: 15 }}>Laporan Transaksi</span>
               </a>
             </Link>
           </li>

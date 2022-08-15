@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
   const App = () => {
     const [searchText, setSearchText] = useState('');
@@ -176,7 +177,9 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
             harga_barang: 300000,
             harga_kirim: 100000,
         },
-    ]
+    ];
+
+    useAuthenticatedPage()
 
     return ( 
       <>

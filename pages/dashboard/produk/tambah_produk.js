@@ -5,6 +5,9 @@ import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import Head from "next/head";
 import Link from "next/link";
+import styles from '../../../styles/Home.module.css';
+import { message } from "antd";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const TambahProduk = () => {
 
@@ -73,11 +76,15 @@ const TambahProduk = () => {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
+            message.success("Produk Berhasil Ditambahkan")
             router.push('/dashboard/produk')
 
     }catch(e){
 
     }}
+
+    useAuthenticatedPage()
+    
     return (
         <>
         <Head>
@@ -122,7 +129,7 @@ const TambahProduk = () => {
                                 <div className="row mb-3">
                                     <label htmlFor="stok" className="col-sm-2 col-form-label">Stok</label>
                                     <div className="col-sm-9">
-                                        <input type="stok" className="form-control" onChange={onChangeStok} name="stok" required/>
+                                        <input type="number" pattern="[0-9]{5}" className="form-control" onChange={onChangeStok} placeholder="0" name="stok" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">

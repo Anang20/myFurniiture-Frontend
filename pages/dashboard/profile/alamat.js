@@ -1,8 +1,107 @@
-import Head from "next/head";
-import NavbarAdmin from "../../components/navbar_admin";
+import NavbarAdmin from "../../components/navbar_admin"
 import SidebarAdmin from "../../components/sidebar_admin";
+import Head from "next/head";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import appConfig from "../../../config/app";
+import jwtDecode from "jwt-decode";
+import { message } from "antd";
+import { useRouter } from "next/router";
 
-const AlamatAdmin = () => {
+
+const ListAlamat = () => {
+
+    // const [userId, setUserId] = useState('');
+    const [alamat, setAlamat] = useState([{
+        id_alamat_user : '',
+        alamat:''
+    }]);
+    const [nama, setNama] = useState('')
+    const [telp, setTelp] = useState('')
+    const router = useRouter();
+
+    useEffect(() => {
+        const getAlamat = async () => {
+            try {
+                const token = localStorage.getItem('accessToken');
+                const decode = jwtDecode(token);
+                const id = decode.query["id_user"];
+                const endpoint = `${appConfig.apiUrl}/users/cari_alamat/${id}`;
+
+                 await  axios.get(endpoint).then((value) => {
+                    
+                    const alamatUser = value.data.data.alamat
+                    const id = value.data.data.alamat
+                    const nama = value.data.data.nama_lengkap  
+                    const telp = value.data.data.no_telp
+                    setAlamat(alamatUser)
+                    setNama(nama)
+                    setTelp(telp)
+                })
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getAlamat()
+    }, [])
+
+  return (
+        <>
+        <div className="col-12">
+            <div className="row mb-3">
+                <div>
+                    <h5 style={{ display: 'block', float: 'left' }}>Alamat Saya</h5>
+                    <Link href="/dashboard/profile/tambah_alamat">
+                        <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
+                    </Link>
+                </div>
+                <div className="col-sm-12">
+                    <hr/>
+                </div>
+            </div>
+            { alamat?.map((value) => 
+            <div key={value?.id_alamat_user} className="row mb-3">
+                <div className="col-4">
+                    <p>Nama Lengkap</p>
+                    <p>Telephone</p>
+                    <p>Alamat</p>
+                </div>
+                <div className="col-4">
+                    <p>{nama}</p>
+                    <p>{telp}</p>
+                    <p>{value?.alamat}</p>
+                </div>
+                <div className="col-4">
+                    <button type="button" onClick={
+                        async () => {
+                            const apiDelete = `http://localhost:3222/users/alamat/${value?.id_alamat_user}`
+                            console.log(apiDelete);
+                                const response = await axios.delete(apiDelete)
+                                console.log(response.data.statusCode)
+                                if(response.data.statusCode === 200) {
+                                    message.success("Alamat Berhasil Dihapus")
+                                    router.reload('/customer/profile/alamat-customer')
+                                }else{
+                                    alert('Something Wrong')
+                                }
+                        }
+                    } 
+                    style={{ border: 'none', background: 'transparent', listStyle: 'unset' }}><a>Hapus</a></button>
+                </div>
+                <div className="col-sm-12">
+                    <hr/>
+                </div>
+            </div>
+            )}
+        </div> 
+        </>
+    )
+}
+
+const Alamat = () => {
     return (
         <>
         <Head>
@@ -13,89 +112,19 @@ const AlamatAdmin = () => {
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                <NavbarAdmin/>
-                <div className="container-fluid">
-                    <h4 className="text-gray-600">Alamat Admin</h4>
-                    <div className="card shadow">
-                        <div className="card-body">
-
-                            <form method="POST">
-                                <div className="row mb-3">
-                                    <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Provinsi</label>
-                                    <div className="col-sm-9">
-                                        <select name="provinsi" className="form-select" aria-label="Default select example">
-                                            <option defaultValue={'Pilih Provinsi'}>-- Pilih Provinsi --</option>
-                                            <option value={1}>Jawa Barat</option>
-                                            <option value={2}>Jawa Tengah</option>
-                                            <option value={3}>Jawa Timur</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Kota</label>
-                                    <div className="col-sm-9">
-                                        <select name="kota" className="form-select" aria-label="Default select example">
-                                            <option defaultValue={'Pilih Kota'}>-- Pilih Kota --</option>
-                                            <option value={1}>Jepara</option>
-                                            <option value={2}>Pati</option>
-                                            <option value={3}>Kudus</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Kecamatan</label>
-                                    <div className="col-sm-9">
-                                        <select name="kecamatan" className="form-select" aria-label="Default select example">
-                                            <option defaultValue={'Pilih Kecamatan'}>-- Pilih Kecamatan --</option>
-                                            <option value={1}>Kembang</option>
-                                            <option value={2}>Bangsri</option>
-                                            <option value={3}>Mlonggo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Kelurahan</label>
-                                    <div className="col-sm-9">
-                                        <select name="kelurahan" className="form-select" aria-label="Default select example">
-                                            <option defaultValue={'Provinsi'}>-- Piih Kelurahan --</option>
-                                            <option value={1}>Kancilan</option>
-                                            <option value={2}>Tubanan</option>
-                                            <option value={3}>Kaliaman</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="foto" className="col-sm-2 col-form-label">Detail Nama Jalan RT/RW</label>
-                                    <div className="col-sm-9">
-                                        <textarea name="alamat" className="form-control" cols={30} rows={5} required></textarea>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="password" className="col-sm-2 col-form-label">Latitude</label>
-                                    <div className="col-sm-9">
-                                        <input type="text" className="form-control" name="latitude" required/>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="password" className="col-sm-2 col-form-label">Longtitude </label>
-                                    <div className="col-sm-9">
-                                        <input type="text" className="form-control" name="longtitude" required/>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <div className="col-sm-5">
-                                        <a href="#" className="btn btn-warning mr-3">Cancel</a>
-                                        <button type="submit" className="btn btn-success">Update</button>
-                                    </div>
-                                </div>
-                            </form>
+                    <NavbarAdmin/>
+                    <div className="container-fluid">
+                        <h4 className="text-gray-600">Alamat</h4>
+                        <div className="card shadow" style={{ minHeight: 500 }}>
+                            <div className="card-body">
+                                <ListAlamat/>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </>
+        </>
     )
 }
-export default AlamatAdmin;
+export default Alamat;

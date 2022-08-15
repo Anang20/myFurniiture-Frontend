@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import appConfig from "../../../../config/app";
+import useAuthenticatedPage from "../../../../helper/useAuthenticatedPage";
 
 const EditProduk = () => {
 
@@ -14,72 +15,60 @@ const EditProduk = () => {
     const produkId = query.id
 
     // const [dataById, setDataById] = useState([])
-    const [nama_produk, setNamaProduk] = useState([])
-    const [gambar, setGambar] = useState([])
-    const [harga, setHarga] = useState([])
-    const [deskripsi, setDeskripsi] = useState([])
-    const [stok, setStok] = useState([])
+    const [nama_produk, setNamaProduk] = useState([''])
+    const [gambar, setGambar] = useState([''])
+    const [harga, setHarga] = useState([''])
+    const [deskripsi, setDeskripsi] = useState([''])
+    const [stok, setStok] = useState([''])
 
     const endpoint = axios.get(`${appConfig.apiUrl}/produk/${produkId}`)
 
     const getNamaProduk = async () => {
         const res = await endpoint;
-        const namaProduk = res.data.data.nama_produk;
-        console.log(namaProduk)
+        const namaProduk = await res.data?.data?.nama_produk;
         setNamaProduk(namaProduk);
     }
-    useEffect(() => {
-        getNamaProduk()
-    }, []);
 
     const getGambar = async () => {
         const res = await endpoint;
-        const gambarProduk = res.data.data.gambar;
-        console.log(gambarProduk)
+        const gambarProduk = await res.data?.data?.gambar;
         setGambar(gambarProduk);
     }
-    useEffect(() => {
-        getGambar()
-    }, []);
 
     const getHarga = async () => {
         const res = await endpoint;
-        const hargaProduk = res.data.data.harga;
-        console.log(hargaProduk)
+        const hargaProduk = await res.data?.data?.harga;
         setHarga(hargaProduk);
     }
-    useEffect(() => {
-        getHarga()
-    }, []);
 
     const getDeskripsi = async () => {
         const res = await endpoint
-        const deskripsiProduk = res.data.data.deskripsi;
-        console.log(deskripsiProduk)
+        const deskripsiProduk = await res?.data?.data?.deskripsi;
         setDeskripsi(deskripsiProduk);
     }
-    useEffect(() => {
-        getDeskripsi()
-    }, []);
 
     const getStok = async () => {
         const res = await endpoint
-        const stokProduk = res.data.data.stok;
-        console.log(stokProduk)
+        const stokProduk = await res.data?.data?.stok;
         setStok(stokProduk);
     }
+    
     useEffect(() => {
-        getStok()
+        getNamaProduk();
+        getGambar();
+        getHarga();
+        getDeskripsi();
+        getStok();
     }, []);
 
 
-    const onChangeNamaProduk = (e) => {
-        const value = e.target.value
+    const onChangeNamaProduk = async (e) => {
+        const value = await e.target.value
         setNamaProduk(value)
     }
 
     const onChangeGambar = async (e) => {
-        const value = e.target.files[0]
+        const value = await e.target.files[0]
         const data = {
             file: value
         }
@@ -90,25 +79,24 @@ const EditProduk = () => {
                     "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            console.log(res, resnya)
             setGambar(res.data.data.filename)
         } catch(err) {
 
         }
     }
 
-    const onChangeHarga = (e) => {
-        const value = e.target.value
+    const onChangeHarga = async (e) => {
+        const value = await e.target.value
         setHarga(value)
     }
 
-    const onChangeDeskripsi = (e) => {
-        const value = e.target.value
+    const onChangeDeskripsi = async (e) => {
+        const value = await e.target.value
         setDeskripsi(value)
     }
 
-    const onChangeStok = (e) => {
-        const value = e.target.value
+    const onChangeStok = async (e) => {
+        const value = await e.target.value
         setStok(value)
     }
 
@@ -126,18 +114,22 @@ const EditProduk = () => {
                 'deskripsi' : deskripsi,
                 'stok' : stok,
             }
+            console.log(data)
 
-            const res = await axios.put(`http://localhost:3222/produk/${produkId}`, data, {
+            const res = await axios.put(endpoint, {produkId, nama_produk,gambar,harga,deskripsi,stok}, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 }
             })
+            // console.log(res);
         } catch (e) {
 
         }
     }
+
+    useAuthenticatedPage()
 
     return (
         <>
@@ -155,7 +147,7 @@ const EditProduk = () => {
                     <div className="card shadow">
                         <div className="card-body">
 
-                            <form onSubmit={onFormSubmit} method="POST">
+                            <form onSubmit={onFormSubmit} method="PUT">
                                 <div className="row mb-3">
                                     <div className="col-sm-9">
                                         <input type="hidden" value={produkId} className="form-control" name="id_produk" required readOnly/>

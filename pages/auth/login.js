@@ -8,6 +8,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
 import Head from 'next/head'
+import { message } from "antd";
 
 const Login = () => {
 
@@ -41,17 +42,19 @@ const Login = () => {
         axios.post("http://localhost:3222/auth/login", formData, {
             headers: { 'content-type': 'application/json' }
         }).then(result => { 
-
             localStorage.setItem('accessToken', result.data.accessToken)
             const decode = jwtDecode(result.data.accessToken)
             const role = decode.query.role["role_name"];
             const id = decode.query["id_user"];
             if (role === "admin") {
-                window.alert("Login berhasil")
+                message.success("Login Berhasil")
                 router.push(`/dashboard/${id}`); 
             } else if (role === "customer") {
-                router.push(`/home`);
+                message.success("Login Berhasil")
+                router.push(`/customer/`);
             }
+        }).catch(() => {
+            message.error("Maaf email atau password salah")
         })
     } catch (error) {
         console.error(error);

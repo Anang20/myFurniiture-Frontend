@@ -23,7 +23,7 @@ const Riwayat = () => {
                         <hr style={{ marginLeft: 29, marginRight: 29 }}/>
                         <div className="row">
                             <div className="col-2" style={{ marginLeft: 29 }}>
-                                <Image src={almari} width={117} height={110} style={{ filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))", borderRadius: 4 }}/>
+                                <Image src={almari} width={117} height={110} alt={"image not found"} style={{ filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))", borderRadius: 4 }}/>
                             </div>
                             <div className="col-3">
                                 <h5>Lemari Minimalis </h5>
@@ -49,7 +49,7 @@ const Riwayat = () => {
                         <hr style={{ marginLeft: 29, marginRight: 29 }}/>
                         <div className="row">
                             <div className="col-2" style={{ marginLeft: 29 }}>
-                                <Image src={almari} width={117} height={110} style={{ filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))", borderRadius: 4 }}/>
+                                <Image src={almari} width={117} height={110} alt={"image not found"} style={{ filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))", borderRadius: 4 }}/>
                             </div>
                             <div className="col-3">
                                 <h5>Lemari Minimalis </h5>

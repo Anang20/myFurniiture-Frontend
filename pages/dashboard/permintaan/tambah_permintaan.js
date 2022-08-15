@@ -5,6 +5,7 @@ import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import Head from "next/head";
 import Link from "next/link";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const TambahPermintaan = () => {
     
@@ -50,6 +51,8 @@ const TambahPermintaan = () => {
     }catch(e){
 
     }}
+
+    useAuthenticatedPage()
     return (
         <>
         <Head>

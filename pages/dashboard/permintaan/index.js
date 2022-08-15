@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
   const Permintaan = () => {
 
@@ -174,7 +175,9 @@ import Head from "next/head";
           </>
         ),
       },
-    ]
+    ];
+
+    useAuthenticatedPage()
     
     return ( 
       <>

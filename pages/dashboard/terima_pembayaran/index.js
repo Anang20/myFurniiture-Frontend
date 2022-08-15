@@ -148,7 +148,8 @@ import { Image } from 'antd';
            <div>
             <Image 
             width={100} 
-            src={"https://gotra.sgp1.cdn.digitaloceanspaces.com/web-upload/1527432881_27-05-2018_photo6077615961109801020.jpg"}/>
+            src={"https://gotra.sgp1.cdn.digitaloceanspaces.com/web-upload/1527432881_27-05-2018_photo6077615961109801020.jpg"}
+            alt={"image not found"}/>
            </div>
           )
         },
@@ -160,7 +161,7 @@ import { Image } from 'antd';
         width: 50,
         render: () => {
           return (
-            <span class='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
+            <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
           )
         },
       },

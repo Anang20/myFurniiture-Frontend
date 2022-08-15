@@ -1,9 +1,13 @@
-import NavbarCustomer from "../components/navbar_customer";
-import styles from "../../styles/Home.module.css";
-import Footer from "../components/footer";
+import NavbarCustomer from "../../components/navbar_customer";
+import styles from "../../../styles/Home.module.css";
+import Footer from "../../components/footer";
 import Head from "next/head";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const CheckOut = () => {
+
+    useAuthenticatedPage()
+    
     return (
         <>
         <Head>

@@ -10,7 +10,6 @@ import appConfig from "../../config/app";
 const CardHome = () => {
 
     const [detailProduk, setDetailProduk] = useState();
-    const [detailGambar, setDetailGambar] = useState([]);
 
     const getProduk = async () => {
         const dataProduk = await axios.get(`${appConfig.apiUrl}/produk`);
@@ -34,8 +33,8 @@ const CardHome = () => {
                                     <Image src={`${appConfig.apiUrl}/file/${value.gambar}`} width={281} height={209} className="card-img-top" alt="almari"/>
                                     <div className="card-body"> 
                                         <h5 style={{ fontWeight: 500, fontSize: 20 }}>{value["nama_produk"]}</h5>
-                                        <p style={{ fontWeight: 600, fontSize: 20, color: '#00B8B0' }}>{value.harga}</p>
-                                        <Link href="/detail-produk">
+                                        <p style={{ fontWeight: 600, fontSize: 20, color: '#00B8B0' }}>Rp {value.harga}</p>
+                                        <Link href={`/customer/produk/${value.id_produk}`}>
                                             <button className={styles["button-detail-produk"]}>Detail Produk</button>
                                         </Link>
                                     </div>

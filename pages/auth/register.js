@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/router"
 import axios from "axios";
 import Head from "next/head";
+import { message } from "antd";
 
 const Register = () => {
 
@@ -57,10 +58,10 @@ const Register = () => {
             const res = await axios.post("http://localhost:3222/auth/register", {nama_lengkap, email, no_telp, password})
             .then(result => {
                 if (result.data.statusCode == 201 || result.data.statusCode == 200) {
-                    window.alert(result.data.message)
+                    message.success("Berhasil Register")
                     router.push('/auth/login')
                 } else {
-                    window.alert("Gagal mendaftar")
+                    message.error("Upss ada kesalahan Mendaftar")
                 }
             })
         } catch (error) {
@@ -101,7 +102,7 @@ const Register = () => {
                                                     <input type="number" style={{ borderRadius: 15 }} className="form-control" value={no_telp} onChange={onChangeNoTelephon} placeholder="Masukkan Nomor Telephone..." required/>
                                                 </div>
                                                 <div className="form-group mt-4">
-                                                    <input type="password" style={{ borderRadius: 15 }} className="form-control" value={password} onChange={onChangePassword} placeholder="Masukkan Password..." required/>
+                                                    <input type="password" pattern="[A-Za-z0-9#?!@$%^*-]" title="Password Harus kombinasi huruf besar(A-Z),huruf kecil(a-z),angka(0-9) dan simbol(#?!@$%^*-)" style={{ borderRadius: 15 }} className="form-control" value={password} onChange={onChangePassword} placeholder="Masukkan Password..." required/>
                                                 </div>
                                                 <div className="form-group mt-4">
                                                     <input type="hidden" style={{ borderRadius: 15 }} className="form-control" value={roleId} onChange={onChangeRoleid} required/>

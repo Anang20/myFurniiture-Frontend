@@ -12,12 +12,14 @@ import Link from "next/link";
 import Head from "next/head";
 import appConfig from "../../../config/app";
 import { Router, useRouter } from "next/router";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
   const Produk = () => {
 
     const router = useRouter()
     const { id } = router.query
-    
+
+    const [idUser, setIdUser] = useState('');
     const [detailProduk, setDetailProduk] = useState();
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -42,7 +44,18 @@ import { Router, useRouter } from "next/router";
       clearFilters();
       setSearchText('');
     };
-  
+
+    const handlerOk = async () => {
+      const apiDelete = `http://localhost:3222/produk/${idUser}`
+              const response = await axios.delete(apiDelete)
+              console.log(response.data.statusCode)
+              if(response.data.statusCode === 200) {
+                router.reload('/dashboard/produk')
+              }else{
+                alert('Something Wrong')
+              }
+    }
+
     const getColumnSearchProps = (dataIndex) => ({
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
         <div
@@ -130,12 +143,6 @@ import { Router, useRouter } from "next/router";
   
     const columns = [
       {
-        title: 'no',
-        dataIndex: 'nomor',
-        value: 'no',
-        width: 10,
-      },
-      {
         title: 'Nama Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
@@ -186,22 +193,13 @@ import { Router, useRouter } from "next/router";
           <Link href={`/dashboard/produk/edit_produk/${record.id_produk}`}>
             <button className="btn btn-sm btn-success shadow-sm me-3">Edit</button>
           </Link>
-            <button onClick={
-              async () => {
-                const endDelete = `http://localhost:3222/produk/${record.id_produk}`
-                const response = await axios.delete(endDelete)
-                router.reload()
-                if(response.data.statusCode === 200) {
-                  alert(record.nama_produk + " dihapus")
-                } else {
-                  alert("ada kesalahan")
-                }
-              }
-            } className="btn btn-sm btn-danger shadow-sm">Hapus</button>
+          <button type="button" onClick={() => setIdUser(record.id_produk)} className="btn btn-sm shadow-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</button>
           </>
         ),
       },
     ];
+
+    useAuthenticatedPage()
     
     return ( 
       <>
@@ -226,9 +224,25 @@ import { Router, useRouter } from "next/router";
                           dataSource={detailProduk}
                           scroll={{
                             x: 1500,
-                            y: 300,
                           }}
                           />
+                          </div>
+                          <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h5 className="modal-title" id="exampleModalLabel">Hapus Produk Ini</h5>
+                                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                  Apakah Anda Yakin Untuk Menghapus Produk Ini? 
+                                </div>
+                                <div className="modal-footer">
+                                  <button type="button" className="btn btn btn-sm shadow-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                  <button type="button" onClick={handlerOk} className="btn btn-sm shadow-sm" style={{ color: "#FFF", backgroundColor: "#00B8B0" }}>Hapus</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                       </div>  
                   </div>

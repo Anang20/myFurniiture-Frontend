@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
+import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
   const Order = () => {
 
@@ -201,7 +202,7 @@ import Head from "next/head";
         width: 20,
         render: () => (
             <>
-            <span class='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
+            <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
             </>
         ),
         sorter: (a, b) => a.status.length - b.status.length,
@@ -217,7 +218,9 @@ import Head from "next/head";
           </>
         ),
       },
-    ]
+    ];
+
+    useAuthenticatedPage()
     
     return ( 
       <>

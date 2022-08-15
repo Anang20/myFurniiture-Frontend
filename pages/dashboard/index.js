@@ -5,6 +5,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import appConfig from "../../config/app";
 import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
+import FooterAdmin from "../components/footer_admin";
 import NavbarAdmin from "../components/navbar_admin";
 import SidebarAdmin from "../components/sidebar_admin";
 
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
     const getData = async () => {
         const res = await axios.get(`${appConfig.apiUrl}/dashboard`);
-        const result = res.data.data
+        const result = res.data.data;
         setDataDashboard(result)
     }
 
@@ -29,7 +30,7 @@ const Dashboard = () => {
             <title>MyFuniture | Dashboard</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-         <div id="wrapper">
+         <div id="wrapper" style={{ maxHeight: 600 }}>
             <SidebarAdmin/>
                 <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
@@ -106,6 +107,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     </div>
+                    <FooterAdmin/>
                 </div>
         </div>
         </>

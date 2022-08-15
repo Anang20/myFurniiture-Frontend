@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const NavbarCustomer = (props) => {
-
+    const { isInput } = props
     // const [search, setSearch] = useState('');
 
     // const onChangeSearch = (e) => {
@@ -31,7 +31,7 @@ const NavbarCustomer = (props) => {
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" style={{ backgroundColor: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
             <div className="container">
                 <a className="navbar-brand">
-                    <Link href="/home">
+                    <Link href="/customer/">
                         <Image src={logo} width={227} height={54} alt={"logo"}/>
                     </Link>
                 </a>
@@ -39,27 +39,28 @@ const NavbarCustomer = (props) => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className={styles.search}>
+                    {isInput && <div className={styles.search}>
                         <FontAwesomeIcon icon={faSearch}
                         color={'rgba(0, 0, 0, 0.09)'}/>
-                    <input type="text" className={styles["search-input"]} onKeyUp={(e)=>props.searchProduk(e.target.value)} placeholder="Quick Search"/>
+                     <input type="text" className={styles["search-input"]} placeholder="Quick Search"/>
                     </div>
+                    }
                     <div className="navbar-nav ms-auto">
-                        <Link href="/home">
+                        <Link href="/customer/">
                             <a className={styles["nav-link"]}>Home</a>
                         </Link>
-                        <Link href="#">
-                            <a className={styles["nav-link"]}>Request</a>
+                        <Link href="https://wa.me/089524783056?text=Saya%20ingin%20request%20produk%20furniture%20yang%20belum%20ada%20di%20aplikasi%20Anda">
+                            <a target="_blank" className={styles["nav-link"]}>Request</a>
                         </Link>
                         <Link href="/riwayat">
                             <a className={styles["nav-link"]}>History</a>
                         </Link>
-                        <Link href="/edit-profile-customer">
+                        <Link href="/customer/profile/edit-profile-customer">
                             <a className={styles["nav-link"]}><FontAwesomeIcon
                             icon={faUser}/>
                             </a>
                         </Link>
-                        <Link href="/cart">
+                        <Link href="/customer/produk/cart">
                             <a className={styles["nav-link"]}><FontAwesomeIcon
                             icon={faCartShopping}/>
                             </a>
