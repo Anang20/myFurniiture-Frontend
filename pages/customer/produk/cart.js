@@ -51,9 +51,8 @@ const Cart = () => {
                 // console.log(result);
                 setCart(result);
             } catch (e) {
-
+                console.log(e);
             }
-            const response = await axios.get(`${appConfig.apiUrl}/`)
         }
         getDataCart()
     }, [])
@@ -101,11 +100,10 @@ const Cart = () => {
                                                 <span>Rp {value.harga_total}</span><br/>
                                             </div>
                                         </div>
-                                            <a style={{ zIndex: 1000, marginLeft: 80 }}>Hapus</a>
                                         <div className="col-2">
                                             <div className={styles["quantity-button-cart"]} style={{ marginLeft: -6 }}>
                                                 <button className={styles["decrement-count-cart"]} onClick={decrementCount}>-</button>
-                                                <span className={styles["count-result-cart"]}>{value.kuantiti}</span>
+                                                <span className={styles["count-result-cart"]}>{count}</span>
                                                 <button className={styles["increment-count-cart"]} onClick={incrementCount}>+</button>
                                             </div>
                                         </div>
