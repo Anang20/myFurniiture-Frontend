@@ -103,10 +103,10 @@ const DetailProduk = () => {
         <NavbarCustomer/>
         <div className="container" style={{ position: 'relative', marginTop: 120, minHeight: '100%' }}>
             <div className="row">
-                <div className="col-lg-6">
+                <div className="col-6">
                     <Image src={`${appConfig.apiUrl}/file/${produk?.gambar}`} width={400} height={380} alt={'Image Not Found '}/>
                 </div>
-                <div className="col-lg-6">
+                <div className="col-6">
                     <form style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <label style={{ position: 'absolute', fontStyle: 'normal', fontWeight: 600, fontSize: 30, top: 80 }}>{produk?.nama_produk}</label>
                         <label style={{ position: 'absolute', fontStyle: 'normal', fontWeight: 500, fontSize: 30, top: 180 }}>Rp {produk?.harga}</label>
@@ -122,19 +122,19 @@ const DetailProduk = () => {
                     </div>
                 </div>
                 <h5 className={styles["deskripsi-title"]}>Self Pickup</h5>
-                <div className="col-lg-7 d-flex">
-                    <div className="col-lg-2">
+                <div className="col-7 d-flex">
+                    <div className="col-2">
                         <FontAwesomeIcon
                         icon={faHandHolding}
                         style={{ width: 64, height: 40, marginLeft: -20 }}
                         />
                     </div>
-                    <div className="col-lg-5" style={{ marginLeft: -40 }}>
+                    <div className="col-5" style={{ marginLeft: -40 }}>
                         <small className={styles.deskripsi}>Anda dapat mengambil barang pada lokasi kami</small>
                     </div>
                 </div>
                 <h5 className={styles["deskripsi-title"]}>Detail Produk & Spesifikasi</h5>
-                <div className="col-lg-12">
+                <div className="col-12">
                     <p className={styles.deskripsi}>
                     {produk?.deskripsi}
                     </p>

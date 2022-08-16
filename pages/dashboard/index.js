@@ -32,7 +32,7 @@ const Dashboard = () => {
             <title>MyFuniture | Dashboard</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-         <div id="wrapper">
+         <div id="wrapper" style={{ maxHeight: 600 }}>
             <SidebarAdmin/>
                 <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">

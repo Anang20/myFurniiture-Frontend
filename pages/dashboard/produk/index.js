@@ -26,8 +26,9 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
     const searchInput = useRef(null);
 
     const getProduk = async () => {
-        const dataProduk = await axios.get(`${appConfig.apiUrl}/produk`);
-        const produk = dataProduk.data.items;
+        const dataProduk = await axios.get(`${appConfig.apiUrl}/produk/get/all`);
+        const produk = dataProduk.data.data;
+        console.log(produk, 'ini produk');
         setDetailProduk(produk);
     }
     useEffect(() => {
@@ -143,10 +144,17 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
   
     const columns = [
       {
+        title: 'No',
+        dataIndex: 'No',
+        value: 'no',
+        width: 10,
+        // ...getColumnSearchProps('nama_produk'),
+      },
+      {
         title: 'Nama Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
-        width: 50,
+        width: 40,
         ...getColumnSearchProps('nama_produk'),
       },
       {
@@ -164,7 +172,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         title: 'Harga',
         dataIndex: 'harga',
         value: 'harga',
-        width: 20,
+        width: 18,
         sorter: (a, b) => a.harga.length - b.harga.length,
         sortDirections: ['descend', 'ascend'],
       },
@@ -172,16 +180,16 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         title: 'deskripsi',
         dataIndex: 'deskripsi',
         value: 'deskripsi',
-        width: 50,
-        ...getColumnSearchProps('deskripsi'),
+        width: 55,
+        // ...getColumnSearchProps('deskripsi'),
       },
       {
         title: 'Stok',
         dataIndex: 'stok',
         value: 'stok',
-        width: 20,
-        sorter: (a, b) => a.stok.length - b.stok.length,
-        sortDirections: ['descend', 'ascend'],
+        width: 15,
+        // sorter: (a, b) => a.stok.length - b.stok.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Action',
@@ -207,7 +215,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Produk</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ maxWidth: 1125 }}>
+       <div id="wrapper" >
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">

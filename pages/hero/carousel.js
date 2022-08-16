@@ -15,7 +15,7 @@ const Carousel = () => {
             </div>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <Image src={carausel} className="d-block w-100" alt="carausel-1"/>
+                    <Image src={carausel} className="d-block" alt="carausel-1" style={{minWidth: '100%'}}/>
                     <div className="carousel-caption d-none d-md-block">
                         <h3 className={styles["title-carousel"]}>Kursi Bundar Kembar</h3>
                         <p className={styles["deskripsi-carousel"]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc, enim, quam risus facilisi ipsum, nunc. Morbi amet mi eget sit varius mattis.</p>
