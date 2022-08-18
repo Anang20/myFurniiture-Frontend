@@ -138,7 +138,7 @@ import appConfig from "../../../config/app";
         dataIndex: 'No',
         value: 'No',
         width: 5,
-        ...getColumnSearchProps('nama_produk'),
+        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'Tanggal',

@@ -7,10 +7,13 @@ import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import Head from "next/head";
 import { Image } from 'antd';
+import axios from "axios";
+import appConfig from "../../../config/app";
 
   const App = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
+    const [payment, getPayment]= useState('')
     const searchInput = useRef(null);
   
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -18,6 +21,16 @@ import { Image } from 'antd';
       setSearchText(selectedKeys[0]);
       setSearchedColumn(dataIndex);
     };
+    
+    useEffect(()=>{
+    const Data = async () =>{
+      const res = await axios.get(`${appConfig.apiUrl}/payment`)
+      const data = res.data.data
+      console.log(data);
+      getPayment(data)
+    }
+    Data()
+},[])
   
     const handleReset = (clearFilters) => {
       clearFilters();
@@ -112,41 +125,43 @@ import { Image } from 'antd';
     const columns = [
       {
         title: 'No',
-        dataIndex: 'no',
+        dataIndex: 'No',
         key: 'no',
-        width: 20,
+        width: 15,
       },
       {
         title: 'Nama Customer',
-        dataIndex: 'nama_lengkap',
+        dataIndex: 'NamaCustomer',
         key: 'nama_lengkap',
-        width: 80,
+        width: 50,
+        // sorter: (a, b) => a.nama_lengkap.length - b.nama_lengkap.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Nama Bank',
-        dataIndex: 'nama_bank',
+        dataIndex: 'NamaBank',
         key: 'nama_bank',
         width: 40,
         // ...getColumnSearchProps('nama_lengkap'),
       },
       {
         title: 'No Rek',
-        dataIndex: 'no_rekening',
+        dataIndex: 'NoRek',
         key: 'no_rekening',
         width: 50,
         // ...getColumnSearchProps('no_rekening'),
       },
       {
         title: 'Bukti',
-        dataIndex: 'gambar_bukti',
+        dataIndex: 'Bukti',
         key: 'gambar_bukti',
         width: 50,
-        render: () => {
+        render: () => { 
           return (
            <div>
             <Image 
             width={100} 
-            src={"https://gotra.sgp1.cdn.digitaloceanspaces.com/web-upload/1527432881_27-05-2018_photo6077615961109801020.jpg"}
+            src={`${appConfig.apiUrl}/file/${payment[0].Bukti}`}
             alt={"image not found"}/>
            </div>
           )
@@ -154,12 +169,12 @@ import { Image } from 'antd';
       },
       {
         title: 'Status',
-        dataIndex: 'status',
+        dataIndex: 'Status',
         key: 'status',
         width: 50,
         render: () => {
           return (
-            <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
+            <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>{payment[0].Status}</span>
           )
         },
       },
@@ -233,7 +248,7 @@ import { Image } from 'antd';
                           <div className="card-body">
                           <Table
                           columns={columns}
-                          dataSource={data}
+                          dataSource={payment}
                           scroll={{
                             x: 1500,
                             y: 300,
