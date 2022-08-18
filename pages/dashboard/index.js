@@ -32,12 +32,12 @@ const Dashboard = () => {
             <title>MyFuniture | Dashboard</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-         <div id="wrapper" style={{ maxHeight: 600 }}>
+         <div id="wrapper">
             <SidebarAdmin/>
                 <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
                     <NavbarAdmin/>
-                    <div className="container">
+                    <div className="container col-12">
                         <h4 className="text-gray-600">Dashboard</h4>
                         <div className="row">
                             <div className="col-xl-4 col-md-6 mb-4">
@@ -62,6 +62,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
+
                             <div className="col-xl-4 col-md-6 mb-4"style={{ height: 120 }}>
                                 <div className="card shadow h-100 py-2" style={{ borderRadius: 30 }}>
                                     <div className="card-body">
@@ -83,7 +84,6 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="col-xl-4 col-md-6 mb-4">
                                 <div className="card shadow h-100 py-2" style={{ borderRadius: 30 }}>
                                     <div className="card-body">

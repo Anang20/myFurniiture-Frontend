@@ -14,11 +14,22 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
   const Order = () => {
 
-    const [detailProduk, setDetailProduk] = useState();
+    const [detailProduk, setDetailProduk] = useState([{
+      No : 1,
+      Tanggal: "",
+      Nama: "",
+      Produk: "",
+      Kuantiti: 1,
+      HargaBarang: 0,
+      totalHarga: 0,
+      Alamat: "",
+      status:''
+  }]);
 
     const getProduk = async () => {
-        const dataProduk = await axios.get("http://localhost:3222/produk");
-        const produk = dataProduk.data.items;
+        const dataProduk = await axios.get("http://localhost:3222/order");
+        const produk = dataProduk.data.data;
+        console.log(produk);
         setDetailProduk(produk);
     }
     useEffect(() => {
@@ -127,32 +138,41 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
   
     const columns = [
       {
-        title: 'no',
-        dataIndex: 'nomor',
-        value: 'no',
-        width: 10,
-        fixed: 'left',
+        title: 'No',
+        dataIndex: 'No',
+        value: 'No',
+        width: 8,
+        // fixed: 'left',
         // sorter: (a, b) => a.no.length - b.no.length,
         // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Tanggal',
-        dataIndex: 'tanggal',
+        dataIndex: 'Tanggal',
         value: 'created_at',
         width: 20,
-        fixed: 'left',
+        // fixed: 'left',
         // ...getColumnSearchProps('tanggal'),
       },
       {
-        title: 'Nama',
-        dataIndex: 'nama',
-        value: 'nama_lengkap',
+        title: 'Nomer Order',
+        dataIndex: 'NomerOrder',
+        value: 'total_order',
         width: 20,
+        // sorter: (a, b) => a.total_order.length - b.total_order.length,
+        // sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'Nama Pelanggan',
+        dataIndex: 'Nama',
+        value: 'nama_lengkap',
+        width: 25,
+        // fixed: 'left'
         // ...getColumnSearchProps('nama'),
       },
       {
         title: 'Produk',
-        dataIndex: 'nama_produk',
+        dataIndex: 'Produk',
         value: 'nama_produk',
         width: 20,
         // sorter: (a, b) => a.nama_produk.length - b.nama_produk.length,
@@ -160,51 +180,38 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
       },
       {
         title: 'Kuantiti',
-        dataIndex: 'quantity',
+        dataIndex: 'Kuantiti',
         value: 'quantity',
-        width: 15 ,
+        width: 15,
+        fixed: 'center'
         // ...getColumnSearchProps('quantity'),
       },
       {
         title: 'Harga Barang',
-        dataIndex: 'harga_barang',
+        dataIndex: 'HargaBarang',
         value: 'harga_barang',
         width: 20,
         // ...getColumnSearchProps('harga_barang'),
       },
-      {
-        title: 'Harga Kirim',
-        dataIndex: 'harga_kirim',
-        value: 'harga_kirim',
-        width: 20,
-        // ...getColumnSearchProps('harga_kirim'),
-      },
-      {
-        title: 'Total Order',
-        dataIndex: 'total_order',
-        value: 'total_order',
-        width: 20,
-        // sorter: (a, b) => a.total_order.length - b.total_order.length,
-        // sortDirections: ['descend', 'ascend'],
-      },
+      
       {
         title: 'Alamat',
-        dataIndex: 'alamat',
+        dataIndex: 'Alamat',
         value: 'alamat',
-        width: 20,
+        width: 30,
         // sorter: (a, b) => a.alamat.length - b.alamat.length,
         // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Status',
         dataIndex: 'status',
-        value: 'status',
-        width: 20,
-        render: () => (
-            <>
-            <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
-            </>
-        ),
+        // value: 'Status',
+        width: 18,
+        // render: () => (
+        //     <>
+        //     <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
+        //     </>
+        // ),
         sorter: (a, b) => a.status.length - b.status.length,
         sortDirections: ['descend', 'ascend'],
       },
