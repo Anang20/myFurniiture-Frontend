@@ -154,8 +154,8 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         title: 'Nama Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
-        width: 40,
-        ...getColumnSearchProps('nama_produk'),
+        width: 36,
+        // ...getColumnSearchProps('nama_produk'),  
       },
       {
         title: 'Gambar',
@@ -166,22 +166,15 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
             </div>
           )
         },
-        width: 30,
+        width: 20,
       },
       {
         title: 'Harga',
         dataIndex: 'harga',
         value: 'harga',
         width: 18,
-        sorter: (a, b) => a.harga.length - b.harga.length,
-        sortDirections: ['descend', 'ascend'],
-      },
-      {
-        title: 'deskripsi',
-        dataIndex: 'deskripsi',
-        value: 'deskripsi',
-        width: 55,
-        // ...getColumnSearchProps('deskripsi'),
+        // sorter: (a, b) => a.harga.length - b.harga.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Stok',
@@ -190,6 +183,13 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         width: 15,
         // sorter: (a, b) => a.stok.length - b.stok.length,
         // sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'deskripsi',
+        dataIndex: 'deskripsi',
+        value: 'deskripsi',
+        width: 55,
+        // ...getColumnSearchProps('deskripsi'),
       },
       {
         title: 'Action',
