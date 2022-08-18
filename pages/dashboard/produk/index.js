@@ -198,10 +198,10 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         fixed: 'right',
         render: (_, record) => (
           <>
-          <Link href={`/dashboard/produk/edit_produk/${record.id_produk}`}>
+          <Link href={`/dashboard/produk/edit_produk/${record.id}`}>
             <button className="btn btn-sm btn-success shadow-sm me-3">Edit</button>
           </Link>
-          <button type="button" onClick={() => setIdUser(record.id_produk)} className="btn btn-sm shadow-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</button>
+          <button type="button" onClick={() => setIdUser(record.id)} className="btn btn-sm shadow-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</button>
           </>
         ),
       },
@@ -215,7 +215,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Produk</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" >
+       <div id="wrapper" style={{ width: 1140 }}>
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">

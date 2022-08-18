@@ -121,22 +121,20 @@ import { Image } from 'antd';
         dataIndex: 'nama_lengkap',
         key: 'nama_lengkap',
         width: 80,
-        sorter: (a, b) => a.nama_lengkap.length - b.nama_lengkap.length,
-        sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Nama Bank',
         dataIndex: 'nama_bank',
         key: 'nama_bank',
         width: 40,
-        ...getColumnSearchProps('nama_lengkap'),
+        // ...getColumnSearchProps('nama_lengkap'),
       },
       {
         title: 'No Rek',
         dataIndex: 'no_rekening',
         key: 'no_rekening',
         width: 50,
-        ...getColumnSearchProps('no_rekening'),
+        // ...getColumnSearchProps('no_rekening'),
       },
       {
         title: 'Bukti',
@@ -168,11 +166,12 @@ import { Image } from 'antd';
       {
         title: 'Aksi',
         key: 'operation',
-        width: 40,
+        width: 50,
         fixed: 'right',
         render: () => (
           <>
-          <button className="btn btn-sm btn-danger shadow-sm me-3">Tolak</button>
+          <button className="btn btn-sm btn-primary shadow-sm me-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button>
+          <button className="btn btn-sm btn-danger shadow-sm me-1">Tolak</button>
           <button className="btn btn-sm btn-warning shadow-sm">Terima</button>
           </>
         ),
@@ -223,7 +222,7 @@ import { Image } from 'antd';
         <title>MyFuniture | Terima Pembayaran</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" >
+       <div id="wrapper" style={{ width: 1140 }}>
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
@@ -242,6 +241,28 @@ import { Image } from 'antd';
                           />
                           </div>
                       </div>  
+
+                      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Detail Order</h5>
+                              <button type="button" class="btn-close btn-sm shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Nama : Anang</p>
+                              <p>Produk Yang Dipesan :</p>
+                              <p>Meja 3x</p>
+                              <p>Almari 3x</p>
+                              <p>total Pesanan : Rp 4000000</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
                   </div>
                 </div>
             </div>
