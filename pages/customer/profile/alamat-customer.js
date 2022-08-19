@@ -31,8 +31,7 @@ const ListAlamat = () => {
                 const id = decode.query["id_user"];
                 const endpoint = `${appConfig.apiUrl}/users/cari_alamat/${id}`;
 
-                 await  axios.get(endpoint).then((value) => {
-                    
+                 await  axios.get(endpoint).then((value) => {       
                     const alamatUser = value.data.data.alamat
                     const id = value.data.data.alamat
                     const nama = value.data.data.nama_lengkap  
@@ -82,14 +81,13 @@ const ListAlamat = () => {
                             <button type="button" onClick={
                                 async () => {
                                     const apiDelete = `http://localhost:3222/users/alamat/${value?.id_alamat_user}`
-                                    console.log(apiDelete);
                                         const response = await axios.delete(apiDelete)
                                         console.log(response.data.statusCode)
                                         if(response.data.statusCode === 200) {
                                             message.success("Alamat Berhasil Dihapus")
                                             router.reload('/customer/profile/alamat-customer')
                                         }else{
-                                            alert('Something Wrong')
+                                            message.error("Ups ada suatu kesalahan")
                                         }
                                 }
                             } 

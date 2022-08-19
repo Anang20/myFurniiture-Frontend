@@ -1,7 +1,7 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, message, Space, Table } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
@@ -9,12 +9,14 @@ import Head from "next/head";
 import { Image } from 'antd';
 import axios from "axios";
 import appConfig from "../../../config/app";
+import { useRouter } from "next/router";
 
   const App = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [payment, getPayment]= useState('')
     const searchInput = useRef(null);
+    const router = useRouter();
   
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();
@@ -26,11 +28,13 @@ import appConfig from "../../../config/app";
     const Data = async () =>{
       const res = await axios.get(`${appConfig.apiUrl}/payment`)
       const data = res.data.data
-      console.log(data);
+      // console.log(data);
       getPayment(data)
     }
     Data()
-},[])
+    },[])
+
+    console.log(payment);
   
     const handleReset = (clearFilters) => {
       clearFilters();
@@ -183,53 +187,27 @@ import appConfig from "../../../config/app";
         key: 'operation',
         width: 50,
         fixed: 'right',
-        render: () => (
+        render: (_, record) => (
           <>
           <button className="btn btn-sm btn-primary shadow-sm me-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button>
           <button className="btn btn-sm btn-danger shadow-sm me-1">Tolak</button>
-          <button className="btn btn-sm btn-warning shadow-sm">Terima</button>
+          <button className="btn btn-sm btn-warning shadow-sm" onClick={
+            async () => {
+              const endpoint = `http://localhost:3222/payment/${record?.id}`
+              const res = await axios.put(endpoint)
+              console.log(res.data);
+              if(res.data.statusCode === 200) {
+                message.success("Pesanan Berhasil Diterima")
+                router.reload('/dashboard/terima_pembayaran')
+              }else{
+                  message.error("Ups ada suatu kesalahan")
+              }
+            }
+          }>Terima</button>
           </>
         ),
       },
     ];
-
-    const data = [
-      {
-        no: 1,
-        nama_lengkap: "Anang Syah Amirul Haqim",
-        nama_bank: "BCA",
-        no_rekening: "9040-030560-49596",
-        gambar_bukti: "https://gotra.sgp1.cdn.digitaloceanspaces.com/web-upload/1527432881_27-05-2018_photo6077615961109801020.jpg",
-      },
-      {
-        no: 2,
-        nama_lengkap: "Fernanda Iqshal",
-        nama_bank: "BCA",
-        no_rekening: "9040-030560-49596",
-        gambar_bukti: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        no: 3,
-        nama_lengkap: "Anang Syah Amirul Haqim",
-        nama_bank: "BCA",
-        no_rekening: "9040-030560-49596",
-        gambar_bukti: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        no: 4,
-        nama_lengkap: "Anang Syah Amirul Haqim",
-        nama_bank: "BCA",
-        no_rekening: "9040-030560-49596",
-        gambar_bukti: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        no: 5,
-        nama_lengkap: "Anang Syah Amirul Haqim",
-        nama_bank: "BCA",
-        no_rekening: "9040-030560-49596",
-        gambar_bukti: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-    ]
 
     return ( 
       <>

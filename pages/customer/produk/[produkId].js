@@ -29,8 +29,6 @@ const DetailProduk = () => {
 
     }])
     const stok = produk?.stok
-    // const [changeCount, setChange] = useState(0)
-    // console.log(stok)
 
     const decrementCount = () => {
         if (count > 0 ) {
@@ -47,6 +45,17 @@ const DetailProduk = () => {
     const onChangeStok = (e) => {
         const value = e.target.value
         setCount(value)
+    }
+
+    const curency = (value)=>{
+        const formatter = new Intl.NumberFormat('en-ID', {
+            style: 'currency',
+            currency: 'IDR'
+          }).format(value)
+          .replace(/[IDR]/gi, '')
+          .replace(/(\.+\d{2})/, '')
+          .trimLeft()
+        return formatter
     }
     
     useEffect(() => {
@@ -68,7 +77,6 @@ const DetailProduk = () => {
                 const id_user = decode.query["id_user"];
                 const endpoint = await axios.get(`${appConfig.apiUrl}/cart/cari_cart/${id_user}`)
                 const result = endpoint.data.data.id_cart
-                // console.log(id_user);
                 console.log('ini id cart', result);
                 setIdCart(result)
             } catch (e) {
@@ -109,7 +117,7 @@ const DetailProduk = () => {
                 <div className="col-6">
                     <form style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <label style={{ position: 'absolute', fontStyle: 'normal', fontWeight: 600, fontSize: 30, top: 80 }}>{produk?.nama_produk}</label>
-                        <label style={{ position: 'absolute', fontStyle: 'normal', fontWeight: 500, fontSize: 30, top: 180 }}>Rp {produk?.harga}</label>
+                        <label style={{ position: 'absolute', fontStyle: 'normal', fontWeight: 500, fontSize: 30, top: 180 }}>Rp {curency(produk?.harga)}</label>
                         <input type="hidden" value={count} onChange={onChangeStok} />
                         <Link href="/customer/produk/cart">
                             <button type="button" onClick={createDetail} className={styles["button-tambah-keranjang"]}>Tambah Ke Keranjang</button>

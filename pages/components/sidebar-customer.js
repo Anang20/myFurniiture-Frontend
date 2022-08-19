@@ -43,8 +43,10 @@ const SideBarCustomer = () => {
     return (
         <>
             <div className="col-2" style={{ display: 'flex', alignItems: "center", flexDirection: 'column', backgroundColor: '#00B8B0', maxHeight: '100%' }}>
-                <Image src={avatar} width={118} height={200} alt="avatar" />
-                <span className="text-light" style={{ marginTop: -30, marginBottom: 15, textAlign: 'center' }}>{nama.nama_lengkap}</span>
+                <div style={{ marginTop: 30 }}>
+                    <Image src={avatar} width={118} height={118} alt="avatar" style={{ borderRadius: '100%'}}/>
+                </div>
+                <span className="text-light" style={{ marginTop: 15, marginBottom: 15, textAlign: 'center' }}>{nama.nama_lengkap}</span>
                 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <Link href="/customer/profile/edit-profile-customer">

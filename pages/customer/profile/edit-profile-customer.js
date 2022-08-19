@@ -7,72 +7,107 @@ import jwtDecode from "jwt-decode";
 import appConfig from "../../../config/app";
 import axios from "axios";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import { useRouter } from "next/router";
+import { message } from "antd";
 
 const FormEditProfile = () => {
 
     const [dataUser, setDataUser] = useState([]);
-    // const [foto, setFoto] = useState('');
-    // const [nama, setNama] = useState([]);
-    // const [email, setEmail] = useState([]);
-    // const [notlp, setNoTlp] = useState([]);
+    const [userId, setUserId] = useState('')
+    const [foto, setFoto] = useState('');
+    const [nama, setNama] = useState([]);
+    const [email, setEmail] = useState([]);
+    const [notlp, setNoTlp] = useState([]);
+    const [password, setPassword] = useState([]);
+    const router = useRouter();
     const getData = () => {
         try {
             const token = localStorage.getItem('accessToken');
             const decode = jwtDecode(token);
             const id = decode.query["id_user"];
+            setUserId(id)
             const endpoint = `${appConfig.apiUrl}/users/cari_user/${id}`;
 
             axios.get(endpoint).then((res) => {
                 const result = res.data.data;
+                const fotos = res.data.data.foto;
+                const nama_lengkap = res.data.data.nama_lengkap;
+                const emails = res.data.data.email;
+                const no_hp = res.data.data.no_telp;
+                const passwords = res.data.data.password
+                setFoto(fotos);
+                setNama(nama_lengkap);
+                setEmail(emails);
+                setNoTlp(no_hp);
+                setPassword(passwords);
                 setDataUser(result);
             })
         } catch (err) {
             console.log(err);
         }
     }
-
-    // const getFoto = () => {
-    //     setFoto(data.foto);
-    // }
-
-    // const getNama = () => {
-    //     setNama(data.nama_lengkap);
-    // }
-
-    // const getEmail = () => {
-    //     setEmail(data.email);
-    // }
-
-    // const getNoTlp = () => {
-    //     setNoTlp(data.no_telp)
-    // }
-
+    
     useEffect(() => {
         getData();
-        // getFoto();
-        // getNama();
-        // getEmail();
-        // getNoTlp();
     }, []);
-
-    const onChangeFoto = async (e) => {
-        const value = await e.target.value;
-        setDataUser(value)
+    
+    const editProfileSubmit = async () => {
+        try {
+            const response = await axios.put(`${appConfig.apiUrl}/users/${userId}`, {nama_lengkap: nama, email, no_telp: notlp, foto, password}, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            console.log(response)        
+            if (response.status == 201 || response.status == 200) {
+                router.reload("/customer/profile/edit-profile-customer")
+                message.success("Berhasil Mengedit Profile")
+            } else {
+                message.error("Upss ada kesalahan saat menambahkan alamat")
+            }
+        
+        } catch (err) {
+            console.log('error nya adalah', err);
+        }
     }
 
+
+    
     const onChangeNama = async (e) => {
         const value = await e.target.value;
-        setDataUser(value)
+        setNama(value)
     }
-
+    
     const onChangeEmail = async (e) => {
         const value = await e.target.value;
-        setDataUser(value)
+        setEmail(value)
     }
 
     const onChangeNoTlp = async (e) => {
         const value = await e.target.value;
-        setDataUser(value)
+        setNoTlp(value)
+    }
+
+    const onChangePassword = async (e) => {
+        const value = await e.target.value;
+        setPassword(value)
+    }
+    const onChangeFoto = async (e) => {
+       const value = e.target.files[0]
+       const data = {
+            file : value
+       }
+       try {
+            const res = await axios.post("http://localhost:3222/file/upload", data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            setFoto(res.data.data.filename)
+       } catch (err) {
+        console.log(err);
+       }
     }
 
     useAuthenticatedPage()
@@ -86,32 +121,38 @@ const FormEditProfile = () => {
         <div className="col-10">
             <div className="card" style={{ minHeight: 500 }}>
                 <div className="card-body">
-                    <form method="POST">
+                    <form>
                         <div className="row mb-3">
                             <label htmlFor="foto" className="col-sm-2 col-form-label">Foto</label>
                             <div className="col-sm-9">
-                                <input type="file" className="form-control" value={dataUser.foto} onChange={onChangeFoto} required/>
+                                <input type="file" className="form-control" onChange={onChangeFoto} required/>
                             </div>
                         </div>
                         <div className="row mb-3">
                             <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Nama Lengkap</label>
                             <div className="col-sm-9">
-                                <input type="text" className="form-control" value={dataUser.nama_lengkap} onChange={onChangeNama} required/>
+                                <input type="text" className="form-control" value={nama} onChange={onChangeNama} required/>
                             </div>
                         </div>
                         <div className="row mb-3">
                             <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
                             <div className="col-sm-9">
-                                <input type="text" className="form-control" value={dataUser.email} onChange={onChangeEmail} required/>
+                                <input type="text" className="form-control" value={email} onChange={onChangeEmail} required/>
                             </div>
                         </div>
                         <div className="row mb-3">
                             <label htmlFor="no_telp" className="col-sm-2 col-form-label">No Telephone</label>
                             <div className="col-sm-9">
-                                <input type="number" className="form-control" value={dataUser.no_telp} onChange={onChangeNoTlp} required/>
+                                <input type="number" className="form-control" value={notlp} onChange={onChangeNoTlp} required/>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-success" style={{ marginLeft: 148 }}>Simpan</button>
+                        <div className="row mb-3">
+                            <label htmlFor="no_telp" className="col-sm-2 col-form-label">Password</label>
+                            <div className="col-sm-9">
+                                <input type="password" placeholder="Masukan password" className="form-control" onChange={onChangePassword} required/>
+                            </div>
+                        </div>
+                        <button type="button" onClick={editProfileSubmit} className="btn btn-success" style={{ marginLeft: 148 }}>Simpan</button>
                     </form>
                 </div>
             </div>

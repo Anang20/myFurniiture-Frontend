@@ -86,12 +86,7 @@ const Order = () => {
             console.log('error nya adalah', err);
         }
     }
-
-    const onChangeAlamat = async (event) => {
-        const getAlamatId = await event.target.value;
-        // console.log(getAlamatId);
-        setAlamatId(getAlamatId);
-    }
+    
     const curency = (value)=>{
         const formatter = new Intl.NumberFormat('en-ID', {
             style: 'currency',
@@ -102,8 +97,9 @@ const Order = () => {
           .trimLeft()
           return formatter
     }
+
     const totalHargaProduk = async () => {
-       const hasil = await produk.reduce((value, i)=> {
+        const hasil = await produk.reduce((value, i)=> {
             return value + i.harga_total
         }, 0)
         // console.log(produk)
@@ -118,6 +114,31 @@ const Order = () => {
         setOrder(hasil)
     }
     totalOrder()
+
+    const onChangeCartId = async (event) => {
+        const getCartId = await event.target.value;
+        setIdCart(getCartId);
+    }
+
+    const onChangeAlamat = async (event) => {
+        const getAlamatId = await event.target.value;
+        setAlamatId(getAlamatId);
+    }
+
+    const onChangeTotalHargaProduk = (event) => {
+        const totalHargaProduk = event.target.value;
+        setHargaProduk(totalHargaProduk);
+    }
+
+    const onChangeOngkir = (event) => {
+        const hargaOngkir = event.target.value;
+        setOngkir(hargaOngkir);
+    }
+
+    const onChangeTotalOrder = (event) => {
+        const totalOrder = event.target.value;
+        setOrder(totalOrder)
+    }
 
     useAuthenticatedPage()
     return (
@@ -152,31 +173,24 @@ const Order = () => {
 
                         <div className="row mb-3">
                             <div className="col-sm-9">
-                                <input type="text" value={cartId} className="form-control" name="id_cart" required/>
+                                <input type="hidden" value={cartId} onChange={onChangeCartId} className="form-control" name="id_cart" required/>
                             </div>
 
                             <div className="col-sm-9">
-                                <input type="text" value={alamatId} className="form-control" onChange={onChangeAlamat} name="id_alamat" required/>
+                                <input type="hidden" value={alamatId} className="form-control" onChange={onChangeAlamat} name="id_alamat" required/>
                             </div>
                 
                             <div className="col-sm-9">
-                                <input type="text" value={hargaProduk} className="form-control" name="total_hrg_brg" required/>
+                                <input type="hidden" value={hargaProduk} onChange={onChangeTotalHargaProduk} className="form-control" name="total_hrg_brg" required/>
                             </div>
 
                             <div className="col-sm-9">
-                                <input type="text" value={ongkir} className="form-control" name="total_hrg_kirim" required/>
+                                <input type="hidden" value={ongkir} onChange={onChangeOngkir} className="form-control" name="total_hrg_kirim" required/>
                             </div>
 
                             <div className="col-sm-9">
-                                <input type="text" value={order} className="form-control" name="total_order" required/>
+                                <input type="hidden" value={order} onChange={onChangeTotalOrder} className="form-control" name="total_order" required/>
                             </div>
-
-                            {/* <div className="col-sm-9">
-                                <input type="text" className="form-control" name="status" required/>
-                            </div> */}
-                            <button type="submit" style={{  marginLeft: 720, marginTop: 28, width: 296, height: 50, background: '#00B8B0', color: '#FFFFFF', fontWeight: 400, fonstSize: 20, borderRadius: 15, border: 'none' }}>Buat Pesanan</button>
-                        </div>
-                    </form>
 
                             <table style={{ textAlign: 'center', width: '100%', marginTop: 59 }}>
                                 <thead>
@@ -225,7 +239,9 @@ const Order = () => {
                                     </tbody>
                                 </table>
                             </div>
-                    
+                            <button type="button" onClick={createOrder} style={{  marginLeft: 720, marginTop: 28, width: 296, height: 50, background: '#00B8B0', color: '#FFFFFF', fontWeight: 400, fonstSize: 20, borderRadius: 15, border: 'none' }}>Buat Pesanan</button>
+                        </div>
+                    </form>
                </div>
             </div>
        </div>

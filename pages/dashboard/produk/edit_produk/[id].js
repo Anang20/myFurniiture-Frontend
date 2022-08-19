@@ -68,7 +68,7 @@ const EditProduk = () => {
     }
 
     const onChangeGambar = async (e) => {
-        const value = await e.target.files[0]
+        const value = e.target.files[0]
         const data = {
             file: value
         }
@@ -98,10 +98,6 @@ const EditProduk = () => {
     const onChangeStok = async (e) => {
         const value = await e.target.value
         setStok(value)
-    }
-
-    const onFormSubmit = (e) => {
-        e.preventDefault()
     }
 
     const editProdukSubmit = async () => {
@@ -147,7 +143,7 @@ const EditProduk = () => {
                     <div className="card shadow">
                         <div className="card-body">
 
-                            <form onSubmit={onFormSubmit} method="PUT">
+                            <form>
                                 <div className="row mb-3">
                                     <div className="col-sm-9">
                                         <input type="hidden" value={produkId} className="form-control" name="id_produk" required readOnly/>
