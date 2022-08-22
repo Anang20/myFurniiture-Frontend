@@ -117,9 +117,9 @@ const Alamat = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <NavbarAdmin/>
-                    <div className="container-fluid">
+                    <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
                         <h4 className="text-gray-600">Alamat</h4>
-                        <div className="card shadow" style={{ minHeight: 500 }}>
+                        <div className="card shadow" style={{ minHeight: 450 }}>
                             <div className="card-body">
                                 <ListAlamat/>
                             </div>

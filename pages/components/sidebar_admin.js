@@ -14,7 +14,7 @@ import Link from 'next/link';
 const SidebarAdmin = () => {
     return (
         <>
-        <div id="wrapper" style={{ backgroundColor: '#00B8B0' }}>
+        <div id="wrapper" style={{ backgroundColor: '#00B8B0', position: 'fixed', zIndex: 100 }}>
         <ul className="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
           <a className="sidebar-brand d-flex align-items-center justify-content-center">

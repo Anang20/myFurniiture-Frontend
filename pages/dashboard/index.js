@@ -37,7 +37,7 @@ const Dashboard = () => {
                 <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
                     <NavbarAdmin/>
-                    <div className="container col-12">
+                    <div className="container-fluid col-12" style={{ paddingLeft: 250, height: 460, marginTop: 90}}>
                         <h4 className="text-gray-600">Dashboard</h4>
                         <div className="row">
                             <div className="col-xl-4 col-md-6 mb-4">

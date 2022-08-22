@@ -42,7 +42,7 @@ const NavbarAdmin = () => {
 
     return (
       <>
-      <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top" style={{ zIndex: 60 }}>
         <ul className="navbar-nav ml-auto">
             <span className="mr-2 d-none d-lg-inline text-gray-600 small mt-3">{namaLengkap.nama_lengkap}</span>
             <li className="nav-item dropdown no-arrow">

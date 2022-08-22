@@ -1,7 +1,7 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table, Image } from 'antd';
+import { Button, Input, Space, Table, Image, message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
@@ -49,12 +49,13 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
     const handlerOk = async () => {
       const apiDelete = `http://localhost:3222/produk/${idUser}`
               const response = await axios.delete(apiDelete)
-              console.log(response.data.statusCode)
-              if(response.data.statusCode === 200) {
+              console.log(response)
+              // if(response.data.status == 200) {
+                message.success('Produk Berhasil Dihapus')
                 router.reload('/dashboard/produk')
-              }else{
-                alert('Something Wrong')
-              }
+              // }else{
+              //   router.reload('/dashboard/produk')
+              // }
     }
 
     const getColumnSearchProps = (dataIndex) => ({
@@ -215,12 +216,12 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Produk</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ width: 1140 }}>
+       <div id="wrapper">
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                   <NavbarAdmin/>
-                  <div className="container-fluid">
+                  <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
                       <h4 className="text-gray-600">Data Produk</h4>
                       <div className="card shadow">
                           <div className="card-body">

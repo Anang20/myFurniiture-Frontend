@@ -96,7 +96,7 @@ const TambahProduk = () => {
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                 <NavbarAdmin/>
-                <div className="container-fluid">
+                <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
                     <h4 className="text-gray-600">Tambah Produk</h4>
                     <div className="card shadow">
                         <div className="card-body">

@@ -9,11 +9,26 @@ import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import axios from "axios";
+import appConfig from "../../../config/app";
+import Link from "next/link";
 
   const App = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
+    const [detailOrder, setDetailOrder] = useState([]);
+    const [dataExport, setDataExport] = useState('')
     const searchInput = useRef(null);
+
+    useEffect(() => {
+      const getDataOrder = async () => {
+        const response = await axios.get(`${appConfig.apiUrl}/order/cari_laporan`);
+        const order = response.data.data;
+        setDetailOrder(order);
+      }
+      getDataOrder()
+    }, [])
+    console.log(detailOrder);
   
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();
@@ -114,96 +129,57 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
     const columns = [
       {
         title: 'No',
-        dataIndex: 'no',
-        key: 'no',
+        dataIndex: 'NomerOrder',
+        key: 'NomerOrder',
         width: 20,
-        fixed: 'left',
+        // fixed: 'left',
       },
       {
         title: 'Tanggal',
-        dataIndex: 'tanggal',
-        key: 'tanggal',
+        dataIndex: 'Tanggal',
+        key: 'Tanggal',
         width: 30,
-        sorter: (a, b) => a.tanggal.length - b.tanggal.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.tanggal.length - b.tanggal.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Nama',
-        dataIndex: 'nama_lengkap',
-        key: 'nama_lengkap',
+        dataIndex: 'Nama',
+        key: 'Nama',
         width: 30,
         ...getColumnSearchProps('nama_lengkap'),
       },
       {
         title: 'Produk',
-        dataIndex: 'nama_produk',
-        key: 'nama_produk',
+        dataIndex: 'Produk',
+        key: 'Produk',
         width: 30,
-        ...getColumnSearchProps('nama_produk'),
+        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'Kuantiti',
-        dataIndex: 'quantity',
-        key: 'quantity',
+        dataIndex: 'Kuantiti',
+        key: 'Kuantiti',
         width: 30,
-        sorter: (a, b) => a.quantity.length - b.quantity.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.quantity.length - b.quantity.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Harga Barang',
-        dataIndex: 'harga_barang',
-        key: 'harga_barang',
+        dataIndex: 'HargaBarang',
+        key: 'HargaBarang',
         width: 30,
-        sorter: (a, b) => a.harga_barang.length - b.harga_barang.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.harga_barang.length - b.harga_barang.length,
+        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Harga Kirim',
-        dataIndex: 'harga_kirim',
-        key: 'harga_kirim',
+        dataIndex: 'Alamat',
+        key: 'Alamat',
         width: 30,
-        sorter: (a, b) => a.harga_kirim.length - b.harga_kirim.length,
-        sortDirections: ['descend', 'ascend'],
+        // sorter: (a, b) => a.harga_kirim.length - b.harga_kirim.length,
+        // sortDirections: ['descend', 'ascend'],
       },
-    ];
-
-    const data = [
-        {
-            no: 1,
-            tanggal: 20,
-            nama_lengkap: 'anang syah',
-            nama_produk: 'kursi',
-            quantity: 2,
-            harga_barang: 300000,
-            harga_kirim: 100000,
-        },
-        {
-            no: 1,
-            tanggal: 20,
-            nama_lengkap: 'anang syah',
-            nama_produk: 'kursi',
-            quantity: 2,
-            harga_barang: 300000,
-            harga_kirim: 100000,
-        },
-        {
-            no: 1,
-            tanggal: 20,
-            nama_lengkap: 'anang syah',
-            nama_produk: 'kursi',
-            quantity: 2,
-            harga_barang: 300000,
-            harga_kirim: 100000,
-        },
-        {
-            no: 1,
-            tanggal: 20,
-            nama_lengkap: 'anang syah',
-            nama_produk: 'kursi',
-            quantity: 2,
-            harga_barang: 300000,
-            harga_kirim: 100000,
-        },
     ];
 
     useAuthenticatedPage()
@@ -214,23 +190,22 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Laporan Transaksi</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ width: 1140 }}>
+       <div id="wrapper">
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                   <NavbarAdmin/>
-                  <div className="container-fluid">
+                  <div className="container-fluid" style={{ paddingLeft: 250, height: 500, marginTop: 90 }}>
                       <h4 className="text-gray-600">Laporan Transaksi</h4>
                       <div className="card shadow">
                           <div className="card-body">
-                              <button className="btn btn-sm shadow-sm btn-danger mb-3"><FontAwesomeIcon icon={faFilePdf} className="mr-3"/>Export PDF</button>
+                              <button className="btn btn-sm shadow-sm btn-danger mb-3 me-3" onClick={() => window.print()}><FontAwesomeIcon icon={faFilePdf} className="mr-3"/>Export PDF</button>
+                              <Link href={`${appConfig.apiUrl}/order/export/excel-generator`}>
+                                <button className="btn btn-sm shadow-sm btn-success mb-3"><FontAwesomeIcon icon={faFilePdf} className="mr-3"/>Export Excel</button>
+                              </Link>
                           <Table
                           columns={columns}
-                          dataSource={data}
-                          scroll={{
-                            x: 1500,
-                            y: 300,
-                          }}
+                          dataSource={detailOrder}
                           />
                           </div>
                       </div>  

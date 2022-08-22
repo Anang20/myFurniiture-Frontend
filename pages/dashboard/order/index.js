@@ -1,7 +1,7 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, message, Space, Table } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
@@ -11,6 +11,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import appConfig from "../../../config/app";
+import { useRouter } from "next/router";
 
   const Order = () => {
 
@@ -25,6 +27,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
       Alamat: "",
       status:''
   }]);
+  const router = useRouter();
 
     const getProduk = async () => {
         const dataProduk = await axios.get("http://localhost:3222/order");
@@ -219,9 +222,22 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         title: 'Action',
         key: 'operation',
         width: 20,
-        render: () => (
+        render: (_, record) => (
           <>
-          <button className="btn btn-sm btn-success shadow-sm me-3">Kirim Barang</button>
+          <button className="btn btn-sm btn-success shadow-sm me-3" onClick={
+            async () => {
+              const endpoint = `${appConfig.apiUrl}/order/terima/${record.id}`
+              const res = await axios.put(endpoint)
+              console.log(res.data);
+              if (res.data.statusCode === 200) {
+                message.success("Barang Berhasil Dikirim")
+                router.reload('/dashboard/order')
+              } else {
+                router.reload('/dashboard/order')
+                message.success("Barang Berhasil Dikirim")
+              }
+            }
+          }>Kirim Barang</button>
           </>
         ),
       },
@@ -235,12 +251,12 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         <title>MyFuniture | Order</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ width: 1140 }}>
+       <div id="wrapper">
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                   <NavbarAdmin/>
-                  <div className="container-fluid">
+                  <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
                       <h4 className="text-gray-600">Order</h4>
                       <div className="card shadow">
                           <div className="card-body">
@@ -249,7 +265,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
                           dataSource={detailProduk}
                           scroll={{
                             x: 1500,
-                            y: 300,
+                            // y: 300,
                           }}
                           />
                           </div>

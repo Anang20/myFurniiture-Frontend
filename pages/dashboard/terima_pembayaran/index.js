@@ -12,6 +12,7 @@ import appConfig from "../../../config/app";
 import { useRouter } from "next/router";
 
   const App = () => {
+    const [id, setId] = useState('');
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [payment, getPayment]= useState('')
@@ -34,7 +35,29 @@ import { useRouter } from "next/router";
     Data()
     },[])
 
-    console.log(payment);
+    const handlerTolak = async () => {
+      const endpoint = `${appConfig.apiUrl}/payment/delete/${id}`
+      const res = await axios.delete(endpoint)
+      console.log(res.data);
+      if(res.data.statusCode === 200) {
+        router.push('/dashboard')
+        message.success("Pembayaran Berhasil Ditolak")
+      }else{
+        message.error("Ups ada suatu kesalahan")
+      }
+    }
+
+    const handlerTerima = async () => {     
+      const endpoint = `${appConfig.apiUrl}/payment/${id}`
+      const res = await axios.put(endpoint)
+      console.log(res.data);
+      if(res.data.statusCode === 200) {
+        router.push('/dashboard')
+        message.success("Pembayaran Berhasil Diterima")
+      }else{
+          message.error("Ups ada suatu kesalahan")
+      }
+    }
   
     const handleReset = (clearFilters) => {
       clearFilters();
@@ -128,10 +151,10 @@ import { useRouter } from "next/router";
   
     const columns = [
       {
-        title: 'No',
-        dataIndex: 'No',
-        key: 'no',
-        width: 15,
+        title: 'No Order',
+        dataIndex: 'NoOrder',
+        key: 'NoOrder',
+        width: 30,
       },
       {
         title: 'Nama Customer',
@@ -190,20 +213,8 @@ import { useRouter } from "next/router";
         render: (_, record) => (
           <>
           <button className="btn btn-sm btn-primary shadow-sm me-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button>
-          <button className="btn btn-sm btn-danger shadow-sm me-1">Tolak</button>
-          <button className="btn btn-sm btn-warning shadow-sm" onClick={
-            async () => {
-              const endpoint = `http://localhost:3222/payment/${record?.id}`
-              const res = await axios.put(endpoint)
-              console.log(res.data);
-              if(res.data.statusCode === 200) {
-                message.success("Pesanan Berhasil Diterima")
-                router.reload('/dashboard/terima_pembayaran')
-              }else{
-                  message.error("Ups ada suatu kesalahan")
-              }
-            }
-          }>Terima</button>
+          <button className="btn btn-sm btn-danger shadow-sm me-1" onClick={() => setId(record.id)} data-bs-toggle="modal" data-bs-target="#exampleModal2">Tolak</button>
+          <button className="btn btn-sm btn-warning shadow-sm" onClick={() => setId(record.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">Terima</button>
           </>
         ),
       },
@@ -215,12 +226,12 @@ import { useRouter } from "next/router";
         <title>MyFuniture | Terima Pembayaran</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-       <div id="wrapper" style={{ width: 1140 }}>
+       <div id="wrapper">
             <SidebarAdmin/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                   <NavbarAdmin/>
-                  <div className="container-fluid">
+                  <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90}}>
                       <h4 className="text-gray-600">Terima Pembayaran</h4>
                       <div className="card shadow">
                           <div className="card-body">
@@ -229,7 +240,6 @@ import { useRouter } from "next/router";
                           dataSource={payment}
                           scroll={{
                             x: 1500,
-                            y: 300,
                           }}
                           />
                           </div>
@@ -254,7 +264,43 @@ import { useRouter } from "next/router";
                             </div>
                           </div>
                         </div>
-                    </div>
+                      </div>
+
+                      <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title" id="exampleModalLabel">Tolak Pembayaran</h5>
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                              Apakah Anda Yakin Untuk Menolak Pembayaran Dari Customer Ini? 
+                            </div>
+                            <div className="modal-footer">
+                              <button type="button" className="btn btn btn-sm shadow-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="button" onClick={handlerTolak} className="btn btn-sm shadow-sm" style={{ color: "#FFF", backgroundColor: "#00B8B0" }}>Tolak</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title" id="exampleModalLabel">Terima Pembayaran</h5>
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                              Apakah Anda Yakin Untuk Menerima Pembayaran Dari Customer Ini? 
+                            </div>
+                            <div className="modal-footer">
+                              <button type="button" className="btn btn btn-sm shadow-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="button" onClick={handlerTerima} className="btn btn-sm shadow-sm" style={{ color: "#FFF", backgroundColor: "#00B8B0" }}>Terima</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                   </div>
                 </div>
