@@ -34,23 +34,7 @@ const Home = () => {
     const currentProduk = produk.slice(indexOfFirstProduk, indexOfLastProduk);
     
     const paginate = pageNumber => setCurrentPage(pageNumber)
-
-    const onChangeSearch = (e) => {
-        const value = e.target.value
-        setSearch(value)
-    }
-
-    const searchProduk = async (search) => {
-        const data = await axios.get(`http://localhost:3222/produk/search/produk?search=${search}`);
-        const result = data.data
-        // console.log(result);
-        setSearch(result)
-    }
-
-    useEffect(() => {
-        searchProduk()
-    }, []); 
-   
+    
     useAuthenticatedPage();
     return (
         <>
@@ -58,7 +42,7 @@ const Home = () => {
                 <title>MyFuniture | Home</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <NavbarCustomer isInput={true} searchProduk={searchProduk} onChangeSearch={onChangeSearch}/>
+            <NavbarCustomer isInput={true}/>
             <Carousel/>
             <div className="container-fluid" style={{ position: 'relative', marginTop: '-50px',backgroundColor: '#F5F5F5' }}>
                 <div className="container mt-5">

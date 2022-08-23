@@ -54,12 +54,16 @@ const NavbarAdmin = () => {
                     ? <Image src={avatar} width={40} height={40} alt="avatar" style={{ borderRadius: '100%'}}/>
                     : <Image src={`${appConfig.apiUrl}/file/${foto}`} width={40} height={40} alt="avatar" style={{ borderRadius: '100%'}}/>
                     }
-                    {/* <Image src={avatar} width={40} height={40} alt={"logo"}/> */}
                     </div>
                     <ul className="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                         <li>
                             <Link href={`/dashboard/profile/edit_profile`}>
                                 <a className="dropdown-item">Edit Profil</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={`/dashboard/profile/edit_password`}>
+                                <a className="dropdown-item">Edit password</a>
                             </Link>
                         </li>
                         <li>

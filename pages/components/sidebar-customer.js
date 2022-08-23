@@ -1,4 +1,4 @@
-import { faAddressCard, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faLock, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import avatar from "../../public/images/profile.svg";
@@ -57,6 +57,9 @@ const SideBarCustomer = () => {
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <Link href="/customer/profile/edit-profile-customer">
                         <a style={{ color: 'white', marginBottom: 12, textDecoration: 'none' }}><FontAwesomeIcon icon={faUser} style={{ marginRight: 10}}/>Profile</a>
+                    </Link>
+                    <Link href="/customer/profile/edit-password-customer">
+                        <a style={{ color: 'white', marginBottom: 12, textDecoration: 'none' }}><FontAwesomeIcon icon={faLock} style={{ marginRight: 10}}/>Password</a>
                     </Link>
                     <Link href="/customer/profile/alamat-customer">
                         <a style={{ color: 'white', marginBottom: 12, textDecoration: 'none' }}><FontAwesomeIcon icon={faAddressCard} style={{ marginRight: 10}}/>Alamat</a>

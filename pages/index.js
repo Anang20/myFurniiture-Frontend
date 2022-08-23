@@ -8,8 +8,22 @@ import Link from 'next/link';
 import Footer from './components/footer';
 import CardProduk from './components/card-produk';
 import useAuthenticatedPage from '../helper/useAuthenticatedPage';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import appConfig from '../config/app';
 
 const Index = () => {
+
+  const [produk, setProduk] = useState([])
+
+  useEffect(() => {
+    const getProduk = async () => {
+      const response = await axios.get(`${appConfig.apiUrl}/produk/`)
+      const result = response.data.items
+      setProduk(result)
+    }
+    getProduk()
+  }, [])
 
   return (
     <>
@@ -71,7 +85,7 @@ const Index = () => {
       </div>
     </div>
 
-    <CardProduk/>
+    <CardProduk produk={produk}/>
     <Footer/>
   </>
   )

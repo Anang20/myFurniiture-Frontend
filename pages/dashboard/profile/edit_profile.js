@@ -17,7 +17,6 @@ const EditProfileAdmin = () => {
     const [nama, setNama] = useState([]);
     const [email, setEmail] = useState([]);
     const [notlp, setNoTlp] = useState([]);
-    const [password, setPassword] = useState([]);
     const router = useRouter();
     const getData = () => {
         try {
@@ -33,12 +32,10 @@ const EditProfileAdmin = () => {
                 const nama_lengkap = res.data.data.nama_lengkap;
                 const emails = res.data.data.email;
                 const no_hp = res.data.data.no_telp;
-                const passwords = res.data.data.password
                 setFoto(fotos);
                 setNama(nama_lengkap);
                 setEmail(emails);
                 setNoTlp(no_hp);
-                setPassword(passwords);
             })
         } catch (err) {
             console.log(err);
@@ -51,7 +48,7 @@ const EditProfileAdmin = () => {
     
     const editProfileSubmit = async () => {
         try {
-            const response = await axios.put(`${appConfig.apiUrl}/users/${userId}`, {nama_lengkap: nama, email, no_telp: notlp, foto, password}, {
+            const response = await axios.put(`${appConfig.apiUrl}/users/${userId}`, {nama_lengkap: nama, email, no_telp: notlp, foto}, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -84,10 +81,6 @@ const EditProfileAdmin = () => {
         setNoTlp(value)
     }
 
-    const onChangePassword = async (e) => {
-        const value = await e.target.value;
-        setPassword(value)
-    }
     const onChangeFoto = async (e) => {
        const value = e.target.files[0]
        const data = {
@@ -147,12 +140,6 @@ const EditProfileAdmin = () => {
                                     <label htmlFor="foto" className="col-sm-2 col-form-label">Foto</label>
                                     <div className="col-sm-9">
                                         <input type="file" className="form-control" onChange={onChangeFoto} name="foto" required/>
-                                    </div>
-                                </div>
-                                <div className="row mb-3">
-                                    <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
-                                    <div className="col-sm-9">
-                                        <input type="password" className="form-control" onChange={onChangePassword} name="password" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
