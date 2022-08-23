@@ -13,6 +13,7 @@ import axios from "axios";
 const SideBarCustomer = () => {
     const router = useRouter()
     const [nama, setNama] = useState([]);
+    const [foto, setFoto] = useState([]);
 
     const getDataUser = () => {
         try {
@@ -25,11 +26,13 @@ const SideBarCustomer = () => {
             axios.get(endpoint).then((value) => {
                 const dataUser = value.data.data
                 setNama(dataUser);
+                setFoto(dataUser.foto)
             });
         } catch (err) {
             console.log(err);
         }
     }
+    console.log(foto);
 
     useEffect(() => {
         getDataUser()
@@ -44,7 +47,10 @@ const SideBarCustomer = () => {
         <>
             <div className="col-2" style={{ display: 'flex', alignItems: "center", flexDirection: 'column', backgroundColor: '#00B8B0', maxHeight: '100%' }}>
                 <div style={{ marginTop: 30 }}>
-                    <Image src={avatar} width={118} height={118} alt="avatar" style={{ borderRadius: '100%'}}/>
+                    {foto == null
+                    ? <Image src={avatar} width={118} height={118} alt="avatar" style={{ borderRadius: '100%'}}/>
+                    : <Image src={`${appConfig.apiUrl}/file/${foto}`} width={118} height={118} alt="avatar" style={{ borderRadius: '100%'}}/>
+                    }
                 </div>
                 <span className="text-light" style={{ marginTop: 15, marginBottom: 15, textAlign: 'center' }}>{nama.nama_lengkap}</span>
                 

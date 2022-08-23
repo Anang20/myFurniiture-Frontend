@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import appConfig from "../../../config/app";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import { message } from "antd";
 
 const EditProfileAdmin = () => {
 
@@ -23,8 +24,6 @@ const EditProfileAdmin = () => {
             const token = localStorage.getItem('accessToken');
             const decode = jwtDecode(token);
             const id = decode.query["id_user"];
-            const passsword = decode.query["password"]
-            console.log(password);
             setUserId(id)
             const endpoint = `${appConfig.apiUrl}/users/cari_user/${id}`;
 
@@ -59,7 +58,7 @@ const EditProfileAdmin = () => {
             })
             console.log(response)        
             if (response.status == 201 || response.status == 200) {
-                router.reload("/customer/profile/edit-profile-customer")
+                router.push("/dashboard/profile/edit_profile")
                 message.success("Berhasil Mengedit Profile")
             } else {
                 message.error("Upss ada kesalahan saat menambahkan alamat")
@@ -125,40 +124,35 @@ const EditProfileAdmin = () => {
                     <div className="card shadow">
                         <div className="card-body">
 
-                            <form method="POST">
-                                <div className="row mb-3">
-                                    <div className="col-sm-9">
-                                        <input type="hidden" className="form-control" name="id_user" required readOnly/>
-                                    </div>
-                                </div>
+                            <form>
                                 <div className="row mb-3">
                                     <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Nama Lengkap</label>
                                     <div className="col-sm-9">
-                                        <input type="text" className="form-control" value={nama} name="nama_lengkap" placeholder="Ubah Nama" required/>
+                                        <input type="text" className="form-control" value={nama} onChange={onChangeNama} name="nama_lengkap" placeholder="Ubah Nama" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
                                     <div className="col-sm-9">
-                                        <input type="email" className="form-control" value={email} name="email" placeholder="Ubah Email" required/>
+                                        <input type="email" className="form-control" value={email} onChange={onChangeEmail} name="email" placeholder="Ubah Email" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label htmlFor="no_telp" className="col-sm-2 col-form-label">No. Telephone</label>
                                     <div className="col-sm-9">
-                                        <input type="number" className="form-control" value={notlp} name="no_telp" placeholder="Ubah Nomor Telephone" required/>
+                                        <input type="number" className="form-control" value={notlp} onChange={onChangeNoTlp} name="no_telp" placeholder="Ubah Nomor Telephone" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label htmlFor="foto" className="col-sm-2 col-form-label">Foto</label>
                                     <div className="col-sm-9">
-                                        <input type="file" className="form-control" name="foto" required/>
+                                        <input type="file" className="form-control" onChange={onChangeFoto} name="foto" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
                                     <div className="col-sm-9">
-                                        <input type="password" className="form-control" name="password" required/>
+                                        <input type="password" className="form-control" onChange={onChangePassword} name="password" required/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -166,7 +160,7 @@ const EditProfileAdmin = () => {
                                         <Link href="/dashboard">
                                             <a className="btn btn-warning mr-3">Cancel</a>
                                         </Link>
-                                        <button type="submit" className="btn btn-success">Update</button>
+                                        <button type="button" onClick={editProfileSubmit} className="btn btn-success">Update</button>
                                     </div>
                                 </div>
                             </form>

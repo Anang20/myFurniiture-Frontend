@@ -120,7 +120,7 @@ const DetailProduk = () => {
                         <label style={{ position: 'absolute', fontStyle: 'normal', fontWeight: 500, fontSize: 30, top: 180 }}>Rp {curency(produk?.harga)}</label>
                         <input type="hidden" value={count} onChange={onChangeStok} />
                         <Link href="/customer/produk/cart">
-                            <button type="button" onClick={createDetail} className={styles["button-tambah-keranjang"]}>Tambah Ke Keranjang</button>
+                            <button type="button" disabled={stok == 0 || count == 0} onClick={createDetail} className={styles["button-tambah-keranjang"]}>Tambah Ke Keranjang</button>
                         </Link>
                     </form>
                     <div className={styles["quantity-button"]}>
@@ -129,6 +129,7 @@ const DetailProduk = () => {
                         <button className={styles["increment-count"]} onClick={incrementCount}>+</button>
                     </div>
                 </div>
+                <h5 className="mt-2">Stok: {produk?.stok}</h5>
                 <h5 className={styles["deskripsi-title"]}>Self Pickup</h5>
                 <div className="col-7 d-flex">
                     <div className="col-2">

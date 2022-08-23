@@ -12,6 +12,7 @@ const NavbarAdmin = () => {
 
     const router = useRouter()
     const [namaLengkap, setNamaLengkap] = useState([])
+    const [foto, setFoto] = useState([])
 
     const getUserData = () => {
         try {
@@ -24,6 +25,7 @@ const NavbarAdmin = () => {
             axios.get(endpoint).then((res) => {
                 const dataUser = res.data.data
                 setNamaLengkap(dataUser);
+                setFoto(dataUser.foto)
             });
         } catch (err) {
             // message.error(err)
@@ -48,7 +50,11 @@ const NavbarAdmin = () => {
             <li className="nav-item dropdown no-arrow">
                 <div className="dropdown">
                     <div className="dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <Image src={avatar} width={40} height={40} alt={"logo"}/>
+                    {foto == null
+                    ? <Image src={avatar} width={40} height={40} alt="avatar" style={{ borderRadius: '100%'}}/>
+                    : <Image src={`${appConfig.apiUrl}/file/${foto}`} width={40} height={40} alt="avatar" style={{ borderRadius: '100%'}}/>
+                    }
+                    {/* <Image src={avatar} width={40} height={40} alt={"logo"}/> */}
                     </div>
                     <ul className="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                         <li>
