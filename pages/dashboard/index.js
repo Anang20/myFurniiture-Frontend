@@ -1,17 +1,43 @@
 import { faChair, faHandHoldingUsd, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import appConfig from "../../config/app";
+import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
+import FooterAdmin from "../components/footer_admin";
 import NavbarAdmin from "../components/navbar_admin";
 import SidebarAdmin from "../components/sidebar_admin";
 
 const Dashboard = () => {
+    
+    useAuthenticatedPage();
+    const [dataDashboard, setDataDashboard] = useState([])
+
+    const getData = async () => {
+        const res = await axios.get(`${appConfig.apiUrl}/dashboard`);
+        const result = res.data.data;
+        setDataDashboard(result)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    useAuthenticatedPage()
+
     return (
         <>
+        <Head>
+            <title>MyFuniture | Dashboard</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
          <div id="wrapper">
             <SidebarAdmin/>
                 <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
                     <NavbarAdmin/>
-                    <div className="container">
+                    <div className="container-fluid col-12" style={{ paddingLeft: 250, height: 460, marginTop: 90}}>
                         <h4 className="text-gray-600">Dashboard</h4>
                         <div className="row">
                             <div className="col-xl-4 col-md-6 mb-4">
@@ -22,7 +48,7 @@ const Dashboard = () => {
                                                 <div className="text-xs font-weight-bold text-gray-800 text-uppercase mb-1 pl-3">
                                                     Total Produk
                                                 </div>
-                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">20 Produk</div>
+                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">{dataDashboard.produk} Produk</div>
                                             </div>
                                             <div className="col-auto pr-3">
                                                <FontAwesomeIcon
@@ -36,15 +62,16 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
+
                             <div className="col-xl-4 col-md-6 mb-4"style={{ height: 120 }}>
                                 <div className="card shadow h-100 py-2" style={{ borderRadius: 30 }}>
                                     <div className="card-body">
                                         <div className="row no-gutters align-items-center mt-2">
                                             <div className="col mr-2">
                                                 <div className="text-xs font-weight-bold text-gray-800 text-uppercase mb-1 pl-3">
-                                                    Total Anggota
+                                                    Total Customer
                                                 </div>
-                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">20 Anggota</div>
+                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">{dataDashboard.user} Customer</div>
                                             </div>
                                             <div className="col-auto pr-3">
                                                <FontAwesomeIcon
@@ -57,7 +84,6 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="col-xl-4 col-md-6 mb-4">
                                 <div className="card shadow h-100 py-2" style={{ borderRadius: 30 }}>
                                     <div className="card-body">
@@ -66,7 +92,7 @@ const Dashboard = () => {
                                                 <div className="text-xs font-weight-bold text-gray-800 text-uppercase mb-1 pl-3">
                                                     Total Transaksi
                                                 </div>
-                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">20 Transaksi</div>
+                                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">{dataDashboard.payment} Transaksi</div>
                                             </div>
                                             <div className="col-auto pr-3">
                                                <FontAwesomeIcon
@@ -83,6 +109,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     </div>
+                    <FooterAdmin/>
                 </div>
         </div>
         </>
