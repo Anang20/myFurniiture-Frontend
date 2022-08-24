@@ -3,7 +3,16 @@ import appConfig from "../../config/app";
 import styles from "../../styles/Home.module.css";
 import Image from "next/image";
 
-const CardHome = ({ produk, loading }) => {
+const CardHome = ({ produk, loading, search }) => {
+
+    const filteredData = produk.filter((el) => {
+        if (search === '') {
+            return el
+        } else {
+            return el.nama_produk.toLowerCase().includes(search)
+        }
+    })
+
     if (loading) {
         return <h2>Loading...</h2>
     }
@@ -22,7 +31,7 @@ const CardHome = ({ produk, loading }) => {
     return (
         <>
             <h3 style={{ fontWeight: 600, fontSize: 30, color: '#00B8B0' }} className="mt-3">Rekomendasi</h3>
-            {produk?.map((value) => {
+            {filteredData?.map((value) => {
                 return (
                     <>
                         <div className="col-lg-3" key={value.id_produk}>

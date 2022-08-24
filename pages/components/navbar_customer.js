@@ -8,24 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const NavbarCustomer = (props) => {
-    const { isInput } = props
-    // const [search, setSearch] = useState('');
-
-    // const onChangeSearch = (e) => {
-    //     const value = e.target.value
-    //     setSearch(value)
-    // }
-
-    // const searchProduk = async (search) => {
-    //     const data = await axios.get(`http://localhost:3222/produk/search/produk?search=${search}`);
-    //     const result = data.data
-    //     console.log(result);
-    //     setSearch(result)
-    // }
-
-    // useEffect(() => {
-    //     searchProduk()
-    // }, []); 
+    const { isInput, search } = props
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" style={{ backgroundColor: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
@@ -42,7 +25,7 @@ const NavbarCustomer = (props) => {
                     {isInput && <div className={styles.search}>
                         <FontAwesomeIcon icon={faSearch}
                         color={'rgba(0, 0, 0, 0.09)'}/>
-                     <input type="text" className={styles["search-input"]} placeholder="Quick Search"/>
+                     <input type="text" className={styles["search-input"]} placeholder="Quick Search" onChange={search}/>
                     </div>
                     }
                     <div className="navbar-nav ms-auto">
