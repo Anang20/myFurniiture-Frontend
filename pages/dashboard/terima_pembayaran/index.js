@@ -40,7 +40,7 @@ import { useRouter } from "next/router";
       const res = await axios.delete(endpoint)
       console.log(res.data);
       if(res.data.statusCode === 200) {
-        router.push('/dashboard')
+        router.reload('/dashboard/terima_pembayaran')
         message.success("Pembayaran Berhasil Ditolak")
       }else{
         message.error("Ups ada suatu kesalahan")
@@ -52,7 +52,7 @@ import { useRouter } from "next/router";
       const res = await axios.put(endpoint)
       console.log(res.data);
       if(res.data.statusCode === 200) {
-        router.push('/dashboard')
+        router.reload('/dashboard/terima_pembayaran')
         message.success("Pembayaran Berhasil Diterima")
       }else{
           message.error("Ups ada suatu kesalahan")

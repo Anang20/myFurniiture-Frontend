@@ -31,16 +31,7 @@ const Cart = () => {
     // const handleOnChange = () => {
     //     setIsChecked(!isChecked);
     // };
-
-    const decrementCount = () => {
-        if (count > 0 ) {
-            setCount(prevCount => prevCount - 1)
-        }
-    }
-
-    const incrementCount = () => {
-        setCount(prevCount => prevCount + 1)
-    }
+    
     // useEffect(() => {
     //     const updateData = async () => {
     //         try {

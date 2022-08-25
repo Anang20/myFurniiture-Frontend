@@ -29,6 +29,11 @@ const Home = () => {
         getProduk()
     }, []);
 
+    const searchHandler = (e) => {
+        var lowerCase = e.target.value.toLowerCase();
+        setSearch(lowerCase)
+    }
+
     const indexOfLastProduk = currentPage * itemsPerPage;
     const indexOfFirstProduk = indexOfLastProduk - itemsPerPage;
     const currentProduk = produk.slice(indexOfFirstProduk, indexOfLastProduk);
@@ -42,12 +47,13 @@ const Home = () => {
                 <title>MyFuniture | Home</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <NavbarCustomer isInput={true}/>
+            <NavbarCustomer isInput={true} search={searchHandler}/>
             <Carousel/>
             <div className="container-fluid" style={{ position: 'relative', marginTop: '-50px',backgroundColor: '#F5F5F5' }}>
                 <div className="container mt-5">
                     <div className="row" style={{ backgroundColor: '#FFF' }}>
-                        <CardHome produk={currentProduk} loading={loading}/>
+                        {/* <input onChange={searchHandler} placeholder={"search"}></input> */}
+                        <CardHome produk={currentProduk} loading={loading} search={search}/>
                         <Pagination 
                         totalProduk={produk.length} 
                         itemsPerPage={itemsPerPage} 

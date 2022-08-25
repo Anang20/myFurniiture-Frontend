@@ -158,15 +158,22 @@ import { useRouter } from "next/router";
         // ...getColumnSearchProps('tanggal'),
       },
       {
-        title: 'Nomer Order',
+        title: 'No Order',
         dataIndex: 'NomerOrder',
         value: 'total_order',
         width: 20,
-        // sorter: (a, b) => a.total_order.length - b.total_order.length,
-        // sortDirections: ['descend', 'ascend'],
+        ...getColumnSearchProps('NomerOrder'),
       },
       {
-        title: 'Nama Pelanggan',
+        title: 'No Telp',
+        dataIndex: 'noTelp',
+        value: 'noTelp',
+        width: 25,
+        // fixed: 'left'
+        // ...getColumnSearchProps('nama'),
+      },
+      {
+        title: 'Nama',
         dataIndex: 'Nama',
         value: 'nama_lengkap',
         width: 25,
@@ -194,7 +201,6 @@ import { useRouter } from "next/router";
         dataIndex: 'HargaBarang',
         value: 'harga_barang',
         width: 20,
-        // ...getColumnSearchProps('harga_barang'),
       },
       
       {

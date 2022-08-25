@@ -8,6 +8,7 @@ import Link from "next/link";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import jwtDecode from "jwt-decode";
 import appConfig from "../../../config/app";
+import { message } from "antd";
 
 const TambahPermintaan = () => {
     
@@ -74,7 +75,7 @@ const TambahPermintaan = () => {
                 }
             })
             console.log(response);
-            if (response.status == 201 || response.status == 200) {
+            if (response.status == 201) {
                 router.push("/dashboard/permintaan")
                 message.success("Permintaan Berhasil Ditambahkan")
             } else {

@@ -24,7 +24,17 @@ const Riwayat = () => {
         gambar: '',
         harga: 0,
     }]);
-    const [produk, setProduk] = useState([]);
+
+    const curency = (value)=>{
+        const formatter = new Intl.NumberFormat('en-ID', {
+            style: 'currency',
+            currency: 'IDR'
+          }).format(value)
+          .replace(/[IDR]/gi, '')
+          .replace(/(\.+\d{2})/, '')
+          .trimLeft()
+        return formatter
+    }
 
     useEffect(() => {
         const getHistory = async () => {
@@ -51,11 +61,11 @@ const Riwayat = () => {
         getHistory() 
     }, [])
 
-    var result =[];
     useEffect(() => {
-        const joinArray = () => {
+        // var result =[];
+        const joinArray = async () => {
             try {
-                const filterHistory = history?.map(item => {
+                const filterHistory = await history?.map(item => {
                     return item?.produk?.map(childItem => {
                         return {
                             alamat: item?.alamat,
@@ -70,7 +80,7 @@ const Riwayat = () => {
                         }
                     })
                 })
-                result = filterHistory[0]
+                const result = filterHistory[0]
                 // console.log(result); 
                 setData(result)
             } catch (e) {
@@ -78,7 +88,7 @@ const Riwayat = () => {
             }
         }
         joinArray()
-    }, [])
+    })
     console.log(data);
         // let resultOfArrayMap = joinArray(filterHistory);
         // const properlyMappedArray = resultOfArrayMap.reduce((arrayBeingBuilt, currValue) => {
@@ -114,12 +124,12 @@ const Riwayat = () => {
                                         </div>
                                         <div className="col-3">
                                             <h5>{value.nama_produk}</h5>
-                                            <p>{value.harga}</p>
+                                            <p>Rp {curency(value.harga)}</p>
                                             <p>x{value.kuantiti}</p>
-                                            <p>Jumlah Harga {value.harga_total}</p>
+                                            <p>Jumlah Harga Rp {curency(value.harga_total)}</p>
                                         </div>
                                         <div className="container">
-                                            <span style={{ color: '#00B8B0', float: 'right', marginRight: 11 }}>Total Pesanan: <span style={{ color: '#818B8B' }}>Rp {value.totalOrder}</span></span>
+                                            <span style={{ color: '#00B8B0', float: 'right', marginRight: 11 }}>Total Pesanan: <span style={{ color: '#818B8B' }}>Rp {curency(value.totalOrder)}</span></span>
                                         </div>
                                     </div>
                                 {/* })} */}

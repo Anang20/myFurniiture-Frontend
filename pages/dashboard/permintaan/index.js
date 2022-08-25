@@ -154,38 +154,31 @@ import { useRouter } from "next/router";
         dataIndex: 'No',
         value: 'No',
         width: 5,
-        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'Tanggal',
         dataIndex: 'tanggal',
         value: 'tanggal',
         width: 30,
-        // ...getColumnSearchProps('tanggal'),
-        // sorter: (a, b) => a.tanggal.length - b.tanggal.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Nama',
         dataIndex: 'nama_lengkap',
         value: 'nama_lengkap',
         width: 50,
-        // ...getColumnSearchProps('nama_lengkap'),
+        ...getColumnSearchProps('nama_lengkap'),
       },
       {
         title: 'Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
         width: 50,
-        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'kuantiti',
         dataIndex: 'kuantiti',
         value: 'kuantiti',
         width: 20,
-        // sorter: (a, b) => a.kuantiti.length - b.kuantiti.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Action',
@@ -227,15 +220,15 @@ import { useRouter } from "next/router";
                             <div className="modal-dialog">
                               <div className="modal-content">
                                 <div className="modal-header">
-                                  <h5 className="modal-title" id="exampleModalLabel">Hapus Produk Ini</h5>
+                                  <h5 className="modal-title" id="exampleModalLabel">Produk Telah Jadi</h5>
                                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
-                                  Apakah Anda Yakin Untuk Menghapus Produk Ini? 
+                                  Apakah Produk Ini Sudah Anda Buatkan? 
                                 </div>
                                 <div className="modal-footer">
                                   <button type="button" className="btn btn btn-sm shadow-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                  <button type="button" onClick={hapusPermintaan} className="btn btn-sm shadow-sm" style={{ color: "#FFF", backgroundColor: "#00B8B0" }}>Hapus</button>
+                                  <button type="button" onClick={hapusPermintaan} className="btn btn-sm shadow-sm" style={{ color: "#FFF", backgroundColor: "#00B8B0" }}>Iya</button>
                                 </div>
                               </div>
                             </div>
