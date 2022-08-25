@@ -149,14 +149,13 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
         dataIndex: 'No',
         value: 'no',
         width: 10,
-        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'Nama Produk',
         dataIndex: 'nama_produk',
         value: 'nama_produk',
         width: 36,
-        // ...getColumnSearchProps('nama_produk'),  
+        ...getColumnSearchProps('nama_produk'),  
       },
       {
         title: 'Gambar',

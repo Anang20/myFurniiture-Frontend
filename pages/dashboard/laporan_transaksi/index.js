@@ -16,19 +16,19 @@ import Link from "next/link";
   const App = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
-    const [detailOrder, setDetailOrder] = useState([]);
-    const [dataExport, setDataExport] = useState('')
+    const [laporan, setLaporan] = useState([]);
     const searchInput = useRef(null);
 
     useEffect(() => {
-      const getDataOrder = async () => {
-        const response = await axios.get(`${appConfig.apiUrl}/order/cari_laporan`);
-        const order = response.data.data;
-        setDetailOrder(order);
+      const getDataLaporan = async () => {
+        const response = await axios.get(`${appConfig.apiUrl}/order/cari/cari_laporan`);
+        const result = response.data;
+        setLaporan(result);
+        console.log(result);
       }
-      getDataOrder()
+      getDataLaporan()
     }, [])
-    console.log(detailOrder);
+
   
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();
@@ -129,8 +129,8 @@ import Link from "next/link";
     const columns = [
       {
         title: 'No',
-        dataIndex: 'NomerOrder',
-        key: 'NomerOrder',
+        dataIndex: 'No',
+        key: 'No',
         width: 20,
         // fixed: 'left',
       },
@@ -143,41 +143,33 @@ import Link from "next/link";
         // sortDirections: ['descend', 'ascend'],
       },
       {
+        title: 'No Order',
+        dataIndex: 'NoOrder',
+        key: 'NoOrder',
+        width: 30,
+        ...getColumnSearchProps('NoOrder'),
+      },
+      {
         title: 'Nama',
         dataIndex: 'Nama',
         key: 'Nama',
         width: 30,
-        ...getColumnSearchProps('nama_lengkap'),
-      },
-      {
-        title: 'Produk',
-        dataIndex: 'Produk',
-        key: 'Produk',
-        width: 30,
         // ...getColumnSearchProps('nama_produk'),
       },
       {
-        title: 'Kuantiti',
-        dataIndex: 'Kuantiti',
-        key: 'Kuantiti',
+        title: 'Total Order',
+        dataIndex: 'totalOrder',
+        key: 'totalOrder',
         width: 30,
         // sorter: (a, b) => a.quantity.length - b.quantity.length,
         // sortDirections: ['descend', 'ascend'],
       },
       {
-        title: 'Harga Barang',
-        dataIndex: 'HargaBarang',
-        key: 'HargaBarang',
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
         width: 30,
         // sorter: (a, b) => a.harga_barang.length - b.harga_barang.length,
-        // sortDirections: ['descend', 'ascend'],
-      },
-      {
-        title: 'Harga Kirim',
-        dataIndex: 'Alamat',
-        key: 'Alamat',
-        width: 30,
-        // sorter: (a, b) => a.harga_kirim.length - b.harga_kirim.length,
         // sortDirections: ['descend', 'ascend'],
       },
     ];
@@ -205,7 +197,7 @@ import Link from "next/link";
                               </Link>
                           <Table
                           columns={columns}
-                          dataSource={detailOrder}
+                          dataSource={laporan}
                           />
                           </div>
                       </div>  

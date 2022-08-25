@@ -6,9 +6,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+import appConfig from "../../config/app";
 
 const NavbarCustomer = (props) => {
     const { isInput, search } = props
+    const [cart, setCart] = useState('')
+
+    useEffect(() => {
+        const getDataCart = async () => {
+            try {
+                const token = localStorage.getItem('accessToken')
+                const decode = jwtDecode(token)
+                const userId = decode.query["id_user"]
+                const endpoint = `${appConfig.apiUrl}/cart/cari/${userId}`;
+                const items = await axios.get(endpoint)
+                const result = items.data.data
+                // console.log(result);
+                setCart(result);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        getDataCart()
+    }, [])
+    console.log(cart);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" style={{ backgroundColor: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
@@ -46,6 +68,11 @@ const NavbarCustomer = (props) => {
                         <Link href="/customer/produk/cart">
                             <a className={styles["nav-link"]}><FontAwesomeIcon
                             icon={faCartShopping}/>
+                            {cart.length == [] ? ''  
+                            :<div style={{ height: 20, width: 20, backgroundColor: '#00B8B0', borderRadius: 50, marginLeft: -10, marginTop: 15 }}>
+                                <p style={{ fontSize: 12, color: 'white', textAlign: "center", marginTop: -5 }}>{cart.length}</p>
+                            </div>
+                            }
                             </a>
                         </Link>
                     </div>

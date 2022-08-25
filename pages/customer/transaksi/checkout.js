@@ -89,9 +89,9 @@ const CheckOut = () => {
             const response = await axios.post(`${appConfig.apiUrl}/payment`, {nama_bank: namaBank, no_rek: noRekening, gambar: buktiTransfer, id_order: lastIdOrder})
             console.log(response)
            
-                if (response.status == 201 || response.status == 200) {
-                    message.success("Pembayaran Anda Berhasil, tunggu admin cek pembayaran")
-                    router.push("/customer/")
+                if (response.status == 201) {
+                    router.push("/customer/riwayat")
+                    message.success("Pembayaran Anda Berhasil, tunggu admin Menkonfirmasi pembayaran Anda")
                 } else {
                     message.error("Upss ada kesalahan saat Membayar")
                 }
@@ -99,6 +99,17 @@ const CheckOut = () => {
         } catch (err) {
             console.log('error nya adalah', err);
         }
+    }
+
+    const curency = (value)=>{
+        const formatter = new Intl.NumberFormat('en-ID', {
+            style: 'currency',
+            currency: 'IDR'
+          }).format(value)
+          .replace(/[IDR]/gi, '')
+          .replace(/(\.+\d{2})/, '')
+          .trimLeft()
+        return formatter
     }
 
     useAuthenticatedPage()
@@ -122,7 +133,7 @@ const CheckOut = () => {
                                     <div className="row mb-3 d-flex">
                                         <label className="col-sm-2 col-form-label">Total Harga:</label>
                                         <div className="col-sm-9 mt-1">
-                                            <label>Rp {totalOrder}</label>
+                                            <label>Rp {curency(totalOrder)}</label>
                                         </div>
                                     </div>
 
