@@ -7,7 +7,7 @@ import jwtDecode from "jwt-decode";
 import appConfig from "../../../config/app";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 
 const CheckOut = () => {
@@ -91,9 +91,9 @@ const CheckOut = () => {
            
                 if (response.status == 201) {
                     router.push("/customer/riwayat")
-                    message.success("Pembayaran Anda Berhasil, tunggu admin Menkonfirmasi pembayaran Anda")
+                    Swal.fire("Order Berhasil", "Tunggu Admin Menkonfirmasi Pembayaran Anda", "success")
                 } else {
-                    message.error("Upss ada kesalahan saat Membayar")
+                    Swal.fire("Pembayaran Anda Gagal", "Pembayaran Gagal", "error")
                 }
         
         } catch (err) {

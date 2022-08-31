@@ -1,13 +1,12 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input, message, Space, Table } from 'antd';
+import { Button, Input, Space, Table } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 import Link from "next/link";
 import Head from "next/head";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
@@ -234,13 +233,12 @@ import { useRouter } from "next/router";
             async () => {
               const endpoint = `${appConfig.apiUrl}/order/terima/${record.id}`
               const res = await axios.put(endpoint)
-              console.log(res.data);
-              if (res.data.statusCode === 200) {
-                message.success("Barang Berhasil Dikirim")
+              console.log(res);
+              if (res.status === 200) {
+                Swal.fire("Berhasil", "Barang Berhasil Dikirim", "success")
                 router.reload('/dashboard/order')
               } else {
-                router.reload('/dashboard/order')
-                message.success("Barang Berhasil Dikirim")
+                Swal.fire("Gagal", "Upss Ada Suatu Kesalahan", "error ")
               }
             }
           }>Kirim Barang</button>

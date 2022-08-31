@@ -10,7 +10,8 @@ import { useRouter } from "next/router";
 import appConfig from "../../../config/app";
 import axios from "axios";
 import 'antd/dist/antd.css';
-import { Image, message } from 'antd';
+import { Image } from 'antd';
+import Swal from "sweetalert2";
 import jwtDecode from "jwt-decode";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
@@ -18,7 +19,7 @@ const DetailProduk = () => {
 
     const router = useRouter()
     const {produkId} = router.query
-    const [idCart, setIdCart] = useState('')
+    const [userId, setUserId] = useState('');
     const [count, setCount] = useState(0)
     const [produk, setProduk] = useState([{
         nama_produk: '',
@@ -62,7 +63,6 @@ const DetailProduk = () => {
         const getData = async () => {
             const ress = await axios.get(`${appConfig.apiUrl}/produk/${produkId}`)
             const result = ress.data.data
-            console.log(produkId);
             setProduk(result)
         };
         getData();
@@ -70,36 +70,33 @@ const DetailProduk = () => {
     }, [produkId])
 
     useEffect(() => {
-        const getCart = async () => {
+        const getUser = async () => {
             try {
                 const token = localStorage.getItem('accessToken');
                 const decode = jwtDecode(token);
                 const id_user = decode.query["id_user"];
-                const endpoint = await axios.get(`${appConfig.apiUrl}/cart/cari_cart/${id_user}`)
-                const result = endpoint.data.data.id_cart
-                console.log('ini id cart', result);
-                setIdCart(result)
+                setUserId(id_user)
             } catch (e) {
                 console.log(e)
             }
         }
-        getCart()
+        getUser()
     }, [])
-
-        const createDetail = async ()=> {
-            try{
-                const response = await axios.post(`${appConfig.apiUrl}/cart/${produkId}/${idCart}`, {kuantiti: count})
-                console.log(response);
-                if (response.status == 201 || response.status == 200) {
-                    message.success("Berhasil menambahkan produk ke keranjang")
-                    router.push("/customer/produk/cart")
-                } else {
-                    message.error("Upss ada kesalahan saat menambahkan ke cart")
-                }
-            }catch(e){
-                console.log(e);
+    
+    const createDetail = async ()=> {
+        try{
+            const response = await axios.post(`${appConfig.apiUrl}/cart/${produkId}/${userId}`, {kuantiti: count})
+            console.log(response);
+            if (response.data.statusCode == 201) {
+                Swal.fire("Berhasil", "Berhasil Menambahkan Produk Ke Keranjang", "success")
+                router.push("/customer/produk/cart")
+            } else {
+                Swal.fire("gagal", "Upss Gagal Menambahkan Produk Ke Keranjang", "error")
             }
+        }catch(e){
+            console.log(e);
         }
+    }
     useAuthenticatedPage();
 
     return (

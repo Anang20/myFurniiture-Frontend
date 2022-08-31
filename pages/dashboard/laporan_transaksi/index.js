@@ -23,12 +23,11 @@ import Link from "next/link";
       const getDataLaporan = async () => {
         const response = await axios.get(`${appConfig.apiUrl}/order/cari/cari_laporan`);
         const result = response.data;
-        setLaporan(result);
         console.log(result);
+        setLaporan(result);
       }
       getDataLaporan()
     }, [])
-
   
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();

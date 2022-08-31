@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import avatar from "../../public/images/profile.svg";
 import Link from "next/link";
-import { Row } from "antd";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
@@ -32,7 +32,6 @@ const SideBarCustomer = () => {
             console.log(err);
         }
     }
-    console.log(foto);
 
     useEffect(() => {
         getDataUser()
@@ -41,7 +40,7 @@ const SideBarCustomer = () => {
     const logoutClick = () => {
         localStorage.removeItem('accessToken');
         router.push('/auth/login')
-        window.alert('Berhasil Logout')
+        Swal.fire("Berhasil", "Anda Berhasil Logout", "succes")
     }
     return (
         <>

@@ -7,7 +7,7 @@ import appConfig from "../../../config/app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const TambahAlamat = () => {
@@ -151,11 +151,11 @@ const TambahAlamat = () => {
             const response = await axios.post(`${appConfig.apiUrl}/users/create_alamat`, {id_kelurahan: kelurahanId, id_user: userId.id_user, alamat: detailAlamat, latitude, longtitude})
             console.log(response)
            
-                if (response.status == 201 || response.status == 200) {
+                if (response.data.statusCode == 201) {
                     router.push("/dashboard/profile/alamat")
-                    message.success("Alamat Berhasil Ditambahkan")
+                    Swal.fire("Berhasil", "Selamat Anda Berhasil Menambahkan Alamat", "success")
                 } else {
-                    message.error("Upss ada kesalahan saat menambahkan alamat")
+                    Swal.fire("Gagal", "Upss Anda Gagal Menambahkan Alamat", "error")
                 }
         
         } catch (err) {

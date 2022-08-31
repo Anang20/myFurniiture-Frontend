@@ -22,7 +22,7 @@ const Order = () => {
     const [alamatId, setAlamatId] = useState('')
     const [ongkir, setOngkir] = useState(0)
     const [hargaProduk,setHargaProduk] = useState(0)
-    const [cartId,setIdCart] = useState('')
+    const [cartId,setIdCart] = useState([])
     const [order,setOrder] = useState(0)
     
     const router = useRouter()
@@ -34,18 +34,26 @@ const Order = () => {
                 const decode = jwtDecode(token)
                 const id = decode.query["id_user"];
                 // produk
-                const res = await axios.get(`${appConfig.apiUrl}/order/cart/${id}`)
+                const res = await axios.get(`${appConfig.apiUrl}/cart/${id}`)
                 // console.log(res,'res');
-                const produk = res.data.data.detail
-                // console.log(produk, 'ini produk');
-                const cartId = res.data.data.id_cart
-                setIdCart(cartId)
-                // console.log(cartId, 'ini id card');
-                const hasil = []    
+                const produk = res.data.data
                 setProduk(produk)
+                console.log(produk, 'ini produk');
+                const temp_cart = []
+                produk.map(value => {
+                    temp_cart.push(value.id_cart)
+                })
+                setIdCart(temp_cart)
+                // console.log(temp_cart);
+                // const cartId = res.data.data.id_cart
+                // console.log(cartId);
+                // setIdCart(cartId)
+                // console.log(cartId, 'ini id card');
+                // const hasil = []    
                 // Alamat
                 const respon = await axios.get(`${appConfig.apiUrl}/users/cari_alamat/${id}`)
                 const alamat = respon.data.data.alamat
+                // console.log(alamat, 'ini alamatnya');
                 setAlamat(alamat)
                 
             } catch (err) {

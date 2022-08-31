@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import styles from '../../styles/Home.module.css'
 import Link from "next/link";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
 import Head from 'next/head'
-import { message } from "antd";
+import Swal from "sweetalert2";
 
 const Login = () => {
 
@@ -47,14 +47,14 @@ const Login = () => {
             const role = decode.query.role["role_name"];
             const id = decode.query["id_user"];
             if (role === "admin") {
-                message.success("Login Berhasil")
+                Swal.fire("Login Berhasil", "Selamat Anda Berhasil Login", "success")
                 router.push(`/dashboard/${id}`); 
             } else if (role === "customer") {
-                message.success("Login Berhasil")
+                Swal.fire("Login Berhasil", "Selamat Anda Berhasil Login", "success")
                 router.push(`/customer/`);
             }
         }).catch(() => {
-            message.error("Maaf email atau password salah")
+            Swal.fire("Login Gagal", "Upss Email Atau Password Salah", "error")
         })
     } catch (error) {
         console.error(error);

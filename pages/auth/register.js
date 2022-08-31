@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/router"
 import axios from "axios";
 import Head from "next/head";
-import { message } from "antd";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
@@ -58,10 +58,10 @@ const Register = () => {
             const res = await axios.post("http://localhost:3222/auth/register", {nama_lengkap, email, no_telp, password})
             .then(result => {
                 if (result.data.statusCode == 201 || result.data.statusCode == 200) {
-                    message.success("Berhasil Register")
+                    Swal.fire("Berhasil Mendaftar", "Selamat Anda Berhasil Mendaftar", "success")
                     router.push('/auth/login')
                 } else {
-                    message.error("Upss ada kesalahan Mendaftar")
+                    Swal.fire("Gagal Mendaftar", "Upss Ada Kesalahan Saat Mendaftar", "error")
                 }
             })
         } catch (error) {

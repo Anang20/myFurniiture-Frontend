@@ -1,7 +1,8 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, message, Space, Table } from 'antd';
+import { Button, Input, Space, Table } from 'antd';
+import Swal from "sweetalert2";
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
@@ -52,10 +53,10 @@ import { useRouter } from "next/router";
       const res = await axios.put(endpoint)
       console.log(res.data);
       if(res.data.statusCode === 200) {
-        router.reload('/dashboard/terima_pembayaran')
-        message.success("Pembayaran Berhasil Diterima")
+        router.reload('/dashboard/terima_pembayaran/')
+        Swal.fire("Berhasil", "Pembayaran Berhasil Diterima", "success")
       }else{
-          message.error("Ups ada suatu kesalahan")
+        Swal.fire("Gagal", "Upss Ada Suatu Kesalahan", "error")
       }
     }
   

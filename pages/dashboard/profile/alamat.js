@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import appConfig from "../../../config/app";
 import jwtDecode from "jwt-decode";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
@@ -78,15 +78,15 @@ const ListAlamat = () => {
                 <div className="col-4">
                     <button type="button" onClick={
                         async () => {
-                            const apiDelete = `http://localhost:3222/users/alamat/${value?.id_alamat_user}`
+                            const apiDelete = `${appConfig.apiUrl}/users/alamat/${value?.id_alamat_user}`
                             console.log(apiDelete);
                                 const response = await axios.delete(apiDelete)
                                 console.log(response.data.statusCode)
                                 if(response.data.statusCode === 200) {
-                                    message.success("Alamat Berhasil Dihapus")
+                                    Swal.fire("Berhasil", "Alamat Berhasil Dihapus", "success")
                                     router.reload('/customer/profile/alamat-customer')
                                 }else{
-                                    alert('Something Wrong')
+                                    Swal.fire("Gagal", "Upps Gagal Menghapus Alamat", "error")
                                 }
                         }
                     } 
