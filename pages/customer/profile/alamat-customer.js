@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import appConfig from "../../../config/app";
 import jwtDecode from "jwt-decode";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
@@ -53,52 +53,69 @@ const ListAlamat = () => {
         <>
         <div className="col-10">
             <div className="card" style={{ minHeight: 500 }}>
-                <div className="card-body">
-                    <div className="row mb-3">
-                        <div>
-                            <h5 style={{ display: 'block', float: 'left' }}>Alamat Saya</h5>
-                            <Link href="/customer/profile/tambah-alamat-customer">
-                                <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', fontSize: 13 ,display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
-                            </Link>
+                {alamat.length === 0 
+                    ? <div className="card-body">
+                        <div className="row mb-3">
+                            <div>
+                                <h5 style={{ display: 'block', float: 'left' }}>Alamat Saya</h5>
+                                <Link href="/customer/profile/tambah-alamat-customer">
+                                    <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', fontSize: 13 ,display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
+                                </Link>
+                            </div>
+                            <div className="col-sm-12">
+                                <hr/>
+                            </div>
                         </div>
-                        <div className="col-sm-12">
-                            <hr/>
+                        <div className="row">
+                            <div className="col-12"><p className="text-center">Anda Belum Memiliki Alamat Silahkan Tambahkan Alamat Anda</p></div>
                         </div>
+                       </div>
+                    : <div className="card-body">
+                        <div className="row mb-3">
+                            <div>
+                                <h5 style={{ display: 'block', float: 'left' }}>Alamat Saya</h5>
+                                <Link href="/customer/profile/tambah-alamat-customer">
+                                    <button style={{ width: 214, height: 43, backgroundColor: '#00B8B0', color: 'white', fontSize: 13 ,display: 'block', float: 'right', border: 'none' }}><FontAwesomeIcon icon={faPlus} style={{ paddingRight: 5 }}/>Tambahkan Alamat Baru</button>
+                                </Link>
+                            </div>
+                            <div className="col-sm-12">
+                                <hr/>
+                            </div>
+                        </div>
+                        { alamat?.map((value) => 
+                        <div key={value?.id_alamat_user} className="row mb-3">
+                            <div className="col-4">
+                                <p>Nama Lengkap</p>
+                                <p>Telephone</p>
+                                <p>Alamat</p>
+                            </div>
+                            <div className="col-4">
+                                <p>{nama}</p>
+                                <p>{telp}</p>
+                                <p>{value?.alamat}</p>
+                            </div>
+                            <div className="col-4">
+                                <button type="button" onClick={
+                                    async () => {
+                                        const apiDelete = `${appConfig.apiUrl}/users/alamat/${value?.id_alamat_user}`
+                                            const response = await axios.delete(apiDelete)
+                                            if(response.data.statusCode === 200) {
+                                                Swal.fire("Berhasil", "Berhasil Menghapus Alamat", "success")
+                                                router.reload('/customer/profile/alamat-customer')
+                                            }else{
+                                                Swal.fire("Gagal", "Upss Gagal Menghapus Alamat", "error")
+                                            }
+                                    }
+                                } 
+                                style={{ border: 'none', background: 'transparent', listStyle: 'unset' }}><a>Hapus</a></button>
+                            </div>
+                            <div className="col-sm-12">
+                                <hr/>
+                            </div>
+                        </div>
+                        )}
                     </div>
-                    { alamat?.map((value) => 
-                    <div key={value?.id_alamat_user} className="row mb-3">
-                        <div className="col-4">
-                            <p>Nama Lengkap</p>
-                            <p>Telephone</p>
-                            <p>Alamat</p>
-                        </div>
-                        <div className="col-4">
-                            <p>{nama}</p>
-                            <p>{telp}</p>
-                            <p>{value?.alamat}</p>
-                        </div>
-                        <div className="col-4">
-                            <button type="button" onClick={
-                                async () => {
-                                    const apiDelete = `http://localhost:3222/users/alamat/${value?.id_alamat_user}`
-                                        const response = await axios.delete(apiDelete)
-                                        console.log(response.data.statusCode)
-                                        if(response.data.statusCode === 200) {
-                                            message.success("Alamat Berhasil Dihapus")
-                                            router.reload('/customer/profile/alamat-customer')
-                                        }else{
-                                            message.error("Ups ada suatu kesalahan")
-                                        }
-                                }
-                            } 
-                            style={{ border: 'none', background: 'transparent', listStyle: 'unset' }}><a>Hapus</a></button>
-                        </div>
-                        <div className="col-sm-12">
-                            <hr/>
-                        </div>
-                    </div>
-                    )}
-                </div>
+                }
             </div>
         </div> 
         </>

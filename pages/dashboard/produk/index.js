@@ -13,6 +13,7 @@ import Head from "next/head";
 import appConfig from "../../../config/app";
 import { Router, useRouter } from "next/router";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import Swal from "sweetalert2";
 
   const Produk = () => {
 
@@ -50,12 +51,12 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
       const apiDelete = `http://localhost:3222/produk/${idUser}`
               const response = await axios.delete(apiDelete)
               console.log(response)
-              // if(response.data.status == 200) {
-                message.success('Produk Berhasil Dihapus')
+              if(response.data.statusCode == 200) {
+                Swal.fire("Berhasil", "Berhasil Menghapus Produk", "success")
                 router.reload('/dashboard/produk')
-              // }else{
-              //   router.reload('/dashboard/produk')
-              // }
+              }else{
+                Swal.fire("Gagal", "Gagal Menghapus Produk", "error")
+              }
     }
 
     const getColumnSearchProps = (dataIndex) => ({

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import appConfig from "../../../config/app";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import { message } from "antd";
+import Swal from "sweetalert2";
 
 const EditProfileAdmin = () => {
 
@@ -54,11 +54,11 @@ const EditProfileAdmin = () => {
                 }
             })
             console.log(response)        
-            if (response.status == 201 || response.status == 200) {
+            if (response.data.statusCode== 200) {
                 router.push("/dashboard/profile/edit_profile")
-                message.success("Berhasil Mengedit Profile")
+                Swal.fire("Berhasil", "Selamat Anda Berhasil Mengedit Profile", "success")
             } else {
-                message.error("Upss ada kesalahan saat menambahkan alamat")
+                Swal.fire("Gagal", "Upss Ada Kesalahan Saat Mengedit, Coba Lagi", "error")
             }
         
         } catch (err) {

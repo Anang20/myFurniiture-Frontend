@@ -8,7 +8,7 @@ import appConfig from "../../../config/app";
 import axios from "axios";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import { useRouter } from "next/router";
-import { message } from "antd";
+import Swal from "sweetalert2";
 
 const FormEditProfile = () => {
 
@@ -58,9 +58,9 @@ const FormEditProfile = () => {
             console.log(response)        
             if (response.status == 201 || response.status == 200) {
                 router.reload("/customer/profile/edit-profile-customer")
-                message.success("Berhasil Mengedit Profile")
+                Swal.fire("Berhasil", "Selamat Anda Berhasil Mengedit Profile", "success")
             } else {
-                message.error("Upss ada kesalahan saat menambahkan alamat")
+                Swal.fire("Gagal", "Upss Ada Kesalahan Saat Mengedit, Coba Lagi", "error")
             }
         
         } catch (err) {

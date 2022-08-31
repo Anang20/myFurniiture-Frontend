@@ -8,6 +8,7 @@ import appConfig from "../../../config/app";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
+import Swal from "sweetalert2";
 
 const EditPassword = () => {
     const [userId, setUserId] = useState('');
@@ -61,10 +62,10 @@ const EditPassword = () => {
             })
             console.log(response)        
             if (response.status == 200) {
-                message.success("Password Berhasil Di Ubah")
+                Swal.fire("Berhasil", "Berhasil Mengedit Passsword", "success")
                 router.push("/dashboard/profile/edit_profile")
             } else {
-                message.error("Upss ada kesalahan saat Mengedit Password")
+                Swal.fire("Gagal", "Upss ada kesalahan saat Mengedit Password", "error")
             }
         
         } catch (err) {
@@ -104,7 +105,7 @@ const EditPassword = () => {
                                     </div>
                                     {showErrorMessage && isCPasswordDirty ? <span className="text-danger"> Password Tidak Sama </span> : ''}
                                 </div>
-                                <button type="button" onClick={EditPasswordSubmit} className="btn btn-success" style={{ marginLeft: 148 }}>Simpan</button>
+                                <button type="button" onClick={EditPasswordSubmit} className="btn btn-success" style={{ marginLeft: 148 }}>Ubah</button>
                             </form>
                             
                         </div>

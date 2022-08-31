@@ -8,7 +8,7 @@ import appConfig from "../../../config/app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const TambahAlamatCustomer = () => {
@@ -154,9 +154,9 @@ const TambahAlamatCustomer = () => {
            
                 if (response.status == 201 || response.status == 200) {
                     router.push("/customer/profile/alamat-customer")
-                    message.success("Alamat Berhasil Ditambahkan")
+                    Swal.fire("Berhasil", "Selamat Anda Berhasil Menambahkan Alamat", "success")
                 } else {
-                    message.error("Upss ada kesalahan saat menambahkan alamat")
+                    Swal.fire("Gagal", "Upss Anda Gagal Menambahkan Alamat, Coba Lagi", "error")
                 }
         
         } catch (err) {

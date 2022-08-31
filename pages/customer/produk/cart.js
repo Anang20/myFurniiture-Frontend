@@ -6,7 +6,7 @@ import almari from "/public/images/almari.png"
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import appConfig from "../../../config/app";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -57,7 +57,7 @@ const Cart = () => {
                 const token = localStorage.getItem('accessToken')
                 const decode = jwtDecode(token)
                 const userId = decode.query["id_user"]
-                const endpoint = `${appConfig.apiUrl}/cart/cari/${userId}`;
+                const endpoint = `${appConfig.apiUrl}/cart/${userId}`;
                 const items = await axios.get(endpoint)
                 const result = items.data.data
                 // console.log(result);
@@ -97,11 +97,19 @@ const Cart = () => {
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <NavbarCustomer/>
-        <div className="container-fluid" style={{ backgroundColor: '#ECEEEE' }}>
-            <div className="container" style={{ backgroundColor: '#ECEEEE' }}>
-                <div className="row">
+        <div className="container-fluid">
+            <div className="container">
+                {cart.length === 0 
+                ? <div className="row" style={{ marginBottom: 300 }}>
+                    <div className="col-lg-12">
+                        <div className="card shadow" style={{ marginTop: 250 }}>
+                            <div className="card-body"><p style={{ textAlign: 'center' }}>Anda Belum Memiliki Produk DiKeranjang, Silahkan Masukan Produk Ke Dalam Keranjang Terlebih Dahulu</p></div>
+                        </div>
+                    </div>
+                  </div>
+                : <div className="row" style={{ marginBottom: 200 }}>
                     <div className="col-lg-7">
-                        <div className="card" style={{ marginTop: 120, borderRadius: 0, marginBottom: 30}}>
+                        <div className="card shadow" style={{ marginTop: 120, borderRadius: 0, marginBottom: 30}}>
                             <div className="card-body d-flex align-items-center justify flex-row" style={{ borderBottom: '3px solid rgba(0, 0, 0, 0.09)' }}>
                             </div>
                             {cart?.map((value, key) => 
@@ -141,24 +149,17 @@ const Cart = () => {
                                         <div className="col-1">
                                             <button className={styles["delete-cart"]} onClick={
                                                 async () => {
-                                                    const apiDelete = `${appConfig.apiUrl}/cart/${value.id_cart_detail}`
+                                                    const apiDelete = `${appConfig.apiUrl}/cart/${value.id_cart}`
                                                     const response = await axios.delete(apiDelete)
-                                                    if (response.data.statusCode === 200 || response.data.statusCode === 201) {
-                                                        message.success("Produk Berhasil dihapus dari keranjang");
+                                                    if (response.data.statusCode === 200) {
                                                         router.reload('/customer/produk/cart')
+                                                        Swal.fire("Berhasil", "Produk Berhasil Dihapus Dari Keranjang", "success")
                                                     } else {
-                                                        message.error("Upss Ada Kesalahan")
+                                                        Swal.fire("Gagal", "Gagal Menghapus Produk Dari Keranjang", "error")
                                                     }
                                                 }
                                             }>Hapus</button>
                                         </div>
-                                        {/* <div className="col-2">
-                                            <div className={styles["quantity-button-cart"]} style={{ marginLeft: -6 }}>
-                                                <button className={styles["decrement-count-cart"]} onClick={decrementCount}>-</button>
-                                                <span className={styles["count-result-cart"]} >{value.kuantiti}</span>
-                                                <button className={styles["increment-count-cart"]} onClick={incrementCount}>+</button>
-                                            </div>
-                                        </div> */}
                                         <hr style={{ width: 580 }}/>
                                     </div>
                                 </div>
@@ -166,7 +167,7 @@ const Cart = () => {
                         </div>
                     </div>
                     <div className="col-lg-5" style={{ marginTop: 120 }}>
-                        <div className="card">
+                        <div className="card shadow">
                             <div className="card-body">
                                 <table>
                                     <thead>
@@ -194,6 +195,7 @@ const Cart = () => {
                         </div>
                     </div>
                 </div>
+                }
             </div>
         </div>
         <Footer/>

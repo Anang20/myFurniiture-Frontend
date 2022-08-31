@@ -9,6 +9,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import Footer from "../../components/footer";
 import NavbarCustomer from "../../components/navbar_customer";
 import SideBarCustomer from "../../components/sidebar-customer";
+import Swal from "sweetalert2";
 
 const FormEditPasswordCustomer = () => {
 
@@ -63,10 +64,10 @@ const FormEditPasswordCustomer = () => {
             })
             console.log(response)        
             if (response.status == 200) {
-                message.success("Password Berhasil Di Ubah")
+                Swal.fire("Berhasil", "Password Berhasil Di Ubah", "success")
                 router.push("/customer/profile/edit-profile-customer")
             } else {
-                message.error("Upss ada kesalahan saat Mengedit Password")
+                Swal.fire("Gagal", "Upss Gagal Mengedit Password", "error")
             }
         
         } catch (err) {
@@ -94,7 +95,7 @@ const FormEditPasswordCustomer = () => {
                             </div>
                             {showErrorMessage && isCPasswordDirty ? <span className="text-danger"> Password Tidak Sama </span> : ''}
                         </div>
-                        <button type="button" onClick={EditPasswordSubmit} className="btn btn-success" style={{ marginLeft: 148 }}>Simpan</button>
+                        <button type="button" onClick={EditPasswordSubmit} className="btn btn-success" style={{ marginLeft: 148 }}>Ubah</button>
                     </form>
                 </div>
             </div>

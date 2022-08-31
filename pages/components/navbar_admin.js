@@ -6,8 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import appConfig from "../../config/app";
 import axios from "axios";
-// import { message } from "antd";
-
+import Swal from 'sweetalert2';
 const NavbarAdmin = () => {
 
     const router = useRouter()
@@ -28,8 +27,8 @@ const NavbarAdmin = () => {
                 setFoto(dataUser.foto)
             });
         } catch (err) {
-            // message.error(err)
-        }    // const data = decode.query
+           console.log(err);
+        }    
     }
 
     useEffect(() => {
@@ -39,7 +38,7 @@ const NavbarAdmin = () => {
     const logoutClick = () => {
         localStorage.removeItem('accessToken')
         router.push('/auth/login')
-        // message.success("Berhasil Logout")
+        Swal.fire("Berhasil", "Anda Berhasil Logout", "success")
     }
 
     return (

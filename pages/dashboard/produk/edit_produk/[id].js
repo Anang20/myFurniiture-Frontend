@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { message } from 'antd';
+import Swal from "sweetalert2";
 import appConfig from "../../../../config/app";
 import useAuthenticatedPage from "../../../../helper/useAuthenticatedPage";
 
@@ -45,44 +45,6 @@ const EditProduk = () => {
         getDataProduk()
     }, [])
     
-    // const getNamaProduk = async () => {
-    //     const res = await endpoint;
-    //     const namaProduk = await res.data?.data?.nama_produk;
-    //     setNamaProduk(namaProduk);
-    // }
-    
-    // const getGambar = async () => {
-    //     const res = await endpoint;
-    //     const gambarProduk = await res.data?.data?.gambar;
-    //     setGambar(gambarProduk);
-    // }
-
-    // const getHarga = async () => {
-    //     const res = await endpoint;
-    //     const hargaProduk = await res.data?.data?.harga;
-    //     setHarga(hargaProduk);
-    // }
-
-    // const getDeskripsi = async () => {
-    //     const res = await endpoint
-    //     const deskripsiProduk = await res?.data?.data?.deskripsi;
-    //     setDeskripsi(deskripsiProduk);
-    // }
-
-    // const getStok = async () => {
-    //     const res = await endpoint
-    //     const stokProduk = await res.data?.data?.stok;
-    //     setStok(stokProduk);
-    // }
-    
-    // useEffect(() => {
-    //     getNamaProduk();
-    //     getGambar();
-    //     getHarga();
-    //     getDeskripsi();
-    //     getStok();
-    // }, []);
-
     const onChangeNamaProduk = async (e) => {
         const value = await e.target.value
         setNamaProduk(value)
@@ -123,14 +85,6 @@ const EditProduk = () => {
 
     const editProdukSubmit = async () => {
         try {
-            // const data = {
-            //     'nama_produk' : nama_produk,
-            //     'gambar' : gambar,
-            //     'harga' : harga,
-            //     'deskripsi' : deskripsi,
-            //     'stok' : stok,
-            // }
-            // console.log(data)
 
             const res = await axios.put(`${appConfig.apiUrl}/produk/${produkId}`, {nama_produk, gambar, harga, deskripsi, stok}, {
                 headers: {
@@ -139,11 +93,11 @@ const EditProduk = () => {
                     "Content-Type": "application/json"
                 }
             })
-            if (res.status == 200) {
-                message.success("Berhasil Mengedit Produk")
+            if (res.data.statusCode == 200) {
+                Swal.fire("Berhasil", "Berhasil Mengedit Produk", "success")
                 router.push("/dashboard/produk")
             } else {
-                message.error("Maaf Ada Kesalahan Saat Mengedit Produk, coba lagi")
+                Swal.fire("Gagal", "Upss Gagal Mengedit Produk", "error")
             }
         } catch (e) {
 

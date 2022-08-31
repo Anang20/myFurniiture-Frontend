@@ -5,9 +5,8 @@ import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
 import Head from "next/head";
 import Link from "next/link";
-import styles from '../../../styles/Home.module.css';
-import { message } from "antd";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
+import Swal from "sweetalert2";
 
 const TambahProduk = () => {
 
@@ -76,11 +75,11 @@ const TambahProduk = () => {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            message.success("Produk Berhasil Ditambahkan")
+            Swal.fire("Berhasil", "Berhasil Menambahkan Produk", "success")
             router.push('/dashboard/produk')
 
     }catch(e){
-
+        Swal.fire("Gagal", "Gagal Menambahkan Produk", "error")
     }}
 
     useAuthenticatedPage()
