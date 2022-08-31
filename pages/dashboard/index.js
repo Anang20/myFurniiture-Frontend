@@ -5,6 +5,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import appConfig from "../../config/app";
 import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
+import Chart from "../components/chart";
 import FooterAdmin from "../components/footer_admin";
 import NavbarAdmin from "../components/navbar_admin";
 import SidebarAdmin from "../components/sidebar_admin";
@@ -13,11 +14,13 @@ const Dashboard = () => {
     
     useAuthenticatedPage();
     const [dataDashboard, setDataDashboard] = useState([])
+    const [payment, setPayment] = useState(0);
 
     const getData = async () => {
         const res = await axios.get(`${appConfig.apiUrl}/dashboard`);
         const result = res.data.data;
         setDataDashboard(result)
+        setPayment(result.payment)
     }
 
     useEffect(() => {
@@ -34,10 +37,10 @@ const Dashboard = () => {
         </Head>
          <div id="wrapper">
             <SidebarAdmin/>
-                <div id="content-wrapper" className="d-flex flex-column">
+                <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                     <div id="content">
                     <NavbarAdmin/>
-                    <div className="container-fluid col-12" style={{ paddingLeft: 250, height: 460, marginTop: 90}}>
+                    <div className="container-fluid col-12" style={{ paddingLeft: 250, marginTop: 90}}>
                         <h4 className="text-gray-600">Dashboard</h4>
                         <div className="row">
                             <div className="col-xl-4 col-md-6 mb-4">
@@ -105,11 +108,10 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                           
+                        <Chart payment={payment}/>  
                         </div>
                     </div>
                     </div>
-                    <FooterAdmin/>
                 </div>
         </div>
         </>
