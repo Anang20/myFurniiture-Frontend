@@ -18,7 +18,6 @@ import { useRouter } from "next/router";
   const Permintaan = () => {
 
     const [requestId, setRequestId] = useState('');
-    console.log(requestId);
     const [permintaan, setPermintaan] = useState([{
       tanggal : '',
       nama_lengkap : '',
@@ -30,7 +29,6 @@ import { useRouter } from "next/router";
     const getPermintaan = async () => {
         const res = await axios.get(`${appConfig.apiUrl}/request`);
         const result = res.data.data;
-        console.log(result);
         setPermintaan(result);
     }
     useEffect(() => {
@@ -40,7 +38,6 @@ import { useRouter } from "next/router";
     const hapusPermintaan = async () => {
       const apiDelete = `${appConfig.apiUrl}/request/${requestId}`
       const response = await axios.delete(apiDelete)
-      console.log(response)
       if(response.status == 200) {
         router.reload('/dashboard/produk')
         Swal.fire("Berhasil", "Barang Dari Permintaan Customer Sudah Jadi, Selanjutnya Tambah Barang Tersebut Di Menu Produk", "success")
@@ -182,7 +179,7 @@ import { useRouter } from "next/router";
         width: 20,
       },
       {
-        title: 'Action',
+        title: 'Aksi',
         key: 'operation',
         width: 30,
         render: (_, record) => (
@@ -203,7 +200,7 @@ import { useRouter } from "next/router";
       </Head>
        <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                   <NavbarAdmin/>
                   <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

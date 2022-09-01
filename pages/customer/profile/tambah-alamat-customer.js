@@ -38,7 +38,6 @@ const TambahAlamatCustomer = () => {
 
             axios.get(endpoint).then((value) => {
                 const dataUser = value.data.data
-                console.log(dataUser);
                 setUserId(dataUser);
             });
         } catch (err) {
@@ -72,7 +71,6 @@ const TambahAlamatCustomer = () => {
         const getKota = async () => {
             try {
                 const res = await axios.get(`${appConfig.apiUrl}/users/kota/${provinsiId}`)
-                console.log("resss", res)
                 const result = res?.data?.data[0]?.kota
                 setKota(result)
             } catch (err) {
@@ -93,7 +91,6 @@ const TambahAlamatCustomer = () => {
             try {
                 const res = await axios.get(`${appConfig.apiUrl}/users/kecamatan/${kotaId}`)
                 const result = res.data.data[0].kecamatan
-                console.log(result, 'ini get kecamatan');
                 setKecamatan(result)
             } catch (err) {
                 console.log('errornya', err);
@@ -112,7 +109,6 @@ const TambahAlamatCustomer = () => {
             try {
                 const res = await axios.get(`${appConfig.apiUrl}/users/kelurahan/${kecamatanId}`)
                 const result = res.data.data[0].kelurahan
-                console.log(result, 'ini get kelurahan');
                 setKelurahan(result)
             } catch (err) {
                 console.log('errornya', err);
@@ -150,7 +146,6 @@ const TambahAlamatCustomer = () => {
     const tambahAlamatSubmit = async () => {
         try {
             const response = await axios.post(`${appConfig.apiUrl}/users/create_alamat`, {id_kelurahan: kelurahanId, id_user: userId.id_user, alamat: detailAlamat, latitude, longtitude})
-            console.log(response)
            
                 if (response.status == 201 || response.status == 200) {
                     router.push("/customer/profile/alamat-customer")
@@ -177,7 +172,7 @@ const TambahAlamatCustomer = () => {
                 <div className="row">
                     <SideBarCustomer />
                     <div className="col-10">
-                        <div className="card" style={{ minHeight: 500 }}>
+                        <div className="card shadow" style={{ minHeight: 500 }}>
                             <div className="card-body">
                                     <div className="row mb-3">
                                         <label htmlFor="nama_lengkap" className="col-sm-2 col-form-label">Provinsi</label>

@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import appConfig from "../../config/app";
 import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
 import Chart from "../components/chart";
-import FooterAdmin from "../components/footer_admin";
 import NavbarAdmin from "../components/navbar_admin";
 import SidebarAdmin from "../components/sidebar_admin";
 

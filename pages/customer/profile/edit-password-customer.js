@@ -61,8 +61,7 @@ const FormEditPasswordCustomer = () => {
     const EditPasswordSubmit = async () => {
         try {
             const response = await axios.put(`${appConfig.apiUrl}/users/update/password/${userId}`, {password: cPassword}, {
-            })
-            console.log(response)        
+            })      
             if (response.status == 200) {
                 Swal.fire("Berhasil", "Password Berhasil Di Ubah", "success")
                 router.push("/customer/profile/edit-profile-customer")
@@ -79,7 +78,7 @@ const FormEditPasswordCustomer = () => {
     return (
         <>
         <div className="col-10">
-            <div className="card" style={{ minHeight: 500 }}>
+            <div className="card shadow" style={{ minHeight: 500 }}>
                 <div className="card-body">
                     <form>
                         <div className="row mb-3">

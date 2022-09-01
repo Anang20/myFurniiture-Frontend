@@ -52,10 +52,9 @@ const EditProfileAdmin = () => {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
-            })
-            console.log(response)        
+            })   
             if (response.data.statusCode== 200) {
-                router.push("/dashboard/profile/edit_profile")
+                router.reload("/dashboard/profile/edit_profile")
                 Swal.fire("Berhasil", "Selamat Anda Berhasil Mengedit Profile", "success")
             } else {
                 Swal.fire("Gagal", "Upss Ada Kesalahan Saat Mengedit, Coba Lagi", "error")
@@ -109,7 +108,7 @@ const EditProfileAdmin = () => {
         </Head>
         <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                 <NavbarAdmin/>
                 <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

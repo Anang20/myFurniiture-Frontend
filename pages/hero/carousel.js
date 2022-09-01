@@ -19,13 +19,13 @@ const Carousel = () => {
                     <Image src={carausel} className="d-block" alt="carausel-1" style={{minWidth: '100%'}}/>
                     <div className="carousel-caption d-none d-md-block">
                         <h3 className={styles["title-carousel"]}>Kursi Bundar</h3>
-                        <p className={styles["deskripsi-carousel"]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc, enim, quam risus facilisi ipsum, nunc. Morbi amet mi eget sit varius mattis.</p>
-                        <h3 className={styles["harga-carousel"]}>Rp 1.000.000</h3>
+                        <p className={styles["deskripsi-carousel"]}>Kursi Bundar Adalah Tempat Duduk Yang Cocok Untuk Anda, Tinggi 50cm Lebar 30cm Berbahan Kayu Mahoni Dan Awet.</p>
+                        <h3 className={styles["harga-carousel"]}>Rp 1,000,000</h3>
                         <div className={styles["button-group"]}>
-                            <Link href="http://localhost:3000/customer/produk/03766783-8e6e-4b6b-bd95-5caf55553a5b">
+                            <Link href="http://localhost:3000/customer/produk/9f586f31-e77a-44b8-b8c8-6a7d28f29422">
                                 <button className={styles["beli-produk"]}>Beli Produk</button>
                             </Link>
-                            <Link href="http://localhost:3000/customer/produk/03766783-8e6e-4b6b-bd95-5caf55553a5b">
+                            <Link href="http://localhost:3000/customer/produk/9f586f31-e77a-44b8-b8c8-6a7d28f29422">
                                 <button className={styles["button-selengkapnya"]}>Selengkapnya</button>
                             </Link>
                         </div>
@@ -35,13 +35,13 @@ const Carousel = () => {
                     <Image src={carausel2} className="d-block w-100" alt="carausel-2"/>
                     <div className="carousel-caption d-none d-md-block">
                         <h3 className={styles["title-carousel"]}>Almari Mini</h3>
-                        <p className={styles["deskripsi-carousel"]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc, enim, quam risus facilisi ipsum, nunc. Morbi amet mi eget sit varius mattis.</p>
-                        <h3 className={styles["harga-carousel"]}>Rp 2.000.000</h3>
+                        <p className={styles["deskripsi-carousel"]}>Simpan Pakaian Anda Didalam Almari Mini, Tinggi 150cm Lebar 90cm Berbahan Kayu Jati Berwarna Putih.</p>
+                        <h3 className={styles["harga-carousel"]}>Rp 4,500,000</h3>
                         <div className={styles["button-group"]}>
-                            <Link href="http://localhost:3000/customer/produk/cc2b9b9c-05db-4cde-8a4c-0e614faf07e6">
+                            <Link href="http://localhost:3000/customer/produk/f440b4cc-7542-4798-8e45-c1a4ade8656b">
                                 <button className={styles["beli-produk"]}>Beli Produk</button>
                             </Link>
-                            <Link href="http://localhost:3000/customer/produk/cc2b9b9c-05db-4cde-8a4c-0e614faf07e6">
+                            <Link href="http://localhost:3000/customer/produk/f440b4cc-7542-4798-8e45-c1a4ade8656b">
                                 <button className={styles["button-selengkapnya"]}>Selengkapnya</button>
                             </Link>
                         </div>
@@ -51,13 +51,13 @@ const Carousel = () => {
                     <Image src={carausel3} className="d-block w-100" alt="carausel-3"/>
                     <div className="carousel-caption d-none d-md-block">
                         <h3 className={styles["title-carousel"]}>Kitchen Set Minimalis</h3>
-                        <p className={styles["deskripsi-carousel"]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc, enim, quam risus facilisi ipsum, nunc. Morbi amet mi eget sit varius mattis.</p>
-                        <h3 className={styles["harga-carousel"]}>Rp 5.000.000</h3>
+                        <p className={styles["deskripsi-carousel"]}>Percantik Dapur Anda Dengan Kitchen Set Minimalis, Tinggi 200cm Lebar 250cm Berbahan Triplek Bercorak Modern Dan Berwarna Putih Cream.</p>
+                        <h3 className={styles["harga-carousel"]}>Rp 8,000,000</h3>
                         <div className={styles["button-group"]}>
-                            <Link href="http://localhost:3000/customer/produk/9f299958-7245-4d3f-adbb-9843d112f869">
+                            <Link href="http://localhost:3000/customer/produk/8ef18ec9-f6ea-485b-b4ba-60bf2a8101fa">
                                 <button className={styles["beli-produk"]}>Beli Produk</button>
                             </Link>
-                            <Link href="http://localhost:3000/customer/produk/9f299958-7245-4d3f-adbb-9843d112f869">
+                            <Link href="http://localhost:3000/customer/produk/8ef18ec9-f6ea-485b-b4ba-60bf2a8101fa">
                                 <button className={styles["button-selengkapnya"]}>Selengkapnya</button>
                             </Link>
                         </div>

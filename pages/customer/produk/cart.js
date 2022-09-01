@@ -14,7 +14,7 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import { useRouter } from "next/router";
 
 const Cart = () => {
-    const [count, setCount] = useState(0)
+    
     const [cart, setCart] = useState([{
         kuantiti: 0,
         produk: {
@@ -24,32 +24,6 @@ const Cart = () => {
         },
     }]);
     const router = useRouter();
-    // const [isChecked, setIsChecked] = useState(
-    //     new Array()
-    // );
-
-    // const handleOnChange = () => {
-    //     setIsChecked(!isChecked);
-    // };
-    
-    // useEffect(() => {
-    //     const updateData = async () => {
-    //         try {
-    //             const token = localStorage.getItem('accessToken')
-    //             const decode = jwtDecode(token)
-    //             const userId = decode.query["id_user"]
-    //             const endpoint = `${appConfig.apiUrl}/cart/cari/${userId}`;
-    //             const items = await axios.get(endpoint)
-    //             const result = items.data.data
-    //             // console.log(result);
-    //             setCart(result);
-    //         } catch (e) {
-
-    //         }
-    //         const response = await axios.get(`${appConfig.apiUrl}/`)
-    //     }
-    //     getDataCart()
-    // }, [])
 
     useEffect(() => {
         const getDataCart = async () => {

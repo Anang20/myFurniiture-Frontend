@@ -1,13 +1,12 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
-import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import axios from "axios";
 import Swal from "sweetalert2";
-import Link from "next/link";
 import Head from "next/head";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import appConfig from "../../../config/app";
@@ -18,6 +17,7 @@ import { useRouter } from "next/router";
     const [detailProduk, setDetailProduk] = useState([{
       No : 1,
       Tanggal: "",
+      NomerOrder: 0,
       Nama: "",
       Produk: "",
       Kuantiti: 1,
@@ -29,9 +29,8 @@ import { useRouter } from "next/router";
   const router = useRouter();
 
     const getProduk = async () => {
-        const dataProduk = await axios.get("http://localhost:3222/order");
+        const dataProduk = await axios.get(`${appConfig.apiUrl}/order`);
         const produk = dataProduk.data.data;
-        console.log(produk);
         setDetailProduk(produk);
     }
     useEffect(() => {
@@ -143,23 +142,20 @@ import { useRouter } from "next/router";
         title: 'No',
         dataIndex: 'No',
         value: 'No',
-        width: 8,
-        // fixed: 'left',
-        // sorter: (a, b) => a.no.length - b.no.length,
-        // sortDirections: ['descend', 'ascend'],
+        width: 10,
       },
       {
         title: 'Tanggal',
         dataIndex: 'Tanggal',
         value: 'created_at',
         width: 20,
-        // fixed: 'left',
-        // ...getColumnSearchProps('tanggal'),
+        sorter: (a, b) => a.created_at.length - b.created_at.length,
+        sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'No Order',
         dataIndex: 'NomerOrder',
-        value: 'total_order',
+        value: 'NomerOrder',
         width: 20,
         ...getColumnSearchProps('NomerOrder'),
       },
@@ -168,24 +164,19 @@ import { useRouter } from "next/router";
         dataIndex: 'noTelp',
         value: 'noTelp',
         width: 25,
-        // fixed: 'left'
-        // ...getColumnSearchProps('nama'),
       },
       {
         title: 'Nama',
         dataIndex: 'Nama',
         value: 'nama_lengkap',
         width: 25,
-        // fixed: 'left'
-        // ...getColumnSearchProps('nama'),
+        ...getColumnSearchProps('Nama'),
       },
       {
         title: 'Produk',
         dataIndex: 'Produk',
         value: 'nama_produk',
         width: 20,
-        // sorter: (a, b) => a.nama_produk.length - b.nama_produk.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Kuantiti',
@@ -193,13 +184,12 @@ import { useRouter } from "next/router";
         value: 'quantity',
         width: 15,
         fixed: 'center'
-        // ...getColumnSearchProps('quantity'),
       },
       {
-        title: 'Harga Barang',
+        title: 'Harga Satuan',
         dataIndex: 'HargaBarang',
         value: 'harga_barang',
-        width: 20,
+        width: 25,
       },
       
       {
@@ -207,24 +197,27 @@ import { useRouter } from "next/router";
         dataIndex: 'Alamat',
         value: 'alamat',
         width: 30,
-        // sorter: (a, b) => a.alamat.length - b.alamat.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Status',
         dataIndex: 'status',
-        // value: 'Status',
+        value: 'Status',
         width: 18,
-        // render: () => (
-        //     <>
-        //     <span className='badge badge-pill badge-primary' style={{ backgroundColor: '#0D6EFD', }}>Sudah Bayar</span>
-        //     </>
-        // ),
+        render: (_, value) => (
+          <>
+            {value.status == "menunggu"
+            ? <span className='badge badge-pill badge-warning'>{value.status}</span>
+            : value.status == "belum bayar" ? <span className='badge badge-pill badge-danger'>{value.status}</span>
+            : value.status == "diterima" ? <span className='badge badge-pill badge-primary'>{value.status}</span>
+            : <span className='badge badge-pill badge-success'>{value.status}</span>
+            }
+          </>
+        ),
         sorter: (a, b) => a.status.length - b.status.length,
         sortDirections: ['descend', 'ascend'],
       },
       {
-        title: 'Action',
+        title: 'Aksi',
         key: 'operation',
         width: 20,
         render: (_, record) => (
@@ -233,7 +226,6 @@ import { useRouter } from "next/router";
             async () => {
               const endpoint = `${appConfig.apiUrl}/order/terima/${record.id}`
               const res = await axios.put(endpoint)
-              console.log(res);
               if (res.status === 200) {
                 Swal.fire("Berhasil", "Barang Berhasil Dikirim", "success")
                 router.reload('/dashboard/order')
@@ -257,7 +249,7 @@ import { useRouter } from "next/router";
       </Head>
        <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                   <NavbarAdmin/>
                   <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
@@ -269,7 +261,6 @@ import { useRouter } from "next/router";
                           dataSource={detailProduk}
                           scroll={{
                             x: 1500,
-                            // y: 300,
                           }}
                           />
                           </div>

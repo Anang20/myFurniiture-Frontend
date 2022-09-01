@@ -86,7 +86,6 @@ const DetailProduk = () => {
     const createDetail = async ()=> {
         try{
             const response = await axios.post(`${appConfig.apiUrl}/cart/${produkId}/${userId}`, {kuantiti: count})
-            console.log(response);
             if (response.data.statusCode == 201) {
                 Swal.fire("Berhasil", "Berhasil Menambahkan Produk Ke Keranjang", "success")
                 router.push("/customer/produk/cart")

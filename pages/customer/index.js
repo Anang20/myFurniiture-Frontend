@@ -7,7 +7,6 @@ import useAuthenticatedPage from "../../helper/useAuthenticatedPage";
 import Head from "next/head";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { message } from "antd";
 import appConfig from "../../config/app";
 
 const Home = () => {
@@ -22,7 +21,6 @@ const Home = () => {
         const getProduk = async () => {
             const response = await axios.get(`${appConfig.apiUrl}/produk/search/produk`);
             const result = response.data.items;
-            console.log(result);
             setProduk(result);
             setLoading(false)    
         }
@@ -52,7 +50,6 @@ const Home = () => {
             <div className="container-fluid" style={{ position: 'relative', marginTop: '-50px',backgroundColor: '#F5F5F5' }}>
                 <div className="container mt-5">
                     <div className="row" style={{ backgroundColor: '#FFF' }}>
-                        {/* <input onChange={searchHandler} placeholder={"search"}></input> */}
                         <CardHome produk={currentProduk} loading={loading} search={search}/>
                         <Pagination 
                         totalProduk={produk.length} 

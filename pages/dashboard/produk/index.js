@@ -1,7 +1,7 @@
 import NavbarAdmin from "../../components/navbar_admin";
 import SidebarAdmin from "../../components/sidebar_admin";
-import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table, Image, message } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, Input, Space, Table, Image } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
@@ -11,7 +11,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
 import appConfig from "../../../config/app";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import Swal from "sweetalert2";
 
@@ -29,7 +29,6 @@ import Swal from "sweetalert2";
     const getProduk = async () => {
         const dataProduk = await axios.get(`${appConfig.apiUrl}/produk/get/all`);
         const produk = dataProduk.data.data;
-        console.log(produk, 'ini produk');
         setDetailProduk(produk);
     }
     useEffect(() => {
@@ -48,15 +47,14 @@ import Swal from "sweetalert2";
     };
 
     const handlerOk = async () => {
-      const apiDelete = `http://localhost:3222/produk/${idUser}`
-              const response = await axios.delete(apiDelete)
-              console.log(response)
-              if(response.data.statusCode == 200) {
-                Swal.fire("Berhasil", "Berhasil Menghapus Produk", "success")
-                router.reload('/dashboard/produk')
-              }else{
-                Swal.fire("Gagal", "Gagal Menghapus Produk", "error")
-              }
+      const apiDelete = `${appConfig.apiUrl}/produk/${idUser}`
+        const response = await axios.delete(apiDelete)
+        if(response.data.statusCode == 200) {
+          Swal.fire("Berhasil", "Berhasil Menghapus Produk", "success")
+          router.reload('/dashboard/produk')
+        }else{
+          Swal.fire("Gagal", "Gagal Menghapus Produk", "error")
+        }
     }
 
     const getColumnSearchProps = (dataIndex) => ({
@@ -174,26 +172,21 @@ import Swal from "sweetalert2";
         dataIndex: 'harga',
         value: 'harga',
         width: 18,
-        // sorter: (a, b) => a.harga.length - b.harga.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Stok',
         dataIndex: 'stok',
         value: 'stok',
         width: 15,
-        // sorter: (a, b) => a.stok.length - b.stok.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'deskripsi',
         dataIndex: 'deskripsi',
         value: 'deskripsi',
         width: 55,
-        // ...getColumnSearchProps('deskripsi'),
       },
       {
-        title: 'Action',
+        title: 'Aksi',
         key: 'operation',
         width: 30,
         fixed: 'right',
@@ -218,7 +211,7 @@ import Swal from "sweetalert2";
       </Head>
        <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                   <NavbarAdmin/>
                   <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

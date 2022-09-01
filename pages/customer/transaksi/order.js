@@ -35,25 +35,16 @@ const Order = () => {
                 const id = decode.query["id_user"];
                 // produk
                 const res = await axios.get(`${appConfig.apiUrl}/cart/${id}`)
-                // console.log(res,'res');
                 const produk = res.data.data
                 setProduk(produk)
-                console.log(produk, 'ini produk');
                 const temp_cart = []
                 produk.map(value => {
                     temp_cart.push(value.id_cart)
                 })
                 setIdCart(temp_cart)
-                // console.log(temp_cart);
-                // const cartId = res.data.data.id_cart
-                // console.log(cartId);
-                // setIdCart(cartId)
-                // console.log(cartId, 'ini id card');
-                // const hasil = []    
                 // Alamat
                 const respon = await axios.get(`${appConfig.apiUrl}/users/cari_alamat/${id}`)
                 const alamat = respon.data.data.alamat
-                // console.log(alamat, 'ini alamatnya');
                 setAlamat(alamat)
                 
             } catch (err) {
@@ -67,9 +58,7 @@ const Order = () => {
         const getOngkir = async () => {
             try {
                 const res = await axios.post(`${appConfig.apiUrl}/order/ongkir/${alamatId}`)
-                // console.log(res, 'ini alamat');
                 const ongkir = res.data.data
-                // console.log(ongkir, 'ini ongkir');
                 setOngkir(ongkir)
             } catch (err) {
                 console.log('errornya', err);
@@ -81,7 +70,6 @@ const Order = () => {
     const createOrder = async () => {
         try {
             const response = await axios.post(`${appConfig.apiUrl}/order/buat/order`, {id_cart: cartId, id_alamat: alamatId, total_hrg_brg: hargaProduk, total_hrg_krm: ongkir, total_order: order})
-            // console.log(response, 'ini response')
            
                 if (response.status == 201 || response.status == 200) {
                     router.push("/customer/transaksi/checkout")
@@ -110,15 +98,12 @@ const Order = () => {
         const hasil = await produk.reduce((value, i)=> {
             return value + i.harga_total
         }, 0)
-        // console.log(produk)
-        // console.log(hasil);
         setHargaProduk(hasil)
     }
     totalHargaProduk()
 
     const totalOrder = async () => {
         const hasil = await ongkir + hargaProduk
-        // console.log(hasil, 'hasil');
         setOrder(hasil)
     }
     totalOrder()
@@ -157,7 +142,7 @@ const Order = () => {
         </Head>
        <NavbarCustomer/>
        <div className="container" style={{ marginTop : 120 }}>
-            <div className="card">
+            <div className="card shadow">
                <div className="card-body">
                     <h4 className="text-center">Produk Dipesan</h4>
                     <div className="alert alert-warning" role="alert" style={{ fontStyle: 'normal', fontWeight: 400, fontSize: 15, }}>
