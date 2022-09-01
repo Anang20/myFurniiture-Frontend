@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import axios from "axios";
 import Head from "next/head";
 import Swal from "sweetalert2";
+import appConfig from "../../config/app";
 
 const Register = () => {
 
@@ -55,7 +56,7 @@ const Register = () => {
             setEmail(email)
             setNotlp(no_telp)
             setPassword(password)
-            const res = await axios.post("http://localhost:3222/auth/register", {nama_lengkap, email, no_telp, password})
+            const res = await axios.post(`${appConfig.apiUrl}/auth/register`, {nama_lengkap, email, no_telp, password})
             .then(result => {
                 if (result.data.statusCode == 201 || result.data.statusCode == 200) {
                     Swal.fire("Berhasil Mendaftar", "Selamat Anda Berhasil Mendaftar", "success")

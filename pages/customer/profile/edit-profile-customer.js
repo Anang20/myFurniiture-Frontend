@@ -88,7 +88,7 @@ const FormEditProfile = () => {
             file : value
        }
        try {
-            const res = await axios.post("http://localhost:3222/file/upload", data, {
+            const res = await axios.post(`${appConfig.apiUrl}/file/upload`, data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`

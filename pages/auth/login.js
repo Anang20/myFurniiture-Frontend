@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import jwtDecode from "jwt-decode";
 import Head from 'next/head'
 import Swal from "sweetalert2";
+import appConfig from "../../config/app";
 
 const Login = () => {
 
@@ -39,7 +40,7 @@ const Login = () => {
         }
 
         console.log(formData)
-        axios.post("http://localhost:3222/auth/login", formData, {
+        axios.post(`${appConfig.apiUrl}/auth/login`, formData, {
             headers: { 'content-type': 'application/json' }
         }).then(result => { 
             localStorage.setItem('accessToken', result.data.accessToken)
