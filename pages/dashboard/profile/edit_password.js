@@ -60,7 +60,6 @@ const EditPassword = () => {
         try {
             const response = await axios.put(`${appConfig.apiUrl}/users/update/password/${userId}`, {password: cPassword}, {
             })
-            console.log(response)        
             if (response.status == 200) {
                 Swal.fire("Berhasil", "Berhasil Mengedit Passsword", "success")
                 router.push("/dashboard/profile/edit_profile")
@@ -83,7 +82,7 @@ const EditPassword = () => {
         </Head>
         <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                 <NavbarAdmin/>
                 <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
@@ -105,7 +104,7 @@ const EditPassword = () => {
                                     </div>
                                     {showErrorMessage && isCPasswordDirty ? <span className="text-danger"> Password Tidak Sama </span> : ''}
                                 </div>
-                                <button type="button" onClick={EditPasswordSubmit} className="btn btn-success" style={{ marginLeft: 148 }}>Ubah</button>
+                                    <button type="button" onClick={EditPasswordSubmit} className="btn btn-success" style={{ marginLeft: 180 }}>Ubah</button>
                             </form>
                             
                         </div>

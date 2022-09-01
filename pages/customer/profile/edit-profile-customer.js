@@ -54,8 +54,7 @@ const FormEditProfile = () => {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
-            })
-            console.log(response)        
+            })        
             if (response.status == 201 || response.status == 200) {
                 router.reload("/customer/profile/edit-profile-customer")
                 Swal.fire("Berhasil", "Selamat Anda Berhasil Mengedit Profile", "success")
@@ -110,7 +109,7 @@ const FormEditProfile = () => {
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <div className="col-10">
-            <div className="card" style={{ minHeight: 500 }}>
+            <div className="card shadow" style={{ minHeight: 500 }}>
                 <div className="card-body">
                     <form>
                         <div className="row mb-3">

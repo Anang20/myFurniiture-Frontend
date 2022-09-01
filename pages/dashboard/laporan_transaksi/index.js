@@ -7,7 +7,7 @@ import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import axios from "axios";
 import appConfig from "../../../config/app";
@@ -23,7 +23,6 @@ import Link from "next/link";
       const getDataLaporan = async () => {
         const response = await axios.get(`${appConfig.apiUrl}/order/cari/cari_laporan`);
         const result = response.data;
-        console.log(result);
         setLaporan(result);
       }
       getDataLaporan()
@@ -131,15 +130,12 @@ import Link from "next/link";
         dataIndex: 'No',
         key: 'No',
         width: 20,
-        // fixed: 'left',
       },
       {
         title: 'Tanggal',
         dataIndex: 'Tanggal',
         key: 'Tanggal',
         width: 30,
-        // sorter: (a, b) => a.tanggal.length - b.tanggal.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'No Order',
@@ -153,23 +149,21 @@ import Link from "next/link";
         dataIndex: 'Nama',
         key: 'Nama',
         width: 30,
-        // ...getColumnSearchProps('nama_produk'),
       },
       {
         title: 'Total Order',
         dataIndex: 'totalOrder',
         key: 'totalOrder',
         width: 30,
-        // sorter: (a, b) => a.quantity.length - b.quantity.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Status',
         dataIndex: 'status',
         key: 'status',
         width: 30,
-        // sorter: (a, b) => a.harga_barang.length - b.harga_barang.length,
-        // sortDirections: ['descend', 'ascend'],
+        render: (_, value) => (
+          <span className='badge badge-pill badge-success'>{value.status}</span>
+        )
       },
     ];
 
@@ -183,16 +177,16 @@ import Link from "next/link";
       </Head>
        <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                   <NavbarAdmin/>
-                  <div className="container-fluid" style={{ paddingLeft: 250, height: 500, marginTop: 90 }}>
+                  <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>
                       <h4 className="text-gray-600">Laporan Transaksi</h4>
                       <div className="card shadow">
                           <div className="card-body">
                               <button className="btn btn-sm shadow-sm btn-danger mb-3 me-3" onClick={() => window.print()}><FontAwesomeIcon icon={faFilePdf} className="mr-3"/>Export PDF</button>
                               <Link href={`${appConfig.apiUrl}/order/export/excel-generator`}>
-                                <button className="btn btn-sm shadow-sm btn-success mb-3"><FontAwesomeIcon icon={faFilePdf} className="mr-3"/>Export Excel</button>
+                                <button className="btn btn-sm shadow-sm btn-success mb-3"><FontAwesomeIcon icon={faFileExcel} className="mr-3"/>Export Excel</button>
                               </Link>
                           <Table
                           columns={columns}

@@ -30,7 +30,6 @@ import { useRouter } from "next/router";
     const Data = async () =>{
       const res = await axios.get(`${appConfig.apiUrl}/payment`)
       const data = res.data.data
-      // console.log(data);
       getPayment(data)
     }
     Data()
@@ -39,7 +38,6 @@ import { useRouter } from "next/router";
     const handlerTolak = async () => {
       const endpoint = `${appConfig.apiUrl}/payment/delete/${id}`
       const res = await axios.delete(endpoint)
-      console.log(res.data);
       if(res.data.statusCode === 200) {
         router.reload('/dashboard/terima_pembayaran')
         message.success("Pembayaran Berhasil Ditolak")
@@ -51,7 +49,6 @@ import { useRouter } from "next/router";
     const handlerTerima = async () => {     
       const endpoint = `${appConfig.apiUrl}/payment/${id}`
       const res = await axios.put(endpoint)
-      console.log(res.data);
       if(res.data.statusCode === 200) {
         router.reload('/dashboard/terima_pembayaran/')
         Swal.fire("Berhasil", "Pembayaran Berhasil Diterima", "success")
@@ -162,22 +159,18 @@ import { useRouter } from "next/router";
         dataIndex: 'NamaCustomer',
         key: 'nama_lengkap',
         width: 50,
-        // sorter: (a, b) => a.nama_lengkap.length - b.nama_lengkap.length,
-        // sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Nama Bank',
         dataIndex: 'NamaBank',
         key: 'nama_bank',
         width: 40,
-        // ...getColumnSearchProps('nama_lengkap'),
       },
       {
         title: 'No Rek',
         dataIndex: 'NoRek',
         key: 'no_rekening',
         width: 50,
-        // ...getColumnSearchProps('no_rekening'),
       },
       {
         title: 'Bukti',
@@ -213,7 +206,6 @@ import { useRouter } from "next/router";
         fixed: 'right',
         render: (_, record) => (
           <>
-          <button className="btn btn-sm btn-primary shadow-sm me-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button>
           <button className="btn btn-sm btn-danger shadow-sm me-1" onClick={() => setId(record.id)} data-bs-toggle="modal" data-bs-target="#exampleModal2">Tolak</button>
           <button className="btn btn-sm btn-warning shadow-sm" onClick={() => setId(record.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">Terima</button>
           </>
@@ -229,7 +221,7 @@ import { useRouter } from "next/router";
       </Head>
        <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                   <NavbarAdmin/>
                   <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90}}>
@@ -245,27 +237,6 @@ import { useRouter } from "next/router";
                           />
                           </div>
                       </div>  
-
-                      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="staticBackdropLabel">Detail Order</h5>
-                              <button type="button" class="btn-close btn-sm shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <p>Nama : Anang</p>
-                              <p>Produk Yang Dipesan :</p>
-                              <p>Meja 3x</p>
-                              <p>Almari 3x</p>
-                              <p>total Pesanan : Rp 4000000</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
 
                       <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">

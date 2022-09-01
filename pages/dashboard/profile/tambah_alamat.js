@@ -37,7 +37,6 @@ const TambahAlamat = () => {
 
             axios.get(endpoint).then((value) => {
                 const dataUser = value.data.data
-                console.log(dataUser);
                 setUserId(dataUser);
             });
         } catch (err) {
@@ -71,7 +70,6 @@ const TambahAlamat = () => {
         const getKota = async () => {
             try {
                 const res = await axios.get(`${appConfig.apiUrl}/users/kota/${provinsiId}`)
-                console.log("resss", res)
                 const result = res?.data?.data[0]?.kota
                 setKota(result)
             } catch (err) {
@@ -92,7 +90,6 @@ const TambahAlamat = () => {
             try {
                 const res = await axios.get(`${appConfig.apiUrl}/users/kecamatan/${kotaId}`)
                 const result = res.data.data[0].kecamatan
-                console.log(result, 'ini get kecamatan');
                 setKecamatan(result)
             } catch (err) {
                 console.log('errornya', err);
@@ -111,7 +108,6 @@ const TambahAlamat = () => {
             try {
                 const res = await axios.get(`${appConfig.apiUrl}/users/kelurahan/${kecamatanId}`)
                 const result = res.data.data[0].kelurahan
-                console.log(result, 'ini get kelurahan');
                 setKelurahan(result)
             } catch (err) {
                 console.log('errornya', err);
@@ -149,7 +145,6 @@ const TambahAlamat = () => {
     const tambahAlamatSubmit = async () => {
         try {
             const response = await axios.post(`${appConfig.apiUrl}/users/create_alamat`, {id_kelurahan: kelurahanId, id_user: userId.id_user, alamat: detailAlamat, latitude, longtitude})
-            console.log(response)
            
                 if (response.data.statusCode == 201) {
                     router.push("/dashboard/profile/alamat")
@@ -173,7 +168,7 @@ const TambahAlamat = () => {
         </Head>
         <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                 <NavbarAdmin/>
                 <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

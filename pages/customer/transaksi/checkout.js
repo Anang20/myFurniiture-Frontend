@@ -31,7 +31,6 @@ const CheckOut = () => {
                 await axios.get(endpoint).then((value) => {
                     const dataUserOrder = value.data;
                     setDataOrder(dataUserOrder);
-                    // console.log(dataOrder);
                 })
             } catch(e) {
                 console.log(e)
@@ -87,7 +86,6 @@ const CheckOut = () => {
     const checkoutSubmit = async () => {
         try {
             const response = await axios.post(`${appConfig.apiUrl}/payment`, {nama_bank: namaBank, no_rek: noRekening, gambar: buktiTransfer, id_order: lastIdOrder})
-            console.log(response)
            
                 if (response.status == 201) {
                     router.push("/customer/riwayat")

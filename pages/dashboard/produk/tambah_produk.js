@@ -7,6 +7,7 @@ import Head from "next/head";
 import Link from "next/link";
 import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 import Swal from "sweetalert2";
+import appConfig from "../../../config/app";
 
 const TambahProduk = () => {
 
@@ -27,7 +28,7 @@ const TambahProduk = () => {
             file : value
         }
         try{
-            const res = await axios.post("http://localhost:3222/file/upload", data, {
+            const res = await axios.post(`${appConfig.apiUrl}/file/upload`, data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -70,7 +71,7 @@ const TambahProduk = () => {
             'stok': stok,
             }
 
-            const res = await axios.post("http://localhost:3222/produk", data, {
+            const res = await axios.post(`${appConfig.apiUrl}/produk`, data, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -92,7 +93,7 @@ const TambahProduk = () => {
         </Head>
         <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                 <NavbarAdmin/>
                 <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

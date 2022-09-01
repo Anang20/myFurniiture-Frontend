@@ -51,7 +51,6 @@ const TambahPermintaan = () => {
     
                 axios.get(endpoint).then((value) => {
                     const dataUser = value.data.data
-                    console.log(dataUser);
                     setUser(dataUser);
                 });
             } catch (err) {
@@ -62,7 +61,6 @@ const TambahPermintaan = () => {
     }, [])
     const handleUser = async (event) => {
         const getUserId = await event.target.value;
-        console.log(getUserId);
         setUserId(getUserId);
     }
     const router = useRouter()
@@ -74,7 +72,6 @@ const TambahPermintaan = () => {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            console.log(response);
             if (response.status == 201) {
                 router.push("/dashboard/permintaan")
                 Swal.fire("Berhasil", "Permintaan Berhasil Di Tambahkan", "success")
@@ -95,7 +92,7 @@ const TambahPermintaan = () => {
         </Head>
         <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                 <NavbarAdmin/>
                 <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

@@ -15,7 +15,6 @@ import useAuthenticatedPage from "../../../helper/useAuthenticatedPage";
 
 const ListAlamat = () => {
 
-    // const [userId, setUserId] = useState('');
     const [alamat, setAlamat] = useState([{
         id_alamat_user : '',
         alamat:''
@@ -79,9 +78,7 @@ const ListAlamat = () => {
                     <button type="button" onClick={
                         async () => {
                             const apiDelete = `${appConfig.apiUrl}/users/alamat/${value?.id_alamat_user}`
-                            console.log(apiDelete);
                                 const response = await axios.delete(apiDelete)
-                                console.log(response.data.statusCode)
                                 if(response.data.statusCode === 200) {
                                     Swal.fire("Berhasil", "Alamat Berhasil Dihapus", "success")
                                     router.reload('/customer/profile/alamat-customer')
@@ -114,7 +111,7 @@ const Alamat = () => {
         </Head>
         <div id="wrapper">
             <SidebarAdmin/>
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" style={{ backgroundColor: '#FFFF' }}>
                 <div id="content">
                     <NavbarAdmin/>
                     <div className="container-fluid" style={{ paddingLeft: 250, marginTop: 90 }}>

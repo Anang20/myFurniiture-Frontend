@@ -52,7 +52,7 @@ const ListAlamat = () => {
   return (
         <>
         <div className="col-10">
-            <div className="card" style={{ minHeight: 500 }}>
+            <div className="card shadow" style={{ minHeight: 500 }}>
                 {alamat.length === 0 
                     ? <div className="card-body">
                         <div className="row mb-3">
